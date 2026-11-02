@@ -9886,9 +9886,9 @@
   ],
   "metadata": {
     "schema": 2,
-    "last_updated": "2026-11-01",
-    "generated_at": "2026-11-01T06:14:47+00:00",
-    "source_sha": "24723df",
+    "last_updated": "2026-11-02",
+    "generated_at": "2026-11-02T04:58:20+00:00",
+    "source_sha": "7cd8a3c",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",

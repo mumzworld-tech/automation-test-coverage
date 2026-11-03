@@ -6231,6 +6231,185 @@
         ]
       },
       {
+        "ref": "app::test_app_filters_one_filter_at_a_time",
+        "name": "test_app_filters_one_filter_at_a_time",
+        "platform": "app",
+        "path": "tests/app/test_app_filters_and_sorting.py",
+        "file": "test_app_filters_and_sorting.py",
+        "title": "Filters: each of the most-used filters applies and clears on its own",
+        "feature": "PLP Filters and Sort",
+        "story": "FALCONS-388 - One filter at a time from the bottom sheet",
+        "severity": "critical",
+        "tags": [
+          "Filters",
+          "PLP",
+          "Logged In User"
+        ],
+        "docstring": "1. Sign in, then open a listing through search 2. Tick Age's first option; its count, e.g. '(4)', must equal the sheet's 'Show N Results' 3. Apply, verify the chip and products, and that the listing shows exactly N 4. Clear it, then repeat for Gender, Category and Brand, each in isolation 5. Isolating each filter keeps every facet reachable, which a stacked filter can prevent",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_filters_multiple_filters_from_sheet",
+        "name": "test_app_filters_multiple_filters_from_sheet",
+        "platform": "app",
+        "path": "tests/app/test_app_filters_and_sorting.py",
+        "file": "test_app_filters_and_sorting.py",
+        "title": "Filters: applying the most-used filters one after another keeps narrowing the listing",
+        "feature": "PLP Filters and Sort",
+        "story": "FALCONS-388 - Multiple filters from the bottom sheet",
+        "severity": "critical",
+        "tags": [
+          "Filters",
+          "PLP",
+          "Logged In User"
+        ],
+        "docstring": "1. Sign in, then open a listing through search 2. Stack Gender, Categories, Brand, Colour and Age one at a time, broadest first 3. Verify each adds a chip naming what was ticked and shows exactly the total the sheet promised 4. Stop once a filter would leave no products, since the next could not be verified 5. Assert at least two actually stacked, so a facet the sheet dropped cannot pass quietly",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_filters_yalla_from_listing",
+        "name": "test_app_filters_yalla_from_listing",
+        "platform": "app",
+        "path": "tests/app/test_app_filters_and_sorting.py",
+        "file": "test_app_filters_and_sorting.py",
+        "title": "Filters: a signed-in shopper applies Yalla directly on the listing",
+        "feature": "PLP Filters and Sort",
+        "story": "FALCONS-388 - Yalla from the PLP page itself",
+        "severity": "critical",
+        "tags": [
+          "Filters",
+          "PLP",
+          "Yalla",
+          "Logged In User"
+        ],
+        "docstring": "1. Sign in, then open a listing through search 2. Tap the Yalla chip on the listing itself, outside the filter sheet 3. Verify the switch reads as on, the listing reloads and products render 4. Verify the results count narrowed rather than widened 5. Verify every product displayed is Yalla: its badge on Android, no Global badge on iOS",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_filters_from_both_entry_points",
+        "name": "test_app_filters_from_both_entry_points",
+        "platform": "app",
+        "path": "tests/app/test_app_filters_and_sorting.py",
+        "file": "test_app_filters_and_sorting.py",
+        "title": "Filters: the top row and the floating bar both apply and clear a filter",
+        "feature": "PLP Filters and Sort",
+        "story": "FALCONS-388 - Both PLP entry points",
+        "severity": "critical",
+        "tags": [
+          "Filters",
+          "PLP",
+          "Logged In User"
+        ],
+        "docstring": "1. Sign in, then open a listing through search 2. Apply a filter from the fixed row at the top of the listing, then clear it 3. Scroll so the floating bar replaces the top row 4. Apply a filter from the floating bar, then clear it 5. Both entry points open the same sheet, so each must apply and clear the same way",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_filters_on_sale_category_listing",
+        "name": "test_app_filters_on_sale_category_listing",
+        "platform": "app",
+        "path": "tests/app/test_app_filters_and_sorting.py",
+        "file": "test_app_filters_and_sorting.py",
+        "title": "Filters: the Sale listing offers the filters a search listing does not",
+        "feature": "PLP Filters and Sort",
+        "story": "FALCONS-388 - Filters on a category listing",
+        "severity": "critical",
+        "tags": [
+          "Filters",
+          "PLP",
+          "Logged In User"
+        ],
+        "docstring": "1. Open the Categories tab and scroll the list until the Sale category renders 2. Open the Sale listing, whose filter sheet offers a different facet set 3. Apply Category, Color, Diaper Size and Shoe Size alone, each showing exactly what the sheet promised 4. These facets are only offered on a category listing, not on search results",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_filters_discounts",
+        "name": "test_app_filters_discounts",
+        "platform": "app",
+        "path": "tests/app/test_app_filters_and_sorting.py",
+        "file": "test_app_filters_and_sorting.py",
+        "title": "Filters: the Discounts chip narrows the listing to discounted products",
+        "feature": "PLP Filters and Sort",
+        "story": "FALCONS-388 - Discounts filter",
+        "severity": "critical",
+        "tags": [
+          "Filters",
+          "PLP",
+          "Discounts",
+          "Logged In User"
+        ],
+        "docstring": "1. Open a sub-category listing from the Categories tab, whose sheet offers Discounts 2. Open the filter sheet and switch the Discounts chip on 3. Read the total the sheet promises once Discounts is on, 'Show N Results' 4. Apply; on Android the listing shows exactly N and every card shows a was-price and % off",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_filters_price_slider",
+        "name": "test_app_filters_price_slider",
+        "platform": "app",
+        "path": "tests/app/test_app_filters_and_sorting.py",
+        "file": "test_app_filters_and_sorting.py",
+        "title": "Filters: the price slider narrows the listing and the products respect the ceiling",
+        "feature": "PLP Filters and Sort",
+        "story": "FALCONS-388 - Price filter",
+        "severity": "critical",
+        "tags": [
+          "Filters",
+          "PLP",
+          "Price",
+          "Logged In User"
+        ],
+        "docstring": "1. Open the Sale listing from the Categories tab 2. Open the filter sheet and expand the Price facet 3. Read the maximum the sheet offers, then drag the handle down to about 250 4. Apply, then verify the chip, the products shown and the results count 5. Verify every listed price falls under the ceiling the slider actually committed",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_sort_by_price_from_both_entry_points",
+        "name": "test_app_sort_by_price_from_both_entry_points",
+        "platform": "app",
+        "path": "tests/app/test_app_filters_and_sorting.py",
+        "file": "test_app_filters_and_sorting.py",
+        "title": "Sort: price sorting works from the top row and from the floating bar",
+        "feature": "PLP Filters and Sort",
+        "story": "FALCONS-388 - Sort from both entry points",
+        "severity": "critical",
+        "tags": [
+          "Sort",
+          "PLP",
+          "Logged In User"
+        ],
+        "docstring": "1. Sign in, then open a listing through search 2. Sort by price low to high from the top row; the listed prices must ascend 3. Scroll so the floating bar appears, sort high to low there; the prices must descend",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "app::test_app_gift_registry_create_from_my_registries",
         "name": "test_app_gift_registry_create_from_my_registries",
         "platform": "app",
@@ -9816,10 +9995,18 @@
     "app::test_app_category_levels_as_guest",
     "app::test_app_category_levels_as_signed_in_user",
     "app::test_app_category_restricted_coupon_discount",
+    "app::test_app_filters_discounts",
+    "app::test_app_filters_from_both_entry_points",
+    "app::test_app_filters_multiple_filters_from_sheet",
+    "app::test_app_filters_on_sale_category_listing",
+    "app::test_app_filters_one_filter_at_a_time",
+    "app::test_app_filters_price_slider",
+    "app::test_app_filters_yalla_from_listing",
     "app::test_app_gift_registry_create_from_my_registries",
     "app::test_app_new_user_auto_discount_applied_without_coupon",
     "app::test_app_new_user_brand_restricted_coupon_discount",
     "app::test_app_new_user_category_restricted_coupon_discount",
+    "app::test_app_sort_by_price_from_both_entry_points",
     "app::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
     "app::test_super_app_now_non_serviceable_address_validation",
     "app::test_super_app_now_serviceable_address_restores_availability",
@@ -10051,8 +10238,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-11-03",
-    "generated_at": "2026-11-03T06:42:35+00:00",
-    "source_sha": "be1f4f8",
+    "generated_at": "2026-11-03T06:51:48+00:00",
+    "source_sha": "53d29c8",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -10168,13 +10355,13 @@
       "other_group": 11
     },
     "platforms": {
-      "app": 78,
+      "app": 86,
       "web_uae": 65,
       "web_ksa": 50,
       "web_commons": 23
     },
-    "total_automated_tests": 216,
-    "active_tests": 192,
+    "total_automated_tests": 224,
+    "active_tests": 200,
     "skipped_hard": 18,
     "cases_not_running": {
       "hard_skipped": 1,
@@ -10187,7 +10374,7 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 54,
+    "unmapped_count": 62,
     "plan_gap_count": 26,
     "unmapped_and_skipped": 13,
     "arabic_ready_tests": 114,

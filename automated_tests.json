@@ -4554,6 +4554,163 @@
       ]
     },
     {
+      "ref": "web_commons::test_web_filters_one_filter_at_a_time",
+      "name": "test_web_filters_one_filter_at_a_time",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_web_filter_and_sort.py",
+      "file": "test_web_filter_and_sort.py",
+      "title": "mWeb filters: each of the most-used filters applies and clears on its own",
+      "feature": "PLP Filters and Sort",
+      "story": "FALCONS-390 - One filter at a time",
+      "severity": "critical",
+      "tags": [
+        "Filters",
+        "PLP",
+        "mWeb"
+      ],
+      "docstring": "1. Open a search listing for the term under test 2. Tick Category, reading the product count printed beside the option, and confirm the sheet 3. Verify the filter is in the URL and the results total equals exactly that count 4. Clear it and verify the filter left the URL and the listing still shows products 5. Repeat for Brand, Age and Gender, each applied and cleared in isolation 6. Isolating eac",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_commons::test_web_filters_multiple_filters",
+      "name": "test_web_filters_multiple_filters",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_web_filter_and_sort.py",
+      "file": "test_web_filter_and_sort.py",
+      "title": "mWeb filters: stacking the offered filters keeps narrowing the listing",
+      "feature": "PLP Filters and Sort",
+      "story": "FALCONS-390 - Multiple filters",
+      "severity": "critical",
+      "tags": [
+        "Filters",
+        "PLP",
+        "mWeb"
+      ],
+      "docstring": "1. Open a search listing for the term under test 2. Stack Category, Brand, Gender and Age, committing the sheet after each one 3. Verify each writes its own query parameter and the total equals the count its option printed 4. Assert at least two actually stacked, so a facet the listing dropped cannot pass quietly",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_commons::test_web_filters_yalla_from_listing",
+      "name": "test_web_filters_yalla_from_listing",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_web_filter_and_sort.py",
+      "file": "test_web_filter_and_sort.py",
+      "title": "mWeb filters: Yalla applies from the listing itself",
+      "feature": "PLP Filters and Sort",
+      "story": "FALCONS-390 - Yalla from the listing",
+      "severity": "critical",
+      "tags": [
+        "Filters",
+        "PLP",
+        "Yalla",
+        "mWeb"
+      ],
+      "docstring": "1. Open a search listing for the term under test and verify it loaded with products 2. Apply Yalla from the listing itself, outside the filter drawer 3. Verify the control reads as selected and the listing carries the Yalla parameter 4. Verify the page loaded, products are displayed and the results total narrowed 5. Verify every product displayed carries the Yalla delivery flag",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_commons::test_web_filters_price_range",
+      "name": "test_web_filters_price_range",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_web_filter_and_sort.py",
+      "file": "test_web_filter_and_sort.py",
+      "title": "mWeb filters: the price slider narrows the listing and the prices respect it",
+      "feature": "PLP Filters and Sort",
+      "story": "FALCONS-390 - Price range",
+      "severity": "critical",
+      "tags": [
+        "Filters",
+        "PLP",
+        "Price",
+        "mWeb"
+      ],
+      "docstring": "1. Open the Deals listing, which offers the Price facet in every country and environment 2. Open the Filters drawer and expand the Price facet 3. Drag the upper handle down towards 250, read back the value it committed and confirm 4. Verify the page loaded, products are displayed and the results total narrowed 5. Verify every listed price falls under that ceiling",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_commons::test_web_filters_color_and_diaper_size",
+      "name": "test_web_filters_color_and_diaper_size",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_web_filter_and_sort.py",
+      "file": "test_web_filter_and_sort.py",
+      "title": "mWeb filters: Color and Diaper Size each apply and clear on a category listing",
+      "feature": "PLP Filters and Sort",
+      "story": "FALCONS-390 - Color and Diaper Size",
+      "severity": "critical",
+      "tags": [
+        "Filters",
+        "PLP",
+        "mWeb"
+      ],
+      "docstring": "1. Open the Diapers category listing, which offers both facets 2. Tick the first Color, confirm the sheet and verify the total equals the count it printed 3. Clear it and verify the filter left the URL and the listing still shows products 4. Repeat for Diaper Size",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_commons::test_web_filters_discounts",
+      "name": "test_web_filters_discounts",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_web_filter_and_sort.py",
+      "file": "test_web_filter_and_sort.py",
+      "title": "mWeb filters: % Discounts narrows a category listing and clears again",
+      "feature": "PLP Filters and Sort",
+      "story": "FALCONS-390 - % Discounts",
+      "severity": "critical",
+      "tags": [
+        "Filters",
+        "PLP",
+        "Discounts",
+        "mWeb"
+      ],
+      "docstring": "1. Open the Diapers category listing, which offers the % Discounts toggle 2. Turn % Discounts on from the filter sheet and confirm the sheet 3. Verify the listing carries the discount parameter, narrowed, and still renders products 4. Verify every product displayed shows a struck-through was-price above the price paid 5. Turn it off and verify the parameter is gone and the listing still shows prod",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_commons::test_web_sort_by_price_from_both_entry_points",
+      "name": "test_web_sort_by_price_from_both_entry_points",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_web_filter_and_sort.py",
+      "file": "test_web_filter_and_sort.py",
+      "title": "mWeb sort: price sorting works from the listing control and the sticky one",
+      "feature": "PLP Filters and Sort",
+      "story": "FALCONS-390 - Sort from both entry points",
+      "severity": "critical",
+      "tags": [
+        "Sort",
+        "PLP",
+        "mWeb"
+      ],
+      "docstring": "1. Open a search listing for the term under test 2. Sort by price low to high from the control at the top of the listing 3. Verify the rendered product prices ascend 4. Scroll down so the sticky control replaces it, and sort by price high to low 5. Verify the rendered product prices descend 6. Both controls open the same options, so each must sort and be verified from the prices",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "web_commons::test_wishlist_delete_all_product_types",
       "name": "test_wishlist_delete_all_product_types",
       "platform": "web_commons",
@@ -4663,7 +4820,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "7cd8a3c",
+    "sha": "be1f4f8",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }

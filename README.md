@@ -17,12 +17,12 @@ Measured against `automation_web_2.0` **`origin/main`**.
 
 | | Full | Partial | Not covered | In scope | Coverage |
 |---|---|---|---|---|---|
-| mWeb — regression repo 3 / group 73697 | 27 | 4 | 24 | 55 | **56 %** |
-| Native app — repository 241 | 9 | 14 | 6 | 29 | **79 %** |
-| **Combined** | **36** | **18** | **30** | **84** | **64 %** |
+| mWeb — regression repo 3 / group 73697 | 34 | 6 | 15 | 55 | **73 %** |
+| Native app — repository 241 | 21 | 4 | 4 | 29 | **86 %** |
+| **Combined** | **55** | **10** | **19** | **84** | **77 %** |
 
-Automated tests on main: **131** — 111 active, 15 hard-skipped, 5 OS-gated.
-103 are verified in Arabic as well as English.
+Automated tests on main (`53d29c8`, 3 Nov 2026): **224** — 200 active, 18 hard-skipped, 6 OS-gated.
+114 are verified in Arabic as well as English.
 
 ### Scope: only `Automated = YES` or `NO` counts
 
@@ -32,7 +32,7 @@ notifications, Maya, GTM, Apple Pay — are kept in the report for reference but
 excluded from every percentage. This is the same filter as
 `repositories/3?group_id=73697&filter=…custom_automated:[18,144]`.
 
-45 of the 129 cases are excluded this way (26 mWeb + 19 app). Tick **Show *Not planned***
+79 of the 163 cases are excluded this way (60 mWeb + 19 app). Tick **Show *Not planned***
 in the toolbar to see them; the numbers do not move.
 
 The report now mirrors the regression repository exactly: **all 104 cases** of group 73697,
@@ -145,7 +145,7 @@ it has been removed.
 
 ## What is not mapped
 
-19 tests on main are not linked to any case. 15 of those are hard-skipped, so they guard
+48 tests on main are not linked to any case. 13 of those are hard-skipped, so they guard
 nothing today. The rest are UAE cart-behaviour tests (`test_uae_cart_remove_item`,
 `..._increase_and_decrease_quantity`, `..._bundle_multiple_variants`,
 `..._order_summary_updates_after_item_removal`, `..._add_all_product_types_and_verify` and

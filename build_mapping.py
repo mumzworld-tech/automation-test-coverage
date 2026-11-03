@@ -41,15 +41,30 @@ WEB_MAPPING = {
         "the locale is chosen when the session starts."),
 
     # --- Catalogue (all Not planned -> out of scope) -----------------------
+    "1548291": ("partial", ["web_commons::test_web_filters_price_range"],
+        "FALCONS-390 opens the Sale listing, drags the price ceiling down, and verifies the listing "
+        "narrowed and every price respects it. The Category and Brand filters this case starts with "
+        "are applied on a search listing in the same suite, never on the Sale page."),
+    "1548292": ("full", ["web_commons::test_categories_levels_load",
+                         "web_commons::test_web_filters_color_and_diaper_size",
+                         "web_commons::test_web_filters_discounts"],
+        "Scenario 2, the mWeb one, is FALCONS-361 step for step: menu > Toys > Explore All, then every "
+        "branch of the sub-category filter is walked down a level at a time, the listing and its total "
+        "checked at each pick, and the chips cleared before the next. FALCONS-390 adds Color, Diaper "
+        "Size and % Discounts applied and cleared on the Diapers category listing. Scenario 1 is "
+        "labelled desktop and sits outside the mWeb suite."),
     "1548293": ("none", [],
         "Removed the previous link to test_customer_can_search_brand: that is an APP test and it "
-        "is hard-skipped (brand page does not exist on the app). No mWeb brand-page filter test exists."),
+        "is hard-skipped (brand page does not exist on the app). FALCONS-390 filters a search, Sale "
+        "and category listing but never a brand page, so this is still not automated."),
 
     # --- PDP/PLP tax, price, promotions ------------------------------------
     "1018743": ("none", [], "Price and tax display on PLP/PDP/search is never asserted."),
-    "1018744": ("none", [],
-        "Removed the previous link to a KSA cart-coupon test. This case is about special-price "
-        "display on PLP/PDP/search, which no test asserts."),
+    "1018744": ("partial", ["web_commons::test_web_filters_discounts"],
+        "Scenario 1 on one listing: FALCONS-390 turns on % Discounts on the Diapers category PLP and "
+        "asserts every product shown carries a struck-through was-price above the price paid. The "
+        "special price on the PDP and on the search page (scenarios 2 and 3) is not asserted, and "
+        "the products are whatever the listing returns rather than one per product type."),
 
     # --- Registration -------------------------------------------------------
     "2337052": ("full", ["web_uae::test_uae_user_register_from_account_page",
@@ -370,8 +385,6 @@ for _case, _why in (
     ("1018733", "Geo-IP detection for guests is not automated."),
     ("1018736", "Switching country / website is not automated."),
     ("1018735", "Switching currency is not automated."),
-    ("1548291", "Sale-page filters are not automated."),
-    ("1548292", "Category-page filters are not automated."),
 ):
     WEB_MAPPING[_case] = ("none", [], _why)
 
@@ -386,10 +399,30 @@ APP_MAPPING = {
     "1435417": ("none", [], "Home-page banners are not asserted."),
     "1435425": ("partial", ["app::test_customer_can_search_product_in_specific_category"],
         "Reaches the category PLP through a search suggestion rather than the home-page category "
-        "entry point, and only on the configured store -- UAE/KSA/GCC/International are not each covered."),
+        "entry point, and only on the configured store -- UAE/KSA/GCC/International are not each "
+        "covered. Now hard-skipped on main: the new Algolia search no longer returns category "
+        "suggestions, so the flow this script drives no longer exists."),
     "1435426": ("none", [], "Collections from the home page are not automated."),
-    "1435390": ("none", [], "Category levels L1/L2/L3 are not automated."),
-    "1435404": ("none", [], "Filter and sort on the PLP are not automated on the app."),
+    "1435390": ("full", ["app::test_app_category_levels_as_guest",
+                         "app::test_app_category_levels_as_signed_in_user"],
+        "FALCONS-361. From the Categories tab: the L1 list loads, Toys opens its L2 list, a "
+        "sub-category with children opens its PLP, then every chip is selected in turn and descended "
+        "until the listing stops narrowing -- each reload verified. Run as a guest and as a "
+        "signed-in user."),
+    "1435404": ("full", ["app::test_app_filters_on_sale_category_listing",
+                         "app::test_app_filters_discounts",
+                         "app::test_app_filters_price_slider",
+                         "app::test_app_filters_one_filter_at_a_time",
+                         "app::test_app_filters_multiple_filters_from_sheet",
+                         "app::test_app_filters_yalla_from_listing",
+                         "app::test_app_filters_from_both_entry_points",
+                         "app::test_app_sort_by_price_from_both_entry_points"],
+        "FALCONS-388. Filters on category listings: Category, Colour, Diaper Size and Shoe Size on "
+        "the Sale listing, the price slider there with every price checked against the ceiling, and "
+        "Discounts on a sub-category listing with every card showing a was-price. The rest of the "
+        "suite applies, stacks and clears Age, Gender, Category, Brand and Yalla from both the top "
+        "row and the floating bar, and sorts by price both ways with the order verified. Sort runs "
+        "on a listing opened from search -- the same PLP screen and controls."),
     "1435391": ("partial", ["app::test_app_gift_registry_create_from_pdp_all_product_types"],
         "Opens the PDP for simple, bundle, configurable, custom, custom-configurable and "
         "installation products and selects their options, but as part of the gift-registry flow -- "
@@ -405,7 +438,10 @@ APP_MAPPING = {
         "Now automated: the script that was hard-skipped because the app had no brand page is live "
         "again on main, opening the brand page from a search suggestion. Still flagged Not planned "
         "in TestMO, so it sits outside the percentages until that changes."),
-    "2885050": ("none", [], "Brand-page product loading with filter and sort is not automated."),
+    "2885050": ("none", [],
+        "Brand-page product loading with filter and sort is not automated. FALCONS-388 filters and "
+        "sorts search and category listings only; test_customer_can_search_brand opens a brand page "
+        "but neither filters nor sorts it."),
     "2885052": ("full", ["app::test_existing_user_profile",
                          "app::test_app_invalid_login_combinations"],
         "Positive sign-in through the bottom sheet, plus a parametrised negative test asserting the "
@@ -499,11 +535,22 @@ APP_MAPPING = {
                             "app::test_existing_user_delivery_address"],
         "Adds an address, sets it as default, moves the default to another address, deletes one and "
         "verifies the remaining count. Editing an existing address is not covered."),
-    "1435402": ("full", ["app::test_customer_can_search_product_in_specific_category",
-                         "app::test_app_add_all_product_types_from_srp"],
-        "Search from the explore screen through to the suggestion dropdown, the category PLP and the "
-        "search results page. TestMO flags this NO -- it should be YES."),
-    "1435403": ("none", [], "Filter and sort on the search page are not automated."),
+    "1435402": ("full", ["app::test_app_add_all_product_types_from_srp",
+                         "app::test_app_sort_by_price_from_both_entry_points"],
+        "Search from the explore screen to the full search results page, where every product type is "
+        "found and added; the FALCONS-388 suite opens its listing the same way. Dropped "
+        "test_customer_can_search_product_in_specific_category, now hard-skipped because the new "
+        "Algolia search no longer offers category suggestions. TestMO flags this NO -- it should be YES."),
+    "1435403": ("full", ["app::test_app_filters_one_filter_at_a_time",
+                         "app::test_app_filters_multiple_filters_from_sheet",
+                         "app::test_app_filters_yalla_from_listing",
+                         "app::test_app_filters_from_both_entry_points",
+                         "app::test_app_sort_by_price_from_both_entry_points"],
+        "FALCONS-388, all on a search results listing. Age, Gender, Category and Brand each applied "
+        "and cleared, the count matching the sheet's 'Show N Results'; the same facets stacked one "
+        "after another; Yalla applied from the listing with every product checked; a filter applied "
+        "from the top row and from the floating bar; and price sort low-to-high then high-to-low "
+        "with the order verified."),
     "1543903": ("full", ["app::test_app_cart_partial_sc_and_checkout_with_cc",
                          "app::test_app_cart_full_sc_and_checkout"],
         "FALCONS-268. Both tests apply store credit on the cart, verify it, remove it, verify the "
@@ -625,6 +672,23 @@ PLAN_GAPS = {
         ("", "Automatic cart discount with no coupon entered -- no app case describes it"),
     "app::test_app_new_user_auto_discount_applied_without_coupon":
         ("", "Automatic cart discount, new user -- no app case describes it"),
+    # FALCONS-383 / FALCONS-384 -- coupons restricted to a brand or a category.
+    # The Coupon cases cover percentage, variant, bank, fixed and tiered rules;
+    # none describes a rule scoped to a brand or category.
+    **{ref: ("", "Brand restricted coupon -- no Coupon case describes a brand-scoped rule")
+       for ref in ("web_uae::test_uae_brand_restricted_coupon_discount",
+                   "web_uae::test_uae_new_user_brand_restricted_coupon_discount",
+                   "web_ksa::test_ksa_brand_restricted_coupon_discount",
+                   "web_ksa::test_ksa_new_user_brand_restricted_coupon_discount",
+                   "app::test_app_brand_restricted_coupon_discount",
+                   "app::test_app_new_user_brand_restricted_coupon_discount")},
+    **{ref: ("", "Category restricted coupon -- no Coupon case describes a category-scoped rule")
+       for ref in ("web_uae::test_uae_category_restricted_coupon_discount",
+                   "web_uae::test_uae_new_user_category_restricted_coupon_discount",
+                   "web_ksa::test_ksa_category_restricted_coupon_discount",
+                   "web_ksa::test_ksa_new_user_category_restricted_coupon_discount",
+                   "app::test_app_category_restricted_coupon_discount",
+                   "app::test_app_new_user_category_restricted_coupon_discount")},
     # FALCONS-347/348/349 -- the Now vertical. A new product area; neither TestMO
     # export carries cases for it, so none of this can raise a percentage yet.
     "app::test_super_app_vertical_switcher_only_in_uae":
@@ -790,15 +854,6 @@ def load(name, required=True):
 # without the number quietly borrowing against it.
 IN_REVIEW = [
     # Coupon rules -------------------------------------------------------------
-    {"pr": 317, "title": "FALCONS-383: BRAND001 brand restricted coupon, mWeb and app",
-     "tests": 6, "case": None, "status": "ready",
-     "note": "No TestMO case describes a brand-restricted coupon rule, so this adds no case "
-             "coverage on merge. Worth writing the case: the rule carries real revenue."},
-    {"pr": 321, "title": "FALCONS-384: CAT001 category restricted coupon, mWeb and app",
-     "tests": 6, "case": None, "status": "conflict",
-     "note": "Stacked on #317, so its diff shows 12 tests; 6 are new beyond #317. Same position "
-             "on coverage -- no TestMO case for a category-restricted rule. Conflicts in "
-             "resources/test_data.json and needs a rebase before it can merge."},
     {"pr": 311, "title": "App coupons: no-max rules must keep discounting as the quantity rises",
      "tests": 0, "case": None, "status": "ready",
      "note": "Adds no test functions -- it strengthens assertions inside existing app coupon "
@@ -821,8 +876,8 @@ IN_REVIEW = [
     # Everything else ----------------------------------------------------------
     {"pr": 280, "title": "FALCONS-358: app PLP price filter covers the full price range",
      "tests": 1, "case": "1435404", "status": "ready",
-     "note": "The only open PR that moves the headline: C-1435404 'apply filter and sort on PLP' "
-             "goes none -> partial (filter proven, sort still not). One test, open since 21 Sep."},
+     "note": "No longer moves the headline: FALCONS-388 (#332) landed C-1435404 with its own price "
+             "slider test. This would deepen it to the full price range. Open since 21 Sep."},
     {"pr": 235, "title": "FALCONS-323: bottom-sheet checkout support (app)",
      "tests": 5, "case": None, "status": "ready",
      "note": "Five bottom-sheet payment journeys. They deepen C-1543906 and C-1543907, which "

@@ -180,9 +180,11 @@
       "tags": "",
       "source": "regression",
       "run_id": 2154,
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": "Sale-page filters are not automated.",
+      "automated_tests": [
+        "web_commons::test_web_filters_price_range"
+      ],
+      "coverage_status": "partial",
+      "notes": "FALCONS-390 opens the Sale listing, drags the price ceiling down, and verifies the listing narrowed and every price respects it. The Category and Brand filters this case starts with are applied on a search listing in the same suite, never on the Sale page.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -207,9 +209,13 @@
       "tags": "",
       "source": "regression",
       "run_id": 2154,
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": "Category-page filters are not automated.",
+      "automated_tests": [
+        "web_commons::test_categories_levels_load",
+        "web_commons::test_web_filters_color_and_diaper_size",
+        "web_commons::test_web_filters_discounts"
+      ],
+      "coverage_status": "full",
+      "notes": "Scenario 2, the mWeb one, is FALCONS-361 step for step: menu > Toys > Explore All, then every branch of the sub-category filter is walked down a level at a time, the listing and its total checked at each pick, and the chips cleared before the next. FALCONS-390 adds Color, Diaper Size and % Discounts applied and cleared on the Diapers category listing. Scenario 1 is labelled desktop and sits outside the mWeb suite.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -236,7 +242,7 @@
       "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
-      "notes": "Removed the previous link to test_customer_can_search_brand: that is an APP test and it is hard-skipped (brand page does not exist on the app). No mWeb brand-page filter test exists.",
+      "notes": "Removed the previous link to test_customer_can_search_brand: that is an APP test and it is hard-skipped (brand page does not exist on the app). FALCONS-390 filters a search, Sale and category listing but never a brand page, so this is still not automated.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -290,9 +296,11 @@
       "source": "regression",
       "page": 2,
       "run_id": 2154,
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": "Removed the previous link to a KSA cart-coupon test. This case is about special-price display on PLP/PDP/search, which no test asserts.",
+      "automated_tests": [
+        "web_commons::test_web_filters_discounts"
+      ],
+      "coverage_status": "partial",
+      "notes": "Scenario 1 on one listing: FALCONS-390 turns on % Discounts on the Diapers category PLP and asserts every product shown carries a struck-through was-price above the price paid. The special price on the PDP and on the search page (scenarios 2 and 3) is not asserted, and the products are whatever the listing returns rather than one per product type.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -3415,7 +3423,7 @@
         "app::test_customer_can_search_product_in_specific_category"
       ],
       "coverage_status": "none",
-      "notes": "Reaches the category PLP through a search suggestion rather than the home-page category entry point, and only on the configured store -- UAE/KSA/GCC/International are not each covered. NOT COUNTED AS AUTOMATED: every mapped script is hard-skipped, so nothing runs. Closing this is an unskip, not new test work.",
+      "notes": "Reaches the category PLP through a search suggestion rather than the home-page category entry point, and only on the configured store -- UAE/KSA/GCC/International are not each covered. Now hard-skipped on main: the new Algolia search no longer returns category suggestions, so the flow this script drives no longer exists. NOT COUNTED AS AUTOMATED: every mapped script is hard-skipped, so nothing runs. Closing this is an unskip, not new test work.",
       "skipped_only": true,
       "gated_only": false,
       "locales": [
@@ -3468,13 +3476,17 @@
       "source": "release_check",
       "page": 1,
       "run_id": 2192,
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": "Category levels L1/L2/L3 are not automated.",
+      "automated_tests": [
+        "app::test_app_category_levels_as_guest",
+        "app::test_app_category_levels_as_signed_in_user"
+      ],
+      "coverage_status": "full",
+      "notes": "FALCONS-361. From the Categories tab: the L1 list loads, Toys opens its L2 list, a sub-category with children opens its PLP, then every chip is selected in turn and descended until the listing stops narrowing -- each reload verified. Run as a guest and as a signed-in user.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -3496,9 +3508,18 @@
       "source": "release_check",
       "page": 1,
       "run_id": 2192,
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": "Filter and sort on the PLP are not automated on the app.",
+      "automated_tests": [
+        "app::test_app_filters_on_sale_category_listing",
+        "app::test_app_filters_discounts",
+        "app::test_app_filters_price_slider",
+        "app::test_app_filters_one_filter_at_a_time",
+        "app::test_app_filters_multiple_filters_from_sheet",
+        "app::test_app_filters_yalla_from_listing",
+        "app::test_app_filters_from_both_entry_points",
+        "app::test_app_sort_by_price_from_both_entry_points"
+      ],
+      "coverage_status": "full",
+      "notes": "FALCONS-388. Filters on category listings: Category, Colour, Diaper Size and Shoe Size on the Sale listing, the price slider there with every price checked against the ceiling, and Discounts on a sub-category listing with every card showing a was-price. The rest of the suite applies, stacks and clears Age, Gender, Category, Brand and Yalla from both the top row and the floating bar, and sorts by price both ways with the order verified. Sort runs on a listing opened from search -- the same PLP screen and controls.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -3669,7 +3690,7 @@
       "page": 3,
       "automated_tests": [],
       "coverage_status": "none",
-      "notes": "Brand-page product loading with filter and sort is not automated.",
+      "notes": "Brand-page product loading with filter and sort is not automated. FALCONS-388 filters and sorts search and category listings only; test_customer_can_search_brand opens a brand page but neither filters nor sorts it.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -4234,11 +4255,11 @@
       "page": 1,
       "run_id": 2192,
       "automated_tests": [
-        "app::test_customer_can_search_product_in_specific_category",
-        "app::test_app_add_all_product_types_from_srp"
+        "app::test_app_add_all_product_types_from_srp",
+        "app::test_app_sort_by_price_from_both_entry_points"
       ],
       "coverage_status": "full",
-      "notes": "Search from the explore screen through to the suggestion dropdown, the category PLP and the search results page. TestMO flags this NO -- it should be YES.",
+      "notes": "Search from the explore screen to the full search results page, where every product type is found and added; the FALCONS-388 suite opens its listing the same way. Dropped test_customer_can_search_product_in_specific_category, now hard-skipped because the new Algolia search no longer offers category suggestions. TestMO flags this NO -- it should be YES.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -4265,9 +4286,15 @@
       "source": "release_check",
       "page": 1,
       "run_id": 2192,
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": "Filter and sort on the search page are not automated.",
+      "automated_tests": [
+        "app::test_app_filters_one_filter_at_a_time",
+        "app::test_app_filters_multiple_filters_from_sheet",
+        "app::test_app_filters_yalla_from_listing",
+        "app::test_app_filters_from_both_entry_points",
+        "app::test_app_sort_by_price_from_both_entry_points"
+      ],
+      "coverage_status": "full",
+      "notes": "FALCONS-388, all on a search results listing. Age, Gender, Category and Brand each applied and cleared, the count matching the sheet's 'Show N Results'; the same facets stacked one after another; Yalla applied from the listing with every product checked; a filter applied from the top row and from the floating bar; and price sort low-to-high then high-to-low with the order verified.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -9910,10 +9937,31 @@
         }
       ],
       "yes_but_partial": [],
-      "not_planned_but_automated": []
+      "not_planned_but_automated": [
+        {
+          "case_id": "1548291",
+          "name": "Check Sale Page for correct applying Filters (Category, Brand, Price) and mweb",
+          "status": "partial"
+        },
+        {
+          "case_id": "1548292",
+          "name": "Check Category Page for correct applying Filters (Category, Brand, Price)",
+          "status": "full"
+        }
+      ]
     },
     "app": {
       "no_but_automated": [
+        {
+          "case_id": "1435390",
+          "name": "Categories tab - Verify categories L1,L2 and L3 are loading",
+          "status": "full"
+        },
+        {
+          "case_id": "1435404",
+          "name": "Verify customer can apply filter and sort on PLP",
+          "status": "full"
+        },
         {
           "case_id": "1435392",
           "name": "Verify new user registration",
@@ -9942,6 +9990,11 @@
         {
           "case_id": "1435402",
           "name": "Verify customer can search  for products",
+          "status": "full"
+        },
+        {
+          "case_id": "1435403",
+          "name": "Verify customer can apply filter and sort on search page",
           "status": "full"
         },
         {
@@ -9992,21 +10045,11 @@
     "app::test_app_brand_restricted_coupon_discount",
     "app::test_app_cart_apply_gift_wrap_and_place_order",
     "app::test_app_cart_existing_user_orders_no_coupon_yalla",
-    "app::test_app_category_levels_as_guest",
-    "app::test_app_category_levels_as_signed_in_user",
     "app::test_app_category_restricted_coupon_discount",
-    "app::test_app_filters_discounts",
-    "app::test_app_filters_from_both_entry_points",
-    "app::test_app_filters_multiple_filters_from_sheet",
-    "app::test_app_filters_on_sale_category_listing",
-    "app::test_app_filters_one_filter_at_a_time",
-    "app::test_app_filters_price_slider",
-    "app::test_app_filters_yalla_from_listing",
     "app::test_app_gift_registry_create_from_my_registries",
     "app::test_app_new_user_auto_discount_applied_without_coupon",
     "app::test_app_new_user_brand_restricted_coupon_discount",
     "app::test_app_new_user_category_restricted_coupon_discount",
-    "app::test_app_sort_by_price_from_both_entry_points",
     "app::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
     "app::test_super_app_now_non_serviceable_address_validation",
     "app::test_super_app_now_serviceable_address_restores_availability",
@@ -10015,14 +10058,10 @@
     "app::test_uae_cart_move_to_wishlist",
     "app::test_uae_cart_quantity_workflow",
     "app::test_uae_checkout_invalid_cc_no_coupon",
-    "web_commons::test_categories_levels_load",
     "web_commons::test_home_screen_elements_and_navigate_to_account",
     "web_commons::test_home_search_product_in_specific_category",
-    "web_commons::test_web_filters_color_and_diaper_size",
-    "web_commons::test_web_filters_discounts",
     "web_commons::test_web_filters_multiple_filters",
     "web_commons::test_web_filters_one_filter_at_a_time",
-    "web_commons::test_web_filters_price_range",
     "web_commons::test_web_filters_yalla_from_listing",
     "web_commons::test_web_sort_by_price_from_both_entry_points",
     "web_ksa::test_ksa_auto_discount_applied_without_coupon",
@@ -10060,11 +10099,25 @@
       "mirrors_name": "Automatic cart discount with no coupon entered -- no app case describes it"
     },
     {
+      "ref": "app::test_app_brand_restricted_coupon_discount",
+      "platform": "app",
+      "path": "tests/app/test_app_coupon.py",
+      "mirrors_case": "",
+      "mirrors_name": "Brand restricted coupon -- no Coupon case describes a brand-scoped rule"
+    },
+    {
       "ref": "app::test_app_cart_existing_user_orders_no_coupon_yalla",
       "platform": "app",
       "path": "tests/app/test_app_cart.py",
       "mirrors_case": "2337029",
       "mirrors_name": "UF1 - Yalla free shipping on the cart (mWEB case; no app equivalent)"
+    },
+    {
+      "ref": "app::test_app_category_restricted_coupon_discount",
+      "platform": "app",
+      "path": "tests/app/test_app_coupon.py",
+      "mirrors_case": "",
+      "mirrors_name": "Category restricted coupon -- no Coupon case describes a category-scoped rule"
     },
     {
       "ref": "app::test_app_gift_registry_create_from_my_registries",
@@ -10079,6 +10132,20 @@
       "path": "tests/app/test_app_coupon.py",
       "mirrors_case": "",
       "mirrors_name": "Automatic cart discount, new user -- no app case describes it"
+    },
+    {
+      "ref": "app::test_app_new_user_brand_restricted_coupon_discount",
+      "platform": "app",
+      "path": "tests/app/test_app_coupon.py",
+      "mirrors_case": "",
+      "mirrors_name": "Brand restricted coupon -- no Coupon case describes a brand-scoped rule"
+    },
+    {
+      "ref": "app::test_app_new_user_category_restricted_coupon_discount",
+      "platform": "app",
+      "path": "tests/app/test_app_coupon.py",
+      "mirrors_case": "",
+      "mirrors_name": "Category restricted coupon -- no Coupon case describes a category-scoped rule"
     },
     {
       "ref": "app::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
@@ -10144,11 +10211,39 @@
       "mirrors_name": "Automatic cart discount with no coupon entered -- the Coupon cases all assume a code"
     },
     {
+      "ref": "web_ksa::test_ksa_brand_restricted_coupon_discount",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_coupon_ksa.py",
+      "mirrors_case": "",
+      "mirrors_name": "Brand restricted coupon -- no Coupon case describes a brand-scoped rule"
+    },
+    {
+      "ref": "web_ksa::test_ksa_category_restricted_coupon_discount",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_coupon_ksa.py",
+      "mirrors_case": "",
+      "mirrors_name": "Category restricted coupon -- no Coupon case describes a category-scoped rule"
+    },
+    {
       "ref": "web_ksa::test_ksa_new_user_auto_discount_applied_without_coupon",
       "platform": "web_ksa",
       "path": "tests/web/KSA/test_coupon_ksa.py",
       "mirrors_case": "",
       "mirrors_name": "Automatic cart discount, new user -- the Coupon cases all assume a code"
+    },
+    {
+      "ref": "web_ksa::test_ksa_new_user_brand_restricted_coupon_discount",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_coupon_ksa.py",
+      "mirrors_case": "",
+      "mirrors_name": "Brand restricted coupon -- no Coupon case describes a brand-scoped rule"
+    },
+    {
+      "ref": "web_ksa::test_ksa_new_user_category_restricted_coupon_discount",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_coupon_ksa.py",
+      "mirrors_case": "",
+      "mirrors_name": "Category restricted coupon -- no Coupon case describes a category-scoped rule"
     },
     {
       "ref": "web_ksa::test_ksa_wishlist_guest_add_prompts_login",
@@ -10163,6 +10258,13 @@
       "path": "tests/web/UAE/test_coupon.py",
       "mirrors_case": "",
       "mirrors_name": "Automatic cart discount with no coupon entered -- the Coupon cases all assume a code"
+    },
+    {
+      "ref": "web_uae::test_uae_brand_restricted_coupon_discount",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_coupon.py",
+      "mirrors_case": "",
+      "mirrors_name": "Brand restricted coupon -- no Coupon case describes a brand-scoped rule"
     },
     {
       "ref": "web_uae::test_uae_cart_add_all_product_types_and_verify",
@@ -10221,11 +10323,32 @@
       "mirrors_name": "Verify user can remove products from cart - All product types"
     },
     {
+      "ref": "web_uae::test_uae_category_restricted_coupon_discount",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_coupon.py",
+      "mirrors_case": "",
+      "mirrors_name": "Category restricted coupon -- no Coupon case describes a category-scoped rule"
+    },
+    {
       "ref": "web_uae::test_uae_new_user_auto_discount_applied_without_coupon",
       "platform": "web_uae",
       "path": "tests/web/UAE/test_coupon.py",
       "mirrors_case": "",
       "mirrors_name": "Automatic cart discount, new user -- the Coupon cases all assume a code"
+    },
+    {
+      "ref": "web_uae::test_uae_new_user_brand_restricted_coupon_discount",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_coupon.py",
+      "mirrors_case": "",
+      "mirrors_name": "Brand restricted coupon -- no Coupon case describes a brand-scoped rule"
+    },
+    {
+      "ref": "web_uae::test_uae_new_user_category_restricted_coupon_discount",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_coupon.py",
+      "mirrors_case": "",
+      "mirrors_name": "Category restricted coupon -- no Coupon case describes a category-scoped rule"
     },
     {
       "ref": "web_uae::test_uae_wishlist_guest_add_prompts_login",
@@ -10238,7 +10361,7 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-11-03",
-    "generated_at": "2026-11-03T06:51:48+00:00",
+    "generated_at": "2026-11-03T07:11:11+00:00",
     "source_sha": "53d29c8",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
@@ -10261,30 +10384,30 @@
         "in_scope": 55,
         "out_of_scope": 60,
         "full": 34,
-        "partial": 5,
-        "covered": 39,
-        "none": 16,
-        "pct": 71,
+        "partial": 6,
+        "covered": 40,
+        "none": 15,
+        "pct": 73,
         "pct_full": 62
       },
       "app": {
         "total": 48,
         "in_scope": 29,
         "out_of_scope": 19,
-        "full": 18,
+        "full": 21,
         "partial": 4,
-        "covered": 22,
-        "none": 7,
-        "pct": 76,
-        "pct_full": 62
+        "covered": 25,
+        "none": 4,
+        "pct": 86,
+        "pct_full": 72
       },
       "combined": {
         "in_scope": 84,
-        "full": 52,
-        "partial": 9,
-        "covered": 61,
-        "pct": 73,
-        "pct_full": 62
+        "full": 55,
+        "partial": 10,
+        "covered": 65,
+        "pct": 77,
+        "pct_full": 65
       },
       "web_by_source": {
         "other_group": {
@@ -10303,29 +10426,29 @@
           "in_scope": 55,
           "out_of_scope": 49,
           "full": 34,
-          "partial": 5,
-          "covered": 39,
-          "none": 16,
-          "pct": 71,
+          "partial": 6,
+          "covered": 40,
+          "none": 15,
+          "pct": 73,
           "pct_full": 62
         }
       }
     },
     "projection": {
       "web": {
-        "in_scope": 70,
-        "covered": 55,
-        "pct": 79
+        "in_scope": 80,
+        "covered": 66,
+        "pct": 82
       },
       "app": {
-        "in_scope": 41,
-        "covered": 35,
-        "pct": 85
+        "in_scope": 45,
+        "covered": 42,
+        "pct": 93
       },
       "combined": {
-        "in_scope": 111,
-        "covered": 90,
-        "pct": 81
+        "in_scope": 125,
+        "covered": 108,
+        "pct": 86
       },
       "actions": [
         {
@@ -10336,14 +10459,14 @@
         },
         {
           "id": "B",
-          "what": "Add 26 TestMO case(s) for tests that pass but have none",
+          "what": "Add 38 TestMO case(s) for tests that pass but have none",
           "detail": "the cart scenarios FALCONS-336 ported from the app suite; each names the app case to mirror",
           "effect": "enters scope already covered"
         },
         {
           "id": "C",
-          "what": "Re-flag 3 case(s) marked Not planned that have automation mapped",
-          "detail": "C-1435389, C-1435391, C-1435416",
+          "what": "Re-flag 5 case(s) marked Not planned that have automation mapped",
+          "detail": "C-1548291, C-1548292, C-1435389, C-1435391, C-1435416",
           "effect": "enters scope, already covered"
         }
       ]
@@ -10374,27 +10497,11 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 62,
-    "plan_gap_count": 26,
+    "unmapped_count": 48,
+    "plan_gap_count": 38,
     "unmapped_and_skipped": 13,
     "arabic_ready_tests": 114,
     "in_review": [
-      {
-        "pr": 317,
-        "title": "FALCONS-383: BRAND001 brand restricted coupon, mWeb and app",
-        "tests": 6,
-        "case": null,
-        "status": "ready",
-        "note": "No TestMO case describes a brand-restricted coupon rule, so this adds no case coverage on merge. Worth writing the case: the rule carries real revenue."
-      },
-      {
-        "pr": 321,
-        "title": "FALCONS-384: CAT001 category restricted coupon, mWeb and app",
-        "tests": 6,
-        "case": null,
-        "status": "conflict",
-        "note": "Stacked on #317, so its diff shows 12 tests; 6 are new beyond #317. Same position on coverage -- no TestMO case for a category-restricted rule. Conflicts in resources/test_data.json and needs a rebase before it can merge."
-      },
       {
         "pr": 311,
         "title": "App coupons: no-max rules must keep discounting as the quantity rises",
@@ -10433,7 +10540,7 @@
         "tests": 1,
         "case": "1435404",
         "status": "ready",
-        "note": "The only open PR that moves the headline: C-1435404 'apply filter and sort on PLP' goes none -> partial (filter proven, sort still not). One test, open since 21 Sep."
+        "note": "No longer moves the headline: FALCONS-388 (#332) landed C-1435404 with its own price slider test. This would deepen it to the full price range. Open since 21 Sep."
       },
       {
         "pr": 235,

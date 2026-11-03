@@ -846,54 +846,6 @@ def load(name, required=True):
 # merge day. An entry here is inert until EVERY one of its refs is on main, then
 # applies itself -- so the first CI build after the merge flips the case with the
 # evidence note already written. Keyed by (scope, case_id).
-# --- Work in flight -----------------------------------------------------------
-#
-# Shown on the report as a muted "in review" strip, deliberately OUTSIDE every
-# percentage: the headline is measured against origin/main and nothing else, or
-# it stops being checkable. This exists so the wider team can see what is coming
-# without the number quietly borrowing against it.
-IN_REVIEW = [
-    # Coupon rules -------------------------------------------------------------
-    {"pr": 311, "title": "App coupons: no-max rules must keep discounting as the quantity rises",
-     "tests": 0, "case": None, "status": "ready",
-     "note": "Adds no test functions -- it strengthens assertions inside existing app coupon "
-             "tests. Good for confidence in C-1435409, no effect on the count."},
-
-    # Now / super-app vertical on mWeb -- one stack, not three independent PRs ---
-    {"pr": 304, "title": "FALCONS-373: Now serviceability for a logged-in user (mWeb)",
-     "tests": 3, "case": None, "status": "stacked",
-     "note": "Bottom of the Now mWeb stack. Its 3 tests also appear in #305 and #306."},
-    {"pr": 305, "title": "FALCONS-375: Now guest end-to-end order journey (mWeb)",
-     "tests": 4, "case": None, "status": "stacked",
-     "note": "Contains #304 plus the guest order journey. Merge the stack head instead."},
-    {"pr": 306, "title": "FALCONS-380: Now new-user category, sort, filter and Tabby (mWeb)",
-     "tests": 5, "case": None, "status": "stacked",
-     "note": "Head of the stack -- contains #304 and #305, so merging this one lands all 5 mWeb "
-             "Now tests. They carry the same function names as the app Now tests already on main, "
-             "which is why every link in this report is platform-qualified (web_uae:: vs app::). "
-             "TestMO has no case for the Now vertical at all, so the stack adds no case coverage."},
-
-    # Everything else ----------------------------------------------------------
-    {"pr": 280, "title": "FALCONS-358: app PLP price filter covers the full price range",
-     "tests": 1, "case": "1435404", "status": "ready",
-     "note": "No longer moves the headline: FALCONS-388 (#332) landed C-1435404 with its own price "
-             "slider test. This would deepen it to the full price range. Open since 21 Sep."},
-    {"pr": 235, "title": "FALCONS-323: bottom-sheet checkout support (app)",
-     "tests": 5, "case": None, "status": "ready",
-     "note": "Five bottom-sheet payment journeys. They deepen C-1543906 and C-1543907, which "
-             "already count, so no change to the percentage. Untouched since 10 Aug."},
-    {"pr": 221, "title": "FALCONS-295: wishlist from PDP",
-     "tests": 2, "case": None, "status": "superseded",
-     "note": "Both tests are already on main in tests/app/test_app_wishlist.py and are mapped to "
-             "C-1435396. This PR would re-add them to test_app_cart.py. Safe to close."},
-    {"pr": 127, "title": "Gift registry creation for UAE and KSA",
-     "tests": 4, "case": None, "status": "superseded",
-     "note": "Main already covers this with the locale-agnostic commons tests "
-             "(test_gift_registry_create_from_my_account / _from_pdp), which serve both stores. "
-             "This would add per-store duplicates. Open since 20 May. Safe to close."},
-]
-
-
 PENDING = {
     # (empty -- FALCONS-364 landed in #310 and now lives in the dicts above)
 }
@@ -1050,6 +1002,45 @@ def projection(web, app, plan_gaps, reconciliation):
     }
 
 
+def statuses(data):
+    """Every case's status and scope, keyed "web:<id>" / "app:<id>"."""
+    out = {}
+    for platform, key in (("web", "testmo_tests"), ("app", "app_testmo_tests")):
+        for c in data.get(key) or []:
+            out[f"{platform}:{c['case_id']}"] = (c["coverage_status"], c.get("in_scope", True), c["name"])
+    return out
+
+
+def history_point(data, previous, day):
+    """One point on the coverage trend, or None if no in-scope case moved.
+
+    `previous` is statuses() of the build before. Recording only when a case
+    changes keeps the trend to the moments the number actually moved, and makes
+    re-running the build idempotent.
+    """
+    now = statuses(data)
+    changes = []
+    for key, (status, in_scope, name) in now.items():
+        old = previous.get(key)
+        was = old[0] if old and old[1] else ("new" if not old else "out")
+        if in_scope and was != status:
+            changes.append({"case": key, "name": name[:90], "from": was, "to": status})
+        elif not in_scope and old and old[1]:
+            changes.append({"case": key, "name": name[:90], "from": old[0], "to": "out"})
+    if previous and not changes:
+        return None
+
+    def share(platform):
+        scoped = [v for k, v in now.items() if k.startswith(platform + ":") and v[1]]
+        return [sum(1 for v in scoped if v[0] != "none"), sum(1 for v in scoped if v[0] == "full"), len(scoped)]
+
+    tests = data.get("automated_tests") or {}
+    return {"date": day, "sha": (data.get("metadata") or {}).get("source_sha", ""),
+            "web": share("web"), "app": share("app"),   # [covered, full, in scope]
+            "tests": sum(len(v) for k, v in tests.items() if k != "_meta"),
+            "changes": [] if not previous else changes}
+
+
 def tally(cases):
     scoped = [c for c in cases if c["in_scope"]]
     full = sum(1 for c in scoped if c["coverage_status"] == "full")
@@ -1176,7 +1167,6 @@ def main():
                 1 for r in inventory
                 if r not in mapped and (inventory[r]["skip"] or {}).get("type") == "hard"),
             "arabic_ready_tests": sum(1 for t in flat if "ar" in t["locales"]),
-            "in_review": IN_REVIEW,
             # The headline percentage can sit still while real work lands: a new test
             # that deepens a case TestMO already counts changes no case's status. The
             # suite size is the honest companion number, so record where it started.
@@ -1184,6 +1174,12 @@ def main():
                          "what": "the re-map against main"},
         },
     }
+    # Carried forward from the previous build, so CI extends the trend on its own.
+    history = list((prev.get("metadata") or {}).get("history") or [])
+    point = history_point(out, statuses(prev) if prev else {}, date.today().isoformat())
+    if point:
+        history.append(point)
+    out["metadata"]["history"] = history
     (HERE / "mapping.json").write_text(json.dumps(out, indent=2, ensure_ascii=False))
 
     print(f"mWEB  {web_t['full']} full + {web_t['partial']} partial = {web_t['covered']}/{web_t['in_scope']} "

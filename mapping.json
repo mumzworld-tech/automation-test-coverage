@@ -10361,7 +10361,7 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-11-03",
-    "generated_at": "2026-11-03T07:11:11+00:00",
+    "generated_at": "2026-11-03T07:43:31+00:00",
     "source_sha": "53d29c8",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
@@ -10501,77 +10501,420 @@
     "plan_gap_count": 38,
     "unmapped_and_skipped": 13,
     "arabic_ready_tests": 114,
-    "in_review": [
-      {
-        "pr": 311,
-        "title": "App coupons: no-max rules must keep discounting as the quantity rises",
-        "tests": 0,
-        "case": null,
-        "status": "ready",
-        "note": "Adds no test functions -- it strengthens assertions inside existing app coupon tests. Good for confidence in C-1435409, no effect on the count."
-      },
-      {
-        "pr": 304,
-        "title": "FALCONS-373: Now serviceability for a logged-in user (mWeb)",
-        "tests": 3,
-        "case": null,
-        "status": "stacked",
-        "note": "Bottom of the Now mWeb stack. Its 3 tests also appear in #305 and #306."
-      },
-      {
-        "pr": 305,
-        "title": "FALCONS-375: Now guest end-to-end order journey (mWeb)",
-        "tests": 4,
-        "case": null,
-        "status": "stacked",
-        "note": "Contains #304 plus the guest order journey. Merge the stack head instead."
-      },
-      {
-        "pr": 306,
-        "title": "FALCONS-380: Now new-user category, sort, filter and Tabby (mWeb)",
-        "tests": 5,
-        "case": null,
-        "status": "stacked",
-        "note": "Head of the stack -- contains #304 and #305, so merging this one lands all 5 mWeb Now tests. They carry the same function names as the app Now tests already on main, which is why every link in this report is platform-qualified (web_uae:: vs app::). TestMO has no case for the Now vertical at all, so the stack adds no case coverage."
-      },
-      {
-        "pr": 280,
-        "title": "FALCONS-358: app PLP price filter covers the full price range",
-        "tests": 1,
-        "case": "1435404",
-        "status": "ready",
-        "note": "No longer moves the headline: FALCONS-388 (#332) landed C-1435404 with its own price slider test. This would deepen it to the full price range. Open since 21 Sep."
-      },
-      {
-        "pr": 235,
-        "title": "FALCONS-323: bottom-sheet checkout support (app)",
-        "tests": 5,
-        "case": null,
-        "status": "ready",
-        "note": "Five bottom-sheet payment journeys. They deepen C-1543906 and C-1543907, which already count, so no change to the percentage. Untouched since 10 Aug."
-      },
-      {
-        "pr": 221,
-        "title": "FALCONS-295: wishlist from PDP",
-        "tests": 2,
-        "case": null,
-        "status": "superseded",
-        "note": "Both tests are already on main in tests/app/test_app_wishlist.py and are mapped to C-1435396. This PR would re-add them to test_app_cart.py. Safe to close."
-      },
-      {
-        "pr": 127,
-        "title": "Gift registry creation for UAE and KSA",
-        "tests": 4,
-        "case": null,
-        "status": "superseded",
-        "note": "Main already covers this with the locale-agnostic commons tests (test_gift_registry_create_from_my_account / _from_pdp), which serve both stores. This would add per-store duplicates. Open since 20 May. Safe to close."
-      }
-    ],
     "baseline": {
       "tests": 131,
       "date": "2026-09-02",
       "sha": "8a95571",
       "what": "the re-map against main"
-    }
+    },
+    "history": [
+      {
+        "date": "2026-09-06",
+        "sha": "8a95571",
+        "web": [
+          31,
+          27,
+          55
+        ],
+        "app": [
+          23,
+          9,
+          29
+        ],
+        "tests": 131,
+        "changes": []
+      },
+      {
+        "date": "2026-09-07",
+        "sha": "22ffbdb",
+        "web": [
+          31,
+          27,
+          55
+        ],
+        "app": [
+          23,
+          10,
+          29
+        ],
+        "tests": 135,
+        "changes": [
+          {
+            "case": "app:1435409",
+            "name": "Verify user can apply and remove coupon on cart",
+            "from": "partial",
+            "to": "full"
+          }
+        ]
+      },
+      {
+        "date": "2026-09-07",
+        "sha": "94b30e3",
+        "web": [
+          37,
+          32,
+          55
+        ],
+        "app": [
+          23,
+          10,
+          29
+        ],
+        "tests": 145,
+        "changes": [
+          {
+            "case": "web:1018709",
+            "name": "Accessing My profile page by users",
+            "from": "none",
+            "to": "full"
+          },
+          {
+            "case": "web:1018712",
+            "name": "Users updating saved address from address book",
+            "from": "none",
+            "to": "partial"
+          },
+          {
+            "case": "web:2337059",
+            "name": "Gift Registry creation on My account ( My registries)  and PDP",
+            "from": "partial",
+            "to": "full"
+          },
+          {
+            "case": "web:2337061",
+            "name": "Setup the Gift registry",
+            "from": "none",
+            "to": "full"
+          },
+          {
+            "case": "web:2337060",
+            "name": "Adding product  to GR",
+            "from": "none",
+            "to": "partial"
+          },
+          {
+            "case": "web:2337062",
+            "name": "Add to cart GR products",
+            "from": "none",
+            "to": "full"
+          },
+          {
+            "case": "web:2337063",
+            "name": "Checkout with GR",
+            "from": "none",
+            "to": "full"
+          }
+        ]
+      },
+      {
+        "date": "2026-09-08",
+        "sha": "bb4c777",
+        "web": [
+          37,
+          32,
+          55
+        ],
+        "app": [
+          23,
+          15,
+          29
+        ],
+        "tests": 145,
+        "changes": [
+          {
+            "case": "app:1435401",
+            "name": "Verify user can add all product types from PLP, search, brand, PDP (Simple, custom , insta",
+            "from": "partial",
+            "to": "full"
+          },
+          {
+            "case": "app:1435405",
+            "name": "Verify product list in cart - All product types",
+            "from": "partial",
+            "to": "full"
+          },
+          {
+            "case": "app:1435406",
+            "name": "Verify user can update product qty  on cart-All product types",
+            "from": "partial",
+            "to": "full"
+          },
+          {
+            "case": "app:1435407",
+            "name": "Verify user can remove products from cart -All product types",
+            "from": "partial",
+            "to": "full"
+          },
+          {
+            "case": "app:1543907",
+            "name": "Place Tamara, Tabby, Apple pay and CC orders - check ODP, Admin and invoice",
+            "from": "partial",
+            "to": "full"
+          }
+        ]
+      },
+      {
+        "date": "2026-09-08",
+        "sha": "bb4c777",
+        "web": [
+          37,
+          33,
+          55
+        ],
+        "app": [
+          23,
+          15,
+          29
+        ],
+        "tests": 145,
+        "changes": [
+          {
+            "case": "web:2337060",
+            "name": "Adding product  to GR",
+            "from": "partial",
+            "to": "full"
+          }
+        ]
+      },
+      {
+        "date": "2026-09-08",
+        "sha": "bb4c777",
+        "web": [
+          37,
+          33,
+          55
+        ],
+        "app": [
+          24,
+          16,
+          29
+        ],
+        "tests": 145,
+        "changes": [
+          {
+            "case": "app:1435397",
+            "name": "Verify user can remove all product types from wishlist",
+            "from": "none",
+            "to": "full"
+          }
+        ]
+      },
+      {
+        "date": "2026-09-08",
+        "sha": "bb4c777",
+        "web": [
+          37,
+          33,
+          55
+        ],
+        "app": [
+          20,
+          15,
+          29
+        ],
+        "tests": 145,
+        "changes": [
+          {
+            "case": "app:2885053",
+            "name": "Verify user can login from gmail",
+            "from": "partial",
+            "to": "none"
+          },
+          {
+            "case": "app:1435395",
+            "name": "Verify wishlist loading for existing customer",
+            "from": "full",
+            "to": "none"
+          },
+          {
+            "case": "app:1435419",
+            "name": "Verify GR cart and proceed to checkout",
+            "from": "partial",
+            "to": "none"
+          },
+          {
+            "case": "app:1435420",
+            "name": "Verify multiple carts and proceed to checkout",
+            "from": "partial",
+            "to": "none"
+          }
+        ]
+      },
+      {
+        "date": "2026-09-09",
+        "sha": "bb4c777",
+        "web": [
+          36,
+          32,
+          55
+        ],
+        "app": [
+          18,
+          14,
+          29
+        ],
+        "tests": 145,
+        "changes": [
+          {
+            "case": "web:1018761",
+            "name": "Bank discount",
+            "from": "full",
+            "to": "none"
+          },
+          {
+            "case": "app:1435418",
+            "name": "Verify user can add items to GR - All product types (Simple, custom , installation , confi",
+            "from": "partial",
+            "to": "none"
+          },
+          {
+            "case": "app:1543957",
+            "name": "Verify cart merge guest > existing user with items",
+            "from": "full",
+            "to": "none"
+          }
+        ]
+      },
+      {
+        "date": "2026-09-09",
+        "sha": "bb4c777",
+        "web": [
+          37,
+          33,
+          55
+        ],
+        "app": [
+          20,
+          15,
+          29
+        ],
+        "tests": 145,
+        "changes": [
+          {
+            "case": "web:1018761",
+            "name": "Bank discount",
+            "from": "none",
+            "to": "full"
+          },
+          {
+            "case": "app:1435418",
+            "name": "Verify user can add items to GR - All product types (Simple, custom , installation , confi",
+            "from": "none",
+            "to": "partial"
+          },
+          {
+            "case": "app:1543957",
+            "name": "Verify cart merge guest > existing user with items",
+            "from": "none",
+            "to": "full"
+          }
+        ]
+      },
+      {
+        "date": "2026-09-22",
+        "sha": "bf08b17",
+        "web": [
+          38,
+          33,
+          55
+        ],
+        "app": [
+          22,
+          18,
+          29
+        ],
+        "tests": 158,
+        "changes": [
+          {
+            "case": "web:1018774",
+            "name": "To check the registry after order placement",
+            "from": "none",
+            "to": "partial"
+          },
+          {
+            "case": "app:1435396",
+            "name": "Verify user can add all product types to wishlist from cart, PLP and PDP",
+            "from": "partial",
+            "to": "full"
+          },
+          {
+            "case": "app:1435419",
+            "name": "Verify GR cart and proceed to checkout",
+            "from": "none",
+            "to": "full"
+          },
+          {
+            "case": "app:1435420",
+            "name": "Verify multiple carts and proceed to checkout",
+            "from": "none",
+            "to": "full"
+          }
+        ]
+      },
+      {
+        "date": "2026-10-06",
+        "sha": "f614b33",
+        "web": [
+          39,
+          34,
+          55
+        ],
+        "app": [
+          22,
+          18,
+          29
+        ],
+        "tests": 194,
+        "changes": [
+          {
+            "case": "web:1084824",
+            "name": "Multiple Tiered Discount rule",
+            "from": "none",
+            "to": "full"
+          }
+        ]
+      },
+      {
+        "date": "2026-11-03",
+        "sha": "53d29c8",
+        "web": [
+          40,
+          34,
+          55
+        ],
+        "app": [
+          25,
+          21,
+          29
+        ],
+        "tests": 224,
+        "changes": [
+          {
+            "case": "web:1018744",
+            "name": "Discount on PLP, PDP and search page",
+            "from": "none",
+            "to": "partial"
+          },
+          {
+            "case": "app:1435390",
+            "name": "Categories tab - Verify categories L1,L2 and L3 are loading",
+            "from": "none",
+            "to": "full"
+          },
+          {
+            "case": "app:1435404",
+            "name": "Verify customer can apply filter and sort on PLP",
+            "from": "none",
+            "to": "full"
+          },
+          {
+            "case": "app:1435403",
+            "name": "Verify customer can apply filter and sort on search page",
+            "from": "none",
+            "to": "full"
+          }
+        ]
+      }
+    ]
   }
 }

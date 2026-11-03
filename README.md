@@ -116,6 +116,24 @@ and "Update from Main" ask for a token.
 The edit password is a speed bump against accidental edits, not access control: it is in the page
 source. Treat the whole report as public, and keep anything genuinely sensitive out of it.
 
+### Before and since 1 April 2026
+
+`build_tenure.py` writes `tenure.json`, which drives the trend line and the before/after section.
+It reads `automation_web_2.0` at 1 April and at the start of every month since, and applies
+**today's** mapping to the suite as it stood then: a mapped test that did not exist yet, or was
+hard-skipped, does not count, and a case with only some of its tests present is partial at best.
+The early points are therefore an estimate, never more generous than today, and the page says so.
+The run must reproduce today's headline exactly or it fails. It needs the full git history, so it
+is run locally with `make tenure`, not in CI.
+
+### Regression runs
+
+`build_runs.py` writes `runs.json` from every run the FALCON runner published to the Allure Docker
+Service, so the run history needs no hand entry. Only **full regressions** count: a run must cover at
+least 85% of its suite as it stood then, measured per suite and country against the largest run in the
+45 days before it. Targeted re-runs and runs that ended early are kept as `partial` and never averaged
+in. Pass rate is passed ÷ (passed + failed + broken). Refresh with `make runs`.
+
 ### Keeping it current
 
 `ci/automation-repo-workflow.yml` is the one to use. Copy it into `automation_web_2.0` as

@@ -13,7 +13,7 @@ APP_CSV ?= $(HOME)/Downloads/testmo-export-repository-241 (2).csv
 REG_CSV ?= $(HOME)/Downloads/testmo-export-repository-3 (1).csv
 REPO    ?= $(HOME)/automation_web_2.0
 
-.PHONY: generate clean open verify
+.PHONY: generate clean open verify tenure runs
 
 generate: testmo_tests.json app_testmo_tests.json web_regression_tests.json automated_tests.json mapping.json
 	@$(MAKE) --no-print-directory verify
@@ -43,6 +43,17 @@ automated_tests.json: extract_tests.py
 mapping.json: build_mapping.py testmo_tests.json app_testmo_tests.json web_regression_tests.json automated_tests.json testmo_case_links.json
 	python3 build_mapping.py
 
+
+# The before/after-1-April section and the trend line. Needs the full git
+# history of $(REPO), so it runs locally rather than in CI; re-run it when you
+# want the latest month reflected, after `make generate`.
+tenure: mapping.json
+	python3 build_tenure.py "$(REPO)"
+
+# Every FALCON run published to Allure -> runs.json. Only full regressions
+# (>= 85% of the suite as it stood) count towards the pass rates.
+runs:
+	python3 build_runs.py
 
 verify:
 	@python3 verify_mapping.py

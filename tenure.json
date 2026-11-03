@@ -1,0 +1,2375 @@
+{
+ "start": "2026-04-01",
+ "generated": "2026-11-03",
+ "method": "Reconstructed: today's case mapping applied to automation_web_2.0 as it stood on each date. A mapped test that did not exist yet, or was hard-skipped then, does not count; a case with only some of its tests present counts as partial at best.",
+ "points": [
+  {
+   "date": "2026-04-01",
+   "sha": "c6c623d",
+   "commit_date": "2026-03-24",
+   "web": [
+    27,
+    18,
+    55
+   ],
+   "app": [
+    7,
+    1,
+    29
+   ],
+   "tests": 79,
+   "hard_skipped": 8,
+   "ar_safe": 4,
+   "platforms": {
+    "app": 13,
+    "web_uae": 35,
+    "web_ksa": 31
+   },
+   "areas": {
+    "Account & sign-in": 12,
+    "Cart": 26,
+    "Checkout & payments": 38,
+    "Home & search": 3
+   },
+   "files": 10,
+   "reconstructed": true
+  },
+  {
+   "date": "2026-05-01",
+   "sha": "c5d1469",
+   "commit_date": "2026-04-30",
+   "web": [
+    27,
+    18,
+    55
+   ],
+   "app": [
+    8,
+    1,
+    29
+   ],
+   "tests": 82,
+   "hard_skipped": 8,
+   "ar_safe": 4,
+   "platforms": {
+    "app": 16,
+    "web_uae": 35,
+    "web_ksa": 31
+   },
+   "areas": {
+    "Account & sign-in": 12,
+    "Cart": 26,
+    "Checkout & payments": 41,
+    "Home & search": 3
+   },
+   "files": 10,
+   "reconstructed": true
+  },
+  {
+   "date": "2026-06-01",
+   "sha": "e941b95",
+   "commit_date": "2026-05-29",
+   "web": [
+    27,
+    11,
+    55
+   ],
+   "app": [
+    16,
+    4,
+    29
+   ],
+   "tests": 99,
+   "hard_skipped": 13,
+   "ar_safe": 4,
+   "platforms": {
+    "app": 32,
+    "web_uae": 35,
+    "web_ksa": 32
+   },
+   "areas": {
+    "Account & sign-in": 12,
+    "Cart": 38,
+    "Checkout & payments": 46,
+    "Home & search": 3
+   },
+   "files": 10,
+   "reconstructed": true
+  },
+  {
+   "date": "2026-07-01",
+   "sha": "e8262cc",
+   "commit_date": "2026-06-30",
+   "web": [
+    27,
+    11,
+    55
+   ],
+   "app": [
+    19,
+    8,
+    29
+   ],
+   "tests": 107,
+   "hard_skipped": 11,
+   "ar_safe": 6,
+   "platforms": {
+    "app": 40,
+    "web_uae": 35,
+    "web_ksa": 32
+   },
+   "areas": {
+    "Account & sign-in": 14,
+    "Cart": 43,
+    "Checkout & payments": 47,
+    "Home & search": 3
+   },
+   "files": 10,
+   "reconstructed": true
+  },
+  {
+   "date": "2026-08-01",
+   "sha": "0abc447",
+   "commit_date": "2026-07-31",
+   "web": [
+    27,
+    10,
+    55
+   ],
+   "app": [
+    22,
+    10,
+    29
+   ],
+   "tests": 115,
+   "hard_skipped": 21,
+   "ar_safe": 31,
+   "platforms": {
+    "app": 46,
+    "web_uae": 37,
+    "web_ksa": 32
+   },
+   "areas": {
+    "Account & sign-in": 14,
+    "Cart": 45,
+    "Checkout & payments": 49,
+    "Gift registry": 4,
+    "Home & search": 3
+   },
+   "files": 11,
+   "reconstructed": true
+  },
+  {
+   "date": "2026-09-01",
+   "sha": "1707230",
+   "commit_date": "2026-08-31",
+   "web": [
+    29,
+    17,
+    55
+   ],
+   "app": [
+    20,
+    10,
+    29
+   ],
+   "tests": 130,
+   "hard_skipped": 21,
+   "ar_safe": 103,
+   "platforms": {
+    "app": 46,
+    "web_uae": 50,
+    "web_ksa": 34
+   },
+   "areas": {
+    "Account & sign-in": 14,
+    "Cart": 56,
+    "Checkout & payments": 49,
+    "Gift registry": 4,
+    "Home & search": 3,
+    "Wishlist": 4
+   },
+   "files": 13,
+   "reconstructed": true
+  },
+  {
+   "date": "2026-09-06",
+   "sha": "e6db1a0",
+   "commit_date": "2026-09-06",
+   "web": [
+    31,
+    20,
+    55
+   ],
+   "app": [
+    20,
+    10,
+    29
+   ],
+   "tests": 131,
+   "hard_skipped": 15,
+   "ar_safe": 104,
+   "platforms": {
+    "app": 46,
+    "web_uae": 50,
+    "web_ksa": 34,
+    "web_commons": 1
+   },
+   "areas": {
+    "Account & sign-in": 14,
+    "Cart": 56,
+    "Checkout & payments": 49,
+    "Gift registry": 5,
+    "Home & search": 3,
+    "Wishlist": 4
+   },
+   "files": 14,
+   "reconstructed": true
+  },
+  {
+   "date": "2026-09-07",
+   "sha": "bb4c777",
+   "commit_date": "2026-09-07",
+   "web": [
+    37,
+    29,
+    55
+   ],
+   "app": [
+    20,
+    10,
+    29
+   ],
+   "tests": 145,
+   "hard_skipped": 13,
+   "ar_safe": 120,
+   "platforms": {
+    "app": 50,
+    "web_uae": 51,
+    "web_ksa": 35,
+    "web_commons": 9
+   },
+   "areas": {
+    "Account & sign-in": 18,
+    "Cart": 60,
+    "Checkout & payments": 49,
+    "Gift registry": 7,
+    "Home & search": 5,
+    "Wishlist": 6
+   },
+   "files": 17,
+   "reconstructed": true
+  },
+  {
+   "date": "2026-09-08",
+   "sha": "bb4c777",
+   "commit_date": "2026-09-07",
+   "web": [
+    37,
+    29,
+    55
+   ],
+   "app": [
+    20,
+    10,
+    29
+   ],
+   "tests": 145,
+   "hard_skipped": 13,
+   "ar_safe": 120,
+   "platforms": {
+    "app": 50,
+    "web_uae": 51,
+    "web_ksa": 35,
+    "web_commons": 9
+   },
+   "areas": {
+    "Account & sign-in": 18,
+    "Cart": 60,
+    "Checkout & payments": 49,
+    "Gift registry": 7,
+    "Home & search": 5,
+    "Wishlist": 6
+   },
+   "files": 17,
+   "reconstructed": true
+  },
+  {
+   "date": "2026-09-09",
+   "sha": "18083d9",
+   "commit_date": "2026-09-09",
+   "web": [
+    37,
+    29,
+    55
+   ],
+   "app": [
+    20,
+    10,
+    29
+   ],
+   "tests": 148,
+   "hard_skipped": 13,
+   "ar_safe": 122,
+   "platforms": {
+    "app": 53,
+    "web_uae": 51,
+    "web_ksa": 35,
+    "web_commons": 9
+   },
+   "areas": {
+    "Now / super app": 3,
+    "Account & sign-in": 18,
+    "Cart": 60,
+    "Checkout & payments": 49,
+    "Gift registry": 7,
+    "Home & search": 5,
+    "Wishlist": 6
+   },
+   "files": 19,
+   "reconstructed": true
+  },
+  {
+   "date": "2026-09-22",
+   "sha": "b38dca7",
+   "commit_date": "2026-09-22",
+   "web": [
+    38,
+    31,
+    55
+   ],
+   "app": [
+    22,
+    11,
+    29
+   ],
+   "tests": 160,
+   "hard_skipped": 10,
+   "ar_safe": 124,
+   "platforms": {
+    "app": 60,
+    "web_uae": 51,
+    "web_ksa": 35,
+    "web_commons": 14
+   },
+   "areas": {
+    "Now / super app": 5,
+    "Account & sign-in": 18,
+    "Cart": 62,
+    "Categories": 2,
+    "Checkout & payments": 49,
+    "Gift registry": 9,
+    "Home & search": 5,
+    "Wishlist": 10
+   },
+   "files": 25,
+   "reconstructed": true
+  },
+  {
+   "date": "2026-10-06",
+   "sha": "1ac6bb3",
+   "commit_date": "2026-10-06",
+   "web": [
+    39,
+    34,
+    55
+   ],
+   "app": [
+    22,
+    14,
+    29
+   ],
+   "tests": 194,
+   "hard_skipped": 12,
+   "ar_safe": 112,
+   "platforms": {
+    "app": 72,
+    "web_uae": 61,
+    "web_ksa": 46,
+    "web_commons": 15
+   },
+   "areas": {
+    "Now / super app": 5,
+    "Account & sign-in": 18,
+    "Cart": 44,
+    "Checkout & payments": 49,
+    "Coupons & promotions": 48,
+    "Gift registry": 9,
+    "Home & search": 5,
+    "Wishlist": 16
+   },
+   "files": 29,
+   "reconstructed": true
+  },
+  {
+   "date": "2026-11-03",
+   "sha": "53d29c8",
+   "commit_date": "2026-11-03",
+   "web": [
+    40,
+    34,
+    55
+   ],
+   "app": [
+    25,
+    18,
+    29
+   ],
+   "tests": 224,
+   "hard_skipped": 18,
+   "ar_safe": 114,
+   "platforms": {
+    "app": 86,
+    "web_uae": 65,
+    "web_ksa": 50,
+    "web_commons": 23
+   },
+   "areas": {
+    "Now / super app": 5,
+    "Account & sign-in": 18,
+    "Cart": 44,
+    "Categories": 3,
+    "Checkout & payments": 49,
+    "Coupons & promotions": 60,
+    "Filters & sort": 15,
+    "Gift registry": 9,
+    "Home & search": 5,
+    "Wishlist": 16
+   },
+   "files": 33,
+   "reconstructed": true
+  }
+ ],
+ "prs": [
+  {
+   "date": "2026-11-03",
+   "pr": 332,
+   "title": "FALCONS-388: Update app filters and sort suite for build 26.73.0 on Android and iOS",
+   "tickets": [
+    "FALCONS-388"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Filters & sort"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-11-03",
+   "pr": 331,
+   "title": "FALCONS-390: mWeb PLP filter and sort tests",
+   "tickets": [
+    "FALCONS-390"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Filters & sort"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-11-02",
+   "pr": 330,
+   "title": "FALCONS-391: fix the gift registry cleanup and share-link targeting",
+   "tickets": [
+    "FALCONS-391"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Gift registry"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-10-27",
+   "pr": 326,
+   "title": "FALCONS-361: verify category levels L1, L2 and L3 load on mWeb and the app",
+   "tickets": [
+    "FALCONS-361"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Categories"
+   ],
+   "app": true,
+   "web": true
+  },
+  {
+   "date": "2026-10-22",
+   "pr": 321,
+   "title": "FALCONS-384: automate the CAT001 category restricted coupon on mWeb and app",
+   "tickets": [
+    "FALCONS-384"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Coupons & promotions"
+   ],
+   "app": true,
+   "web": true
+  },
+  {
+   "date": "2026-10-22",
+   "pr": 328,
+   "title": "Fix the iOS brand chip and five gift-registry defects in the app suite",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Wishlist"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-10-20",
+   "pr": 327,
+   "title": "Restore _cart_subtotal, dropped by an auto-merge while its four callers remained",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-10-20",
+   "pr": 317,
+   "title": "FALCONS-383: automate the BRAND001 brand restricted coupon on mWeb and app",
+   "tickets": [
+    "FALCONS-383"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Coupons & promotions"
+   ],
+   "app": true,
+   "web": true
+  },
+  {
+   "date": "2026-10-19",
+   "pr": 324,
+   "title": "fix(app): claim exactly one free gift and stop failing when none is offered",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Now / super app"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-10-15",
+   "pr": 322,
+   "title": "FALCONS-385: fix the failing mWeb and app wishlist, bundle, coupon and checkout tests",
+   "tickets": [
+    "FALCONS-385"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Wishlist"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-10-08",
+   "pr": 319,
+   "title": "FALCONS-364: keep import charges out of the app VAT base and guard the tiered cost step",
+   "tickets": [
+    "FALCONS-364"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Coupons & promotions"
+   ],
+   "app": true,
+   "web": true
+  },
+  {
+   "date": "2026-10-07",
+   "pr": 316,
+   "title": "[QA] App Gift Registry: run the creation tests on KSA as well as UAE",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Gift registry"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-10-06",
+   "pr": 314,
+   "title": "fix(app): gate the Now delivery estimate on the dark store's live operating window",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-10-06",
+   "pr": 310,
+   "title": "FALCONS-364: App and mWeb multi-tiered coupon discount",
+   "tickets": [
+    "FALCONS-364"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Coupons & promotions"
+   ],
+   "app": true,
+   "web": true
+  },
+  {
+   "date": "2026-10-06",
+   "pr": 312,
+   "title": "FALCONS-382: create a fresh registry owner per run for the gift registry tests",
+   "tickets": [
+    "FALCONS-382"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Gift registry"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-10-05",
+   "pr": 309,
+   "title": "FALCONS-381: validate the auto-applied discount end to end on app and mWeb",
+   "tickets": [
+    "FALCONS-381"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Coupons & promotions"
+   ],
+   "app": true,
+   "web": true
+  },
+  {
+   "date": "2026-09-30",
+   "pr": 307,
+   "title": "test: skip the category-suggestion searches and accept the app's new sign-in error copy",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Account & sign-in",
+    "Home & search"
+   ],
+   "app": true,
+   "web": true
+  },
+  {
+   "date": "2026-09-28",
+   "pr": 301,
+   "title": "FALCONS-363: add the missing KSA remove-item coupon tests",
+   "tickets": [
+    "FALCONS-363"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Coupons & promotions"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-09-28",
+   "pr": 302,
+   "title": "Match the Android Tabby payment row by label prefix for UAT",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-09-28",
+   "pr": 298,
+   "title": "FALCONS-363: app and mWeb coupon suites — pinned sale product, new-user coverage, summary and VAT verification",
+   "tickets": [
+    "FALCONS-363"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart",
+    "Coupons & promotions"
+   ],
+   "app": true,
+   "web": true
+  },
+  {
+   "date": "2026-09-28",
+   "pr": 293,
+   "title": "FALCONS-295: wishlist from PDP for all product types, existing and new users",
+   "tickets": [
+    "FALCONS-295"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Wishlist"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-09-28",
+   "pr": 290,
+   "title": "[QA] App Wishlist: delete every product type via the trash icon, Select and Select All",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Wishlist"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-09-28",
+   "pr": 286,
+   "title": "[QA] Web Wishlist: delete products using all three deletion options (AE + KSA)",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Wishlist"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-09-28",
+   "pr": 285,
+   "title": "[QA] App Wishlist: add every product type to the wishlist from the SRP, Brand and Deals listings",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart",
+    "Wishlist"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-09-25",
+   "pr": 296,
+   "title": "[QA] App: make the installation dropdown and personalisation text field optional",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-09-24",
+   "pr": 294,
+   "title": "Fix Tabby payment plan selection on Android and iOS",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-09-21",
+   "pr": 289,
+   "title": "Fix installation option selection on iOS and bundles without dropdowns",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-09-21",
+   "pr": 291,
+   "title": "[QA] App Gift Registry: give each product type its own registry owner so parallel runs cannot collide",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Gift registry"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-09-21",
+   "pr": 287,
+   "title": "fix(app): follow the newer build's renamed home, explore and search locators",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Home & search"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-09-21",
+   "pr": 272,
+   "title": "test(superapp): automate the FALCONS-349 Now discovery and new-user Tabby journey",
+   "tickets": [
+    "FALCONS-349"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Now / super app"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-09-21",
+   "pr": 270,
+   "title": "test(superapp): automate the FALCONS-348 Now-vertical guest order journey",
+   "tickets": [
+    "FALCONS-348"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Now / super app"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-09-21",
+   "pr": 264,
+   "title": "test(superapp): automate FALCONS-347 Now-vertical serviceability",
+   "tickets": [
+    "FALCONS-347"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Now / super app"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-09-21",
+   "pr": 283,
+   "title": "[QA] Web Wishlist: move every product type from the wishlist to the cart (AE + KSA)",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-09-21",
+   "pr": 282,
+   "title": "[QA] App Gift Registry: order a shared registry as a new buyer and verify the owner's Purchased tab",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Gift registry"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-09-21",
+   "pr": 281,
+   "title": "FALCONS-312: add products to the wishlist from every PLP (Category, SRP, Brand, Sale)",
+   "tickets": [
+    "FALCONS-312"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Wishlist"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-09-21",
+   "pr": 278,
+   "title": "mWeb Gift Registry: verify a guest's order reaches the owner's Purchased tab",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Gift registry"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-09-20",
+   "pr": 232,
+   "title": "FALCONS-296: App wishlist — guest add-to-wishlist prompts login (new-user signup + existing-user login), EN + AR",
+   "tickets": [
+    "FALCONS-296"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Wishlist"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-09-18",
+   "pr": 277,
+   "title": "Fix cart item name and wishlist clearing on newer app builds",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-09-15",
+   "pr": 274,
+   "title": "FALCONS-345: unskip and fix the three broken app cart/checkout tests",
+   "tickets": [
+    "FALCONS-345"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart",
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-09-15",
+   "pr": 275,
+   "title": "fix(checkout): keep the summary discount so VAT matches a promotion cart",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-09-13",
+   "pr": 269,
+   "title": "fix(wishlist,ios): wishlist count and heart tap, iOS text reads, area selection",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Wishlist"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-09-11",
+   "pr": 268,
+   "title": "Fix coupon/store-credit viewport positioning and app-side add-to-cart defects",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-09-11",
+   "pr": 267,
+   "title": "fix(mweb): cart quantity, line-total rounding and checkout coupon/store-credit waits",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-09-10",
+   "pr": 265,
+   "title": "fix(locators): match product-card-ecom and product-card-qcom on iOS PLP and wishlist",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-09-07",
+   "pr": 263,
+   "title": "fix(hooks): stop the false 'exception not imported' warning",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-09-07",
+   "pr": 262,
+   "title": "chore: add a repo-specific Claude Code operating system",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-09-07",
+   "pr": 260,
+   "title": "FALCONS-341: mWeb Gift Registry — order a registry from its public share link",
+   "tickets": [
+    "FALCONS-341"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Gift registry"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-09-07",
+   "pr": 256,
+   "title": "FALCONS-340: mWeb Gift Registry — build a registry from the PDP with every product type",
+   "tickets": [
+    "FALCONS-340"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Gift registry"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-09-07",
+   "pr": 255,
+   "title": "FALCONS-338: add the missing mWeb home and account tests, running on AE and SA",
+   "tickets": [
+    "FALCONS-338"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Account & sign-in",
+    "Checkout & payments",
+    "Home & search"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-09-07",
+   "pr": 220,
+   "title": "Feature/falcons 314 web wishlist guest prompts login",
+   "tickets": [],
+   "author": "IsraaMohamedTech",
+   "areas": [
+    "Wishlist"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-09-07",
+   "pr": 259,
+   "title": "Skip the invalid-CC checkout tests on Safari when the new-card form is shown",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-09-07",
+   "pr": 258,
+   "title": "FALCONS-342: add the missing app cart coupon tests and fix the Android blockers",
+   "tickets": [
+    "FALCONS-342"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-09-06",
+   "pr": 257,
+   "title": "ci: keep the automation coverage report up to date",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-09-02",
+   "pr": 253,
+   "title": "Unskip the automation_cashback coupon tests (web + app)",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart",
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": true
+  },
+  {
+   "date": "2026-09-01",
+   "pr": 252,
+   "title": "FALCONS-339: mWeb Gift Registry — create a registry from My Account",
+   "tickets": [
+    "FALCONS-339"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Gift registry"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-09-01",
+   "pr": 240,
+   "title": "FALCONS-336: add the missing mWeb UAE cart tests from the app suite",
+   "tickets": [
+    "FALCONS-336"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-08-31",
+   "pr": 243,
+   "title": "FALCONS-333: fix six Android/iOS app-test failures from the regression sweep",
+   "tickets": [
+    "FALCONS-333"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-08-29",
+   "pr": 249,
+   "title": "Stabilise the mWeb cart suite across both regions, platforms and environments",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart",
+    "Checkout & payments"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-08-27",
+   "pr": 247,
+   "title": "FALCONS-337: stabilise mWeb on iOS Safari (inputs, payment radios, size options, COD OTP) and remove a false-green order check",
+   "tickets": [
+    "FALCONS-337"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart",
+    "Checkout & payments"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-08-26",
+   "pr": 245,
+   "title": "FALCONS-337: fix mWeb iOS Safari failures (cart coupon Apply, COD, ODP, Tabby, address prefill)",
+   "tickets": [
+    "FALCONS-337"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-08-25",
+   "pr": 239,
+   "title": "FALCONS-335: stabilise the mWeb UAE cart and user suites in EN and AR",
+   "tickets": [
+    "FALCONS-335"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart",
+    "Checkout & payments"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-08-24",
+   "pr": 241,
+   "title": "FALCONS-333: stabilise Native App regression — iOS + Android",
+   "tickets": [
+    "FALCONS-333"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart",
+    "Checkout & payments",
+    "Gift registry"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-08-19",
+   "pr": 238,
+   "title": "Merging Falcon master into main",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Account & sign-in",
+    "Cart",
+    "Gift registry"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-08-17",
+   "pr": 236,
+   "title": "FALCONS-333: stabilize app tests across Android + iOS",
+   "tickets": [
+    "FALCONS-333"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Account & sign-in",
+    "Cart",
+    "Checkout & payments",
+    "Home & search"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-08-04",
+   "pr": 219,
+   "title": "Feature/falcons 313 web wishlist add from pdp",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Wishlist"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-08-03",
+   "pr": 233,
+   "title": "hotfix: navigate_to_cart_page — landing marker + iOS tap-retry",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-07-31",
+   "pr": 230,
+   "title": "fix: Tabby payment-plan selector no longer relies on positional index",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-07-31",
+   "pr": 228,
+   "title": "FALCONS-330: mWeb Arabic locale support + iOS Safari CC coverage",
+   "tickets": [
+    "FALCONS-330"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-07-29",
+   "pr": 226,
+   "title": "fix for the product assertion",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-07-29",
+   "pr": 224,
+   "title": "FALCONS-321: Arabic locale support for app + Android/iOS test optimisations",
+   "tickets": [
+    "FALCONS-321"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": true
+  },
+  {
+   "date": "2026-07-27",
+   "pr": 214,
+   "title": "Merging Falcon master to main",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-07-27",
+   "pr": 222,
+   "title": "FALCONS-322: fix broken tests on App cart suite + mWeb COD retry",
+   "tickets": [
+    "FALCONS-322"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart",
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": true
+  },
+  {
+   "date": "2026-07-24",
+   "pr": 217,
+   "title": "fix(mweb-checkout): use js_click for Tabby/Tamara payment option selection",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-07-24",
+   "pr": 215,
+   "title": "fix(mweb-checkout): unblock Tabby + Tamara payment flows",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-07-23",
+   "pr": 213,
+   "title": "Merging falcon-master changes to main",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart",
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-07-21",
+   "pr": 211,
+   "title": "FALCONS-272: App Cart UF2 — Guest user, Gift Wrap, Sign up, Wishlist",
+   "tickets": [
+    "FALCONS-272"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-07-16",
+   "pr": 209,
+   "title": "FALCONS-291: multi-region app support (BH/KW/INTL/QT/JD/OM) + dynamic country picker locator",
+   "tickets": [
+    "FALCONS-291"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-07-16",
+   "pr": 207,
+   "title": "FALCONS-282: Gift Registry Scenario 4 — deep-link Add to Cart",
+   "tickets": [
+    "FALCONS-282"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Gift registry"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-07-15",
+   "pr": 205,
+   "title": "fix: handle saved card CVV field optionally",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-07-15",
+   "pr": 203,
+   "title": "fix: skip CVV entry when saved/tokenized card is used",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-07-14",
+   "pr": 202,
+   "title": "Merging main into falcon-master branch (#201)",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-07-14",
+   "pr": 200,
+   "title": "FALCONS-279: Gift Registry Scenario 3 (all product types from PDP) + shared framework speedups",
+   "tickets": [
+    "FALCONS-279"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Gift registry"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-07-10",
+   "pr": 199,
+   "title": "FALCONS-278: Add Gift Registry Scenario 2 (Creation from PDP) + shared framework improvements",
+   "tickets": [
+    "FALCONS-278"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Gift registry"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-07-09",
+   "pr": 198,
+   "title": "FALCONS-277: Add Gift Registry scenario + dynamic app env selector",
+   "tickets": [
+    "FALCONS-277"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Gift registry"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-07-07",
+   "pr": 197,
+   "title": "Falcon master",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-07-07",
+   "pr": 196,
+   "title": "Merging main into falcon-master (#195)",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-07-07",
+   "pr": 194,
+   "title": "FALCONS-288: Regression flaky test fixes (app + mWeb)",
+   "tickets": [
+    "FALCONS-288"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart",
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": true
+  },
+  {
+   "date": "2026-07-06",
+   "pr": 193,
+   "title": "Falcon master",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-07-06",
+   "pr": 191,
+   "title": "FALCONS-286: Add automation coverage for new Checkout.com Save Card / Remember Me flow (mWeb)",
+   "tickets": [
+    "FALCONS-286"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-07-01",
+   "pr": 190,
+   "title": "Falcon master",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-07-01",
+   "pr": 188,
+   "title": "FALCONS-287: Align Tamara Pay-in-Full flow on mWeb + fixes",
+   "tickets": [
+    "FALCONS-287"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": true
+  },
+  {
+   "date": "2026-07-01",
+   "pr": 186,
+   "title": "feat(app): Add cart coverage for all 5 product-type variants",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-06-30",
+   "pr": 185,
+   "title": "FALCONS-283: Country-aware app tests + KSA Android address form + Tamara Pay-in-Full",
+   "tickets": [
+    "FALCONS-283"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Account & sign-in",
+    "Cart",
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-06-30",
+   "pr": 183,
+   "title": "Fix: Tamara duplicate call & checkout assertion failures",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-06-30",
+   "pr": 177,
+   "title": "FALCONS-274: Add parameterized invalid-login scenarios for native app",
+   "tickets": [
+    "FALCONS-274"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Account & sign-in"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-06-30",
+   "pr": 176,
+   "title": "FALCONS-273: Add Google Sign-In E2E test for Native App",
+   "tickets": [
+    "FALCONS-273"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Account & sign-in"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-06-23",
+   "pr": 184,
+   "title": "Merging falcon-master to main",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-06-23",
+   "pr": 181,
+   "title": "Fix: Guest checkout flow, Tamara ID verification, and order summary locators",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-06-22",
+   "pr": 180,
+   "title": "Merging falcon master to main",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-06-22",
+   "pr": 178,
+   "title": "Fix iOS guest-checkout tap regression + login popup handling + checkout cleanup",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-06-11",
+   "pr": 172,
+   "title": "feat(app): Add COD checkout test with phone verification flow",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-06-11",
+   "pr": 174,
+   "title": "Merging code to falcon-master (#173)",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-06-11",
+   "pr": 170,
+   "title": "FALCONS-269: App Wishlist All Product Types Test",
+   "tickets": [
+    "FALCONS-269"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-06-11",
+   "pr": 169,
+   "title": "FALCONS-268: Add partial store credit cart tests with checkout validation",
+   "tickets": [
+    "FALCONS-268"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart",
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": true
+  },
+  {
+   "date": "2026-06-11",
+   "pr": 168,
+   "title": "FALCONS-276: Updated Tamara payment flow for mWeb",
+   "tickets": [
+    "FALCONS-276"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-06-11",
+   "pr": 167,
+   "title": "Added new test and full tamara flow",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-06-11",
+   "pr": 166,
+   "title": "FALCONS-265: Add full store credit checkout test (Android & iOS)",
+   "tickets": [
+    "FALCONS-265"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-06-11",
+   "pr": 162,
+   "title": "FALCONS-261: Fixed Cart Test cases for KSA",
+   "tickets": [
+    "FALCONS-261"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-06-10",
+   "pr": 171,
+   "title": "FALCONS-270: Add Yalla filter test for native app cart",
+   "tickets": [
+    "FALCONS-270"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-05-29",
+   "pr": 164,
+   "title": "Falcon master",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-05-29",
+   "pr": 161,
+   "title": "feat: Add test_app_checkout_tabby_normal_coupon for native app",
+   "tickets": [],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-05-29",
+   "pr": 159,
+   "title": "FALCONS-263: Add guest login with store credit test + fix cross-platform attribute handling",
+   "tickets": [
+    "FALCONS-263"
+   ],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-05-27",
+   "pr": 158,
+   "title": "feat: Add test_app_add_all_product_types_from_srp - Multi-product cart test",
+   "tickets": [],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-05-27",
+   "pr": 157,
+   "title": "FALCONS-260: Add Tabby cashback coupon checkout test (Android & iOS)",
+   "tickets": [
+    "FALCONS-260"
+   ],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-05-27",
+   "pr": 152,
+   "title": "FALCONS-258: Fix bank discount order summary calculation & locators for Android/iOS",
+   "tickets": [
+    "FALCONS-258"
+   ],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-05-27",
+   "pr": 155,
+   "title": "FALCONS-262: Add invalid CC checkout test for native app",
+   "tickets": [
+    "FALCONS-262"
+   ],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-05-27",
+   "pr": 154,
+   "title": "feat: Parametrize test_uae_checkout_tabby_no_coupon for 4 product types",
+   "tickets": [],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-05-27",
+   "pr": 153,
+   "title": "feat: Add SQ2–SQ5 CI environments + register-users target",
+   "tickets": [],
+   "author": "siddharthsharmaext",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-05-27",
+   "pr": 156,
+   "title": "FALCONS-255: Cart- Fix - Percentage of product price discount rules with and without max amount",
+   "tickets": [
+    "FALCONS-255"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-05-20",
+   "pr": 151,
+   "title": "Falcon master",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-05-20",
+   "pr": 149,
+   "title": "FALCONS-253 - Verify that Order summary updates correctly after item removal",
+   "tickets": [
+    "FALCONS-253"
+   ],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-05-20",
+   "pr": 148,
+   "title": "FALCONS-257: Add gift wrap test for native app (Android & iOS)",
+   "tickets": [
+    "FALCONS-257"
+   ],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-05-20",
+   "pr": 147,
+   "title": "FALCONS-256: Fix gift wrap test flow",
+   "tickets": [
+    "FALCONS-256"
+   ],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Cart"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-05-20",
+   "pr": 146,
+   "title": "FALCONS-216: Fix COD OTP, order summary verification & BrowserStack stability",
+   "tickets": [
+    "FALCONS-216"
+   ],
+   "author": "siddharthsharmaext",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-05-20",
+   "pr": 144,
+   "title": "FALCONS-210: Fix order summary calculation for coupon vs catalog discounts",
+   "tickets": [
+    "FALCONS-210"
+   ],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Cart"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-05-13",
+   "pr": 142,
+   "title": "FALCONS-199: Fix flaky tests — bundle product handling, navigation & price parsing",
+   "tickets": [
+    "FALCONS-199"
+   ],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Cart",
+    "Checkout & payments"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-05-12",
+   "pr": 140,
+   "title": "FALCONS-243: Add guest checkout test with login bottom sheet validation",
+   "tickets": [
+    "FALCONS-243"
+   ],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-05-12",
+   "pr": 139,
+   "title": "FALCONS-249: Cart with multiple variants of same product (Bundle & Configurable)",
+   "tickets": [
+    "FALCONS-249"
+   ],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-05-08",
+   "pr": 136,
+   "title": "FALCONS-247: Add cart item integrity test after quantity change",
+   "tickets": [
+    "FALCONS-247"
+   ],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-05-07",
+   "pr": 137,
+   "title": "Falcons-242 test_app_uae_cart_remaining_items_unaffected_after_partial_removal",
+   "tickets": [],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-05-07",
+   "pr": 135,
+   "title": "FALCONS-245 | Task 1: Cart Quantity Update — Increase & Decrease (All Product Types)",
+   "tickets": [
+    "FALCONS-245"
+   ],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-05-05",
+   "pr": 134,
+   "title": "Tamara fixes & added pytest skip to cart suite",
+   "tickets": [],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Cart"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-05-04",
+   "pr": 132,
+   "title": "FALCONS-238: Fix store credit scroll and iOS locators for cc_and_sc checkout flow",
+   "tickets": [
+    "FALCONS-238"
+   ],
+   "author": "siddharthsharmaext",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-05-04",
+   "pr": 131,
+   "title": "fix(checkout): resolve Tabby OTP and flaky View Cart/ATC timeouts on BrowserStack",
+   "tickets": [],
+   "author": "siddharthsharmaext",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-04-29",
+   "pr": 129,
+   "title": "FALCONS-226 [App] Add Automation Test for Tamara payment flow iOS & Android",
+   "tickets": [
+    "FALCONS-226"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-04-28",
+   "pr": 126,
+   "title": "Added new Test automation test for tabby payment flow",
+   "tickets": [],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-04-28",
+   "pr": 124,
+   "title": "Falcons 230",
+   "tickets": [],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Cart"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-04-21",
+   "pr": 122,
+   "title": "updated locators for tabby payment method",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-04-20",
+   "pr": 119,
+   "title": "updated method to enter credit card details",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-04-20",
+   "pr": 120,
+   "title": "added wait until the card is loaded with the discounted price",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-04-17",
+   "pr": 118,
+   "title": "FALCONS-203 [Android] Test Case to Apply gift wrap to product and place order",
+   "tickets": [
+    "FALCONS-203"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-04-17",
+   "pr": 117,
+   "title": "fixed the flow by modifying the locator and added safe_click",
+   "tickets": [],
+   "author": "siddharthsharmaext",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-04-16",
+   "pr": 116,
+   "title": "Merging latest falcon-master with main",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-04-15",
+   "pr": 115,
+   "title": "Falcons 209",
+   "tickets": [],
+   "author": "siddharthsharmaext",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-04-15",
+   "pr": 107,
+   "title": "fix(mweb): local execution fixes and locator stability",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-04-15",
+   "pr": 99,
+   "title": "fix(scripts): align run_tests.sh with Makefile and fix CLI overrides",
+   "tickets": [],
+   "author": "Sab",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-04-14",
+   "pr": 111,
+   "title": "FALCONS-212 [Mweb] Fix Cart TC - UAE - Existing user with orders and Yalla free shipping on Cart",
+   "tickets": [
+    "FALCONS-212"
+   ],
+   "author": "siddharthsharmaext",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-04-14",
+   "pr": 110,
+   "title": "FALCONS-207 modified locator and added hard wait",
+   "tickets": [
+    "FALCONS-207"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-04-10",
+   "pr": 108,
+   "title": "fixed issues on the flow",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-04-03",
+   "pr": 105,
+   "title": "Falcon master",
+   "tickets": [],
+   "author": "athifsha",
+   "areas": [
+    "Checkout & payments"
+   ],
+   "app": false,
+   "web": true
+  }
+ ],
+ "tickets": 68,
+ "commits_since": 798,
+ "commits_before": 1175,
+ "commit_authors_since": [
+  [
+   "saifullaAttar",
+   500
+  ],
+  [
+   "Saifulla Attar",
+   197
+  ],
+  [
+   "siddharthsharmaext",
+   62
+  ],
+  [
+   "Athif",
+   24
+  ],
+  [
+   "IsraaAli",
+   7
+  ],
+  [
+   "Koushik1496",
+   3
+  ],
+  [
+   "athifsha",
+   2
+  ],
+  [
+   "IsraaMohamedTech",
+   1
+  ],
+  [
+   "Sab",
+   1
+  ],
+  [
+   "Paul Rolland",
+   1
+  ]
+ ],
+ "first_commit": "2024-12-15"
+}

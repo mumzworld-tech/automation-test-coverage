@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mumzworld Automation Test Coverage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f2f5;color:#333}
@@ -145,12 +148,415 @@ details.fold[open]>summary h2::after,details.fold[open]>summary h3::after{conten
 }
 .ring-body{min-width:0}
 @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+
+/* ===========================================================================
+   Design system -- one layer over everything above. Tokens first; every
+   surface below reads from them so the page holds one look.
+   =========================================================================== */
+:root{
+  --bg:#f4f5fa; --surface:#fff; --ink:#0f1222; --ink-2:#3b3f55; --muted:#6b7085; --faint:#9aa0b4;
+  --line:#e7e8f0; --line-2:#f0f1f6;
+  --brand:#5b5fd6; --brand-2:#8b5cf6; --good:#12a150; --warn:#d99a00; --bad:#e5484d;
+  --r:16px; --r-sm:10px;
+  --sh-1:0 1px 2px rgba(16,18,40,.04),0 1px 1px rgba(16,18,40,.03);
+  --sh-2:0 1px 2px rgba(16,18,40,.04),0 8px 24px -8px rgba(16,18,40,.10);
+  --sh-3:0 2px 4px rgba(16,18,40,.05),0 18px 40px -12px rgba(16,18,40,.18);
+}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);
+  -webkit-font-smoothing:antialiased;font-feature-settings:'cv11','ss01';letter-spacing:-.005em}
+code{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:.86em;background:rgba(91,95,214,.08);color:#3d40a8;padding:1px 6px;border-radius:5px}
+a{color:var(--brand)}
+.container{max-width:1320px;padding:0 28px 28px;position:relative;z-index:1}
+
+/* --- Masthead ------------------------------------------------------------ */
+.masthead{position:relative;overflow:hidden;color:#fff;padding:22px 28px 118px;
+  background:
+    radial-gradient(900px 420px at 12% -10%,rgba(139,92,246,.55),transparent 60%),
+    radial-gradient(700px 380px at 88% 0%,rgba(14,159,110,.35),transparent 60%),
+    radial-gradient(800px 500px at 60% 120%,rgba(91,95,214,.55),transparent 60%),
+    #0d1024}
+.masthead::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:44px 44px;mask-image:linear-gradient(180deg,#000,transparent 85%);-webkit-mask-image:linear-gradient(180deg,#000,transparent 85%)}
+.mast-inner{max-width:1320px;margin:0 auto;position:relative;z-index:1;animation:fadeIn .6s ease}
+.mast-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:46px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:.92em;color:rgba(255,255,255,.92)}
+.brand-sep{opacity:.4;margin:0 2px}
+.brand-mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:800;font-size:.95em;
+  background:linear-gradient(135deg,#8b5cf6,#5b5fd6 55%,#0e9f6e);box-shadow:0 6px 18px rgba(91,95,214,.45)}
+.mast-nav{display:flex;gap:4px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:4px}
+.mast-nav a{color:rgba(255,255,255,.78);text-decoration:none;font-size:.82em;font-weight:500;padding:6px 14px;border-radius:999px;transition:all .2s}
+.mast-nav a:hover{background:rgba(255,255,255,.12);color:#fff}
+.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.72em;font-weight:600;color:#b9b5ff;margin-bottom:10px}
+.masthead h1{font-size:clamp(1.8em,3.6vw,2.9em);font-weight:800;letter-spacing:-.035em;line-height:1.08;max-width:820px;
+  background:linear-gradient(180deg,#fff,#d9dcff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:1.02em;color:rgba(255,255,255,.72);max-width:680px;margin-top:12px;line-height:1.6}
+.lede code{background:rgba(255,255,255,.1);color:#e6e7ff}
+.mast-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:.78em;font-weight:500;color:rgba(255,255,255,.85);text-decoration:none;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:6px 12px;border-radius:999px;backdrop-filter:blur(6px);transition:background .2s}
+a.pill:hover{background:rgba(255,255,255,.14);color:#fff}
+.pill code{background:rgba(255,255,255,.1);color:#fff}
+.pulse-dot{width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:ping 2.2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(52,211,153,.55)}80%,100%{box-shadow:0 0 0 9px rgba(52,211,153,0)}}
+
+/* --- Hero rings: lifted into the masthead -------------------------------- */
+.hero{margin-top:-82px;gap:18px}
+.ring-card{border:1px solid var(--line);border-top:0;border-radius:var(--r);box-shadow:var(--sh-3);padding:26px;position:relative;overflow:hidden}
+.ring-card::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--c),color-mix(in srgb,var(--c) 40%,#fff))}
+.ring-card.main{background:radial-gradient(420px 220px at 100% 0%,color-mix(in srgb,var(--c) 9%,#fff),#fff 70%)}
+.ring-card:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(16,18,40,.05),0 26px 50px -16px rgba(16,18,40,.24)}
+.ring-pct{letter-spacing:-.04em;font-feature-settings:'tnum'}
+.ring-sub{color:var(--faint);font-weight:500}
+.ring-body h3{font-size:.78em;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:10px}
+.ring-body .counts{color:var(--ink-2)}
+.ring-body .scripts{color:var(--faint)}
+
+/* --- KPI tiles ----------------------------------------------------------- */
+.kpi-strip{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:18px 0}
+.kpi{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px;box-shadow:var(--sh-1);
+  overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s;animation:slideUp .5s ease both}
+.kpi::before{content:'';position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--k)}
+.kpi-label{font-size:.72em;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.kpi-value{font-size:2em;font-weight:800;letter-spacing:-.03em;color:var(--k);margin-top:6px;font-feature-settings:'tnum';line-height:1.1}
+.kpi-sub{font-size:.76em;color:var(--faint);margin-top:4px}
+.up-text{color:var(--good);font-weight:700}
+.kpi.clickable{cursor:pointer}
+.kpi.clickable:hover{transform:translateY(-2px);box-shadow:var(--sh-2);border-color:color-mix(in srgb,var(--k) 35%,var(--line))}
+.kpi-go{position:absolute;right:12px;top:14px;font-size:.68em;font-weight:600;color:var(--k);opacity:0;transform:translateX(-4px);transition:all .2s}
+.kpi.clickable:hover .kpi-go{opacity:1;transform:none}
+.kpi:nth-child(2){animation-delay:.04s}.kpi:nth-child(3){animation-delay:.08s}.kpi:nth-child(4){animation-delay:.12s}
+.kpi:nth-child(5){animation-delay:.16s}.kpi:nth-child(6){animation-delay:.2s}.kpi:nth-child(7){animation-delay:.24s}
+
+/* --- Notes and the lock banner ------------------------------------------- */
+.note{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 18px;
+  margin-bottom:18px;font-size:.84em;color:var(--ink-2);line-height:1.6;box-shadow:var(--sh-1)}
+.note-icon{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.8em;font-style:italic;
+  font-family:Georgia,serif;color:var(--brand);background:rgba(91,95,214,.1)}
+.lock-banner{background:linear-gradient(100deg,#141734,#262a5c 60%,#3a2f7a);border-radius:14px;padding:16px 22px;box-shadow:var(--sh-2);margin-bottom:22px}
+.lock-icon{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.1);color:#cfd0ff}
+.lock-banner .btn{border-radius:10px;padding:10px 18px;font-weight:700}
+
+/* --- Sections ------------------------------------------------------------ */
+.section{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-1);padding:26px 28px;margin-top:0;margin-bottom:22px}
+.section h2,.sec-head h2{border:0;padding:0;margin:0;font-size:1.12em;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line-2)}
+.sec-head p{font-size:.82em;color:var(--muted);margin:0}
+.sub-title{font-size:.72em;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;margin:22px 0 10px}
+.muted-note{font-size:.8em;color:var(--muted);margin:0 0 12px}
+.group-title{font-size:.78em;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:700;margin:34px 0 12px}
+#riskSection{background:var(--surface) !important;border:1px solid var(--line) !important;border-top:3px solid var(--bad) !important}
+#unmappedNotice{background:var(--surface) !important;border:1px solid var(--line) !important;border-top:3px solid var(--warn) !important;
+  border-radius:var(--r) !important;padding:26px 28px !important;box-shadow:var(--sh-1)}
+#arabicPanel details>summary h2{display:flex;align-items:baseline;gap:10px}
+details.fold>summary h2::after,details.fold>summary h3::after{margin-left:auto;font-size:.72em;color:var(--brand);font-weight:600}
+
+/* --- Trend and change log ------------------------------------------------ */
+.trend-legend{font-size:.8em;color:var(--muted)}
+.trend-wrap svg text{font-family:Inter,sans-serif}
+.trend-tip{background:rgba(13,16,36,.94);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.08);border-radius:10px}
+.change-entry{border-left-color:var(--line)}
+.change-entry::before{background:linear-gradient(135deg,var(--brand-2),var(--brand))}
+.change-chip{background:#fafbfe;border-color:var(--line);border-radius:8px;padding:4px 9px}
+.delta{font-size:.74em}
+
+/* --- Folder heatmap ------------------------------------------------------ */
+.folder-breakdown{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.folder-card{border:1px solid var(--line);border-left:0 !important;border-radius:12px;padding:14px 16px;position:relative;overflow:hidden}
+.folder-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:currentColor;opacity:.0}
+.folder-name{font-size:.86em;color:var(--ink)}
+.folder-pct{font-feature-settings:'tnum';letter-spacing:-.02em}
+
+/* --- Toolbar (shown with the case tables) -------------------------------- */
+.toolbar{position:sticky;top:10px;z-index:30;background:rgba(255,255,255,.86);backdrop-filter:blur(12px) saturate(1.4);
+  border:1px solid var(--line);border-radius:14px;box-shadow:var(--sh-2);padding:12px;gap:8px;margin-bottom:18px}
+.toolbar input,.toolbar select{border:1px solid var(--line);border-radius:10px;padding:9px 12px;font:inherit;font-size:.84em;background:#fff;color:var(--ink)}
+.toolbar input:focus,.toolbar select:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(91,95,214,.15)}
+.toolbar label{color:var(--muted) !important}
+.admin-menu{position:relative;margin-left:auto}
+.admin-menu>summary{list-style:none;cursor:pointer;font-size:.84em;font-weight:600;padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink-2)}
+.admin-menu>summary::-webkit-details-marker{display:none}
+.admin-pop{position:absolute;right:0;top:calc(100% + 8px);display:flex;flex-direction:column;gap:6px;min-width:220px;background:#fff;
+  border:1px solid var(--line);border-radius:12px;padding:10px;box-shadow:var(--sh-3);z-index:40}
+.admin-pop .btn{text-align:left}
+
+/* --- Buttons, tables, status --------------------------------------------- */
+.btn{border-radius:10px;font-family:inherit;font-weight:600;letter-spacing:-.005em}
+.btn-primary{background:var(--brand)}.btn-primary:hover{background:#4a4ec4}
+.btn-outline{border-color:var(--line);color:var(--ink-2)}
+table{border:1px solid var(--line);border-radius:12px;box-shadow:none}
+th{background:#fafbfe;font-size:.7em;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;border-bottom:1px solid var(--line);top:84px}
+td{border-bottom:1px solid var(--line-2);color:var(--ink-2)}
+tr:hover{background:#fafaff}
+.status-full,.status-partial,.status-none{border-radius:999px;padding:3px 10px}
+.test-tag{border-radius:6px;background:#f0f1fb;color:#3d40a8;overflow-wrap:normal;word-break:normal}
+.stats-grid .stat-card{border:1px solid var(--line);box-shadow:var(--sh-1);border-radius:14px}
+.stat-number{letter-spacing:-.03em;font-feature-settings:'tnum'}
+.progress-bar{height:10px;background:var(--line-2)}
+.progress-fill{font-size:0;background:linear-gradient(90deg,var(--brand),var(--brand-2))}
+
+/* --- Overlay ------------------------------------------------------------- */
+.auth-overlay{background:rgba(13,16,36,.55);backdrop-filter:blur(6px)}
+.auth-box{border-radius:18px;border:1px solid var(--line);box-shadow:0 30px 80px -20px rgba(13,16,36,.5)}
+.auth-box h2{font-size:1.2em;letter-spacing:-.02em}
+.auth-box input{border:1px solid var(--line);border-radius:10px}
+
+.footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:10px;padding:22px 0 6px;font-size:.8em;color:var(--muted)}
+.footer a{margin-left:16px;color:var(--ink-2);font-weight:500}
+.footer a:hover{color:var(--brand)}
+
+@media (max-width:600px){
+  .masthead{padding:18px 16px 100px}.mast-top{margin-bottom:28px}.mast-nav{display:none}
+  .container{padding:0 14px 20px}.section{padding:18px}
+}
+
+.ring-body h3{margin-bottom:12px}
+.ring-legend{display:grid;gap:5px;font-size:.84em;color:var(--ink-2);min-width:150px}
+.ring-legend div{display:flex;align-items:center}
+.ring-legend b{margin-left:auto;padding-left:18px;font-weight:700;color:var(--ink);font-feature-settings:'tnum'}
+.ring-foot{font-size:.76em;color:var(--faint);margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.ring-card .scripts{margin-top:4px}
+.run-card{display:block;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 18px;
+  position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.run-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--env)}
+.run-card:hover{transform:translateY(-2px);box-shadow:var(--sh-2)}
+.rc{display:inline-flex;align-items:center;gap:5px;margin-right:10px;color:var(--muted)}
+.rc i{width:7px;height:7px;border-radius:50%;display:inline-block}
+
+/* === Round 3: scroll chrome, tenure, tables ================================ */
+/* Slim bar that takes over from the masthead once it scrolls away */
+.topbar{position:fixed;inset:0 0 auto 0;z-index:60;transform:translateY(-110%);transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  background:rgba(13,16,36,.82);backdrop-filter:blur(14px) saturate(1.6);-webkit-backdrop-filter:blur(14px) saturate(1.6);
+  border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 10px 30px -12px rgba(13,16,36,.5)}
+.topbar.show{transform:none}
+.topbar-inner{max-width:1320px;margin:0 auto;padding:10px 28px;display:flex;align-items:center;gap:20px}
+.topbar .brand{text-decoration:none;color:#fff}
+.topbar .brand-mark{width:26px;height:26px;font-size:.8em}
+.tb-stats{display:flex;gap:14px}
+.tb-stat{display:inline-flex;align-items:center;gap:6px;font-size:.78em;color:rgba(255,255,255,.7)}
+.tb-stat i{width:7px;height:7px;border-radius:50%}
+.tb-stat b{color:#fff;font-feature-settings:'tnum'}
+.tb-nav{margin-left:auto;display:flex;gap:2px}
+.tb-nav a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.8em;font-weight:500;padding:6px 12px;border-radius:999px;transition:all .2s}
+.tb-nav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.tb-nav a.on{color:#fff;background:rgba(139,92,246,.35)}
+.to-top{position:fixed;right:22px;bottom:22px;z-index:55;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#fff;
+  color:var(--ink);font-size:1.05em;cursor:pointer;box-shadow:var(--sh-3);opacity:0;transform:translateY(12px);pointer-events:none;transition:all .25s}
+.to-top.show{opacity:1;transform:none;pointer-events:auto}
+.to-top:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+
+/* Sections ease in once, as they enter the viewport */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.section{animation:none}
+
+/* --- Before and since 1 April ------------------------------------------- */
+.tenure{background:radial-gradient(700px 300px at 0% 0%,rgba(139,92,246,.06),transparent 70%),radial-gradient(600px 300px at 100% 0%,rgba(14,159,110,.05),transparent 70%),#fff}
+.tenure-hero{display:grid;grid-template-columns:minmax(280px,1fr) 2fr;gap:18px;align-items:stretch}
+.th-main{border-radius:14px;padding:22px;color:#fff;position:relative;overflow:hidden;
+  background:radial-gradient(400px 200px at 100% 0%,rgba(14,159,110,.45),transparent 70%),linear-gradient(140deg,#151938,#2d2f6e 60%,#4b2f8f)}
+.th-main .cmp-label{color:rgba(255,255,255,.65)}
+.th-pair{display:flex;align-items:baseline;gap:12px;margin-top:8px}
+.th-before{font-size:1.6em;font-weight:700;color:rgba(255,255,255,.45);text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:rgba(255,255,255,.3)}
+.th-arrow{color:#a5b4fc;font-size:1.3em}
+.th-after{font-size:3.4em;font-weight:800;letter-spacing:-.045em;line-height:1;background:linear-gradient(180deg,#fff,#c7d2fe);-webkit-background-clip:text;background-clip:text;color:transparent;font-feature-settings:'tnum'}
+.th-delta{margin-top:10px;font-size:.84em;color:#a7f3d0;font-weight:600}
+.th-track{position:relative;height:10px;border-radius:99px;background:rgba(255,255,255,.1);margin-top:18px;overflow:hidden}
+.th-track i{position:absolute;left:0;top:0;bottom:0;border-radius:99px}
+.th-track .now{background:linear-gradient(90deg,#8b5cf6,#34d399);box-shadow:0 0 18px rgba(52,211,153,.5)}
+.th-track .was{background:rgba(255,255,255,.35);z-index:1}
+.th-legend{display:flex;gap:16px;margin-top:10px;font-size:.74em;color:rgba(255,255,255,.65)}
+.lg{display:inline-block;width:10px;height:4px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.lg.was{background:rgba(255,255,255,.45)}.lg.now{background:linear-gradient(90deg,#8b5cf6,#34d399)}
+.cmp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.cmp{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff;transition:transform .2s,box-shadow .2s}
+.cmp:hover{transform:translateY(-2px);box-shadow:var(--sh-2)}
+.cmp-label{font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+.cmp-row{display:flex;align-items:baseline;gap:8px;margin-top:8px}
+.cmp-before{font-size:1.05em;font-weight:600;color:var(--faint)}
+.cmp-arrow{color:var(--faint)}
+.cmp-after{font-size:1.9em;font-weight:800;letter-spacing:-.03em;color:var(--ink);font-feature-settings:'tnum'}
+.cmp-unit{font-size:1.1em;font-weight:700;color:var(--ink);margin-left:-6px}
+.cmp-delta{display:inline-block;margin-top:6px;font-size:.74em;font-weight:700;padding:2px 9px;border-radius:99px;background:#f1f2f6;color:var(--muted)}
+.cmp-delta.up{background:#e6f6ec;color:#0e6b3d}.cmp-delta.down{background:#fdecec;color:#b91c1c}
+.tenure-cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:8px}
+.sub-hint{text-transform:none;letter-spacing:0;font-weight:500;color:var(--faint);margin-left:8px}
+.stab-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stab{border:1px solid var(--line);border-radius:12px;padding:14px}
+.stab.empty{background:repeating-linear-gradient(135deg,#fafbfe,#fafbfe 8px,#f4f5fa 8px,#f4f5fa 16px)}
+.stab-top{display:flex;justify-content:space-between;font-size:.72em;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.stab-tag{font-size:.9em;font-weight:600;text-transform:none;letter-spacing:0;color:var(--faint)}
+.stab-rate{font-size:1.9em;font-weight:800;letter-spacing:-.03em;color:var(--rate);margin-top:6px}
+.stab-rate small{font-size:.55em;margin-left:1px}
+.stab-bar{height:5px;border-radius:9px;background:var(--line-2);margin-top:6px;overflow:hidden}
+.stab-bar i{display:block;height:100%;background:currentColor;color:var(--good);border-radius:9px}
+.stab-none{font-size:.95em;font-weight:600;color:var(--muted);margin:14px 0 6px}
+.stab-sub{font-size:.72em;color:var(--faint);margin-top:6px;line-height:1.5}
+.stab-foot{display:flex;flex-wrap:wrap;gap:16px;margin-top:12px;font-size:.78em;color:var(--muted)}
+.stab-foot b{color:var(--ink)}
+.areas{display:grid;gap:9px}
+.area-row{display:grid;grid-template-columns:210px 1fr 74px;gap:12px;align-items:center;font-size:.82em}
+.area-name{color:var(--ink-2);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.new-tag{margin-left:6px;font-size:.72em;font-weight:700;color:#6d28d9;background:#ede9fe;padding:1px 6px;border-radius:99px;text-transform:uppercase;letter-spacing:.05em}
+.area-bar{position:relative;height:9px;border-radius:9px;background:var(--line-2);overflow:hidden}
+.area-bar i{position:absolute;top:0;bottom:0}
+.area-bar .was{left:0;background:#c3c7d4}
+.area-bar .grew{background:linear-gradient(90deg,#8b5cf6,#5b5fd6)}
+.area-num{text-align:right;color:var(--faint);font-feature-settings:'tnum'}
+.area-num b{color:var(--ink)}
+.share{margin:4px 0 16px}
+.share-bar{display:flex;height:10px;border-radius:99px;overflow:hidden;gap:2px}
+.share-bar i{display:block;height:100%}
+.share-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px;font-size:.76em;color:var(--muted)}
+.share-legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px}
+.share-legend b{color:var(--ink)}
+.months{display:flex;gap:8px;align-items:flex-end}
+.month{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:1px solid transparent;border-radius:12px;
+  padding:8px 4px;cursor:pointer;font:inherit;font-size:.76em;color:var(--muted);transition:all .2s}
+.month:hover{background:#fafbfe;border-color:var(--line)}
+.month.on{background:#f3f1ff;border-color:#d9d3ff;color:var(--brand)}
+.m-bar{width:28px;height:64px;display:flex;align-items:flex-end;background:var(--line-2);border-radius:7px;overflow:hidden}
+.m-bar i{display:block;width:100%;background:linear-gradient(180deg,#8b5cf6,#5b5fd6);border-radius:7px 7px 0 0}
+.month b{color:var(--ink);font-size:1.1em}
+.pr-tools{margin:14px 0 8px}
+.pr-tools input{width:100%;max-width:420px;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font:inherit;font-size:.84em}
+.pr-tools input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(91,95,214,.15)}
+.pr-list{display:grid;gap:2px}
+.pr{display:grid;grid-template-columns:62px 52px 1fr auto;gap:12px;align-items:center;padding:9px 10px;border-radius:10px;
+  text-decoration:none;color:var(--ink-2);font-size:.83em;transition:background .15s}
+.pr:hover{background:#f6f6fd}
+.pr-date{color:var(--faint);font-feature-settings:'tnum'}
+.pr-num{color:var(--brand);font-weight:600}
+.pr-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pr-tags{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.pr-tags i{font-style:normal;font-size:.82em;padding:1px 7px;border-radius:6px;background:#f1f2f6;color:var(--muted);white-space:nowrap}
+.pr-tags .t-ticket{background:#eef0ff;color:#3d40a8;font-weight:600}
+.pr-tags .t-app{background:#f3e8ff;color:#6b21a8}.pr-tags .t-web{background:#e6f6ef;color:#0e6b3d}
+.pr-more{margin-top:8px}
+.pr-empty{color:var(--faint);font-size:.85em;padding:12px}
+.method{font-size:.74em;color:var(--faint);margin-top:16px;padding-top:12px;border-top:1px dashed var(--line);line-height:1.6}
+
+/* --- Case tables: fixed columns, nothing clipped, header stays visible ---- */
+.toolbar{position:static;box-shadow:var(--sh-1)}
+#appSection>div[style*="overflow-x"],#webSection>div[style*="overflow-x"]{overflow:visible !important}
+#appSection table,#webSection table{table-layout:fixed;border-collapse:separate;border-spacing:0;overflow:visible}
+#appSection th,#webSection th{position:sticky;top:52px;z-index:5;width:auto !important;padding:11px 12px}
+#appSection th:first-child,#webSection th:first-child{border-top-left-radius:12px}
+#appSection th:nth-last-child(2),#webSection th:nth-last-child(2){border-top-right-radius:12px}
+#appSection th:nth-child(1){width:118px !important}#appSection th:nth-child(2){width:23% !important}
+#appSection th:nth-child(3){width:62px !important}#appSection th:nth-child(4){width:74px !important}
+#appSection th:nth-child(5){width:25% !important}#appSection th:nth-child(6){width:136px !important}
+#webSection th:nth-child(1){width:118px !important}#webSection th:nth-child(2){width:20% !important}
+#webSection th:nth-child(3){width:11% !important}#webSection th:nth-child(4){width:62px !important}
+#webSection th:nth-child(5){width:74px !important}#webSection th:nth-child(6){width:22% !important}
+#webSection th:nth-child(7){width:136px !important}
+#appSection td,#webSection td{padding:14px 12px;overflow-wrap:anywhere}
+#appSection td:first-child,#webSection td:first-child{white-space:nowrap}
+#appSection td:first-child a,#webSection td:first-child a{text-decoration:none;font-feature-settings:'tnum'}
+#appSection td:nth-child(2) strong,#webSection td:nth-child(2) strong{font-weight:600;color:var(--ink);font-size:.95em;line-height:1.45;overflow-wrap:normal}
+#webSection td:nth-child(3){color:var(--muted);font-size:.8em}
+#webSection>.section{margin-bottom:0;border-bottom-left-radius:0;border-bottom-right-radius:0}
+.status-full,.status-none{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;font-size:.76em}
+.sdot{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block}
+.notes-clamp{font-size:.82em;line-height:1.55;color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer;position:relative}
+.notes-clamp.open{display:block;-webkit-line-clamp:unset}
+.notes-clamp:hover{color:var(--ink)}
+
+@media (max-width:1000px){
+  .tenure-hero,.tenure-cols{grid-template-columns:1fr}.cmp-grid{grid-template-columns:repeat(2,1fr)}
+  .tb-stats{display:none}
+  #appSection>div[style*="overflow-x"],#webSection>div[style*="overflow-x"]{overflow-x:auto !important}
+  #appSection table,#webSection table{min-width:900px}
+  #appSection th,#webSection th{position:static}
+}
+@media (max-width:600px){
+  .cmp-grid,.stab-grid{grid-template-columns:1fr 1fr}.tb-nav{display:none}.topbar-inner{padding:10px 16px}
+  .area-row{grid-template-columns:120px 1fr 60px}.pr{grid-template-columns:52px 1fr}.pr-num,.pr-tags{display:none}
+  .th-after{font-size:2.6em}
+}
+
+/* Drawn in only where motion is allowed; otherwise the line is simply there. */
+@media (prefers-reduced-motion:no-preference){.trend-line{stroke-dasharray:1;stroke-dashoffset:1;animation:drawLine 1.6s ease forwards}}
+
+/* === Round 4: type, runs, finish ========================================== */
+:root{--sans:'Geist',Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--mono:'Geist Mono',ui-monospace,Menlo,monospace;--serif:'Instrument Serif',Georgia,serif;
+  --ease:cubic-bezier(.2,.8,.2,1)}
+body,button,input,select,textarea,.trend-wrap svg text{font-family:var(--sans)}
+body{letter-spacing:-.011em;font-feature-settings:'ss01','cv11';text-rendering:optimizeLegibility}
+code,.test-tag,.pr-num{font-family:var(--mono);letter-spacing:0}
+.kpi-value,.ring-pct,.cmp-after,.th-after,.stab-rate,.rk b,.combo-mid b,.folder-pct,.month b{font-feature-settings:'tnum','ss01';letter-spacing:-.04em}
+.masthead h1{font-weight:700;letter-spacing:-.045em}
+.masthead h1 em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;padding-right:.06em;
+  background:linear-gradient(90deg,#c4b5fd,#6ee7b7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.section h2,.sec-head h2{font-weight:650;letter-spacing:-.025em;font-size:1.18em}
+::selection{background:rgba(91,95,214,.2)}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:6px}
+*{scrollbar-width:thin;scrollbar-color:#cfd2e0 transparent}
+
+/* Masthead light drifts slowly; nothing else moves on its own */
+@media (prefers-reduced-motion:no-preference){
+  .masthead{background-size:140% 140%,140% 140%,140% 140%,auto;animation:drift 22s ease-in-out infinite alternate}
+}
+@keyframes drift{0%{background-position:0% 0%,100% 0%,50% 100%,0 0}100%{background-position:12% 8%,88% 10%,60% 90%,0 0}}
+
+/* Every interactive surface answers the same way */
+.kpi,.cmp,.ring-card,.folder-card,.combo,.stab,.run-card,.month,.chip,.btn,.pr{transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease)}
+.btn:active,.chip:active,.month:active{transform:scale(.98)}
+
+/* --- Regression runs ------------------------------------------------------ */
+.run-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.rk{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:linear-gradient(180deg,#fff,#fbfbfe)}
+.rk span{display:block;font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+.rk b{display:block;font-size:1.8em;font-weight:750;margin-top:6px;color:var(--ink)}
+.rk em{display:block;font-style:normal;font-size:.75em;color:var(--faint);margin-top:2px}
+.run-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:22px}
+.run-panel{min-width:0}
+.mbar rect{transition:opacity .2s}
+.trend-wrap svg:hover .mbar rect{opacity:.45}
+.trend-wrap svg .mbar:hover rect{opacity:1}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;align-items:center}
+.chip{font:inherit;font-size:.78em;font-weight:550;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink-2);cursor:pointer}
+.chip:hover{border-color:#cfd2e0;background:#fafbfe}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip-sep{width:1px;height:18px;background:var(--line);margin:0 4px}
+.combos{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;max-height:430px;overflow:auto;padding:2px 4px 4px 2px}
+.combo{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff;position:relative;overflow:hidden}
+.combo::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--rate)}
+.combo:hover{transform:translateY(-2px);box-shadow:var(--sh-2);border-color:#d9dbe7}
+.combo-top{display:flex;align-items:center;gap:8px;font-size:.78em}
+.combo-name{font-weight:600;color:var(--ink)}
+.combo-env{margin-left:auto;color:var(--faint);font-size:.92em;font-weight:500}
+.combo-mid{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.combo-mid b{font-size:1.7em;font-weight:750;color:var(--ink)}
+.combo-mid small{font-size:.55em;margin-left:1px;color:var(--muted)}
+.combo-bar{height:4px;border-radius:4px;background:var(--line-2);overflow:hidden;margin-top:6px}
+.combo-bar i{display:block;height:100%;background:var(--rate);border-radius:4px}
+.combo-sub{font-size:.7em;color:var(--faint);margin-top:7px}
+.spark{display:block}
+.suite-tag{font-size:.82em;font-weight:650;padding:2px 8px;border-radius:6px}
+.suite-tag.app{background:#f3e8ff;color:#6b21a8}.suite-tag.mweb{background:#e6f6ef;color:#0e6b3d}
+.run-log{margin-top:18px;border-top:1px solid var(--line-2);padding-top:8px}
+.run-table{width:100%;border:1px solid var(--line);border-radius:12px;font-size:.92em;margin-top:6px}
+.run-table th{position:static;font-size:.68em}
+.run-table td{padding:9px 12px}
+.run-table .num{text-align:right;font-feature-settings:'tnum'}
+.run-table a{font-weight:600;text-decoration:none}
+
+/* --- Stability, now on full regressions ------------------------------------ */
+.stab-pair{display:flex;align-items:baseline;gap:8px;margin-top:6px}
+.stab-pair .stab-rate{margin-top:0}
+.stab-bar{position:relative}
+.stab-bar i{position:absolute;left:0;top:0;bottom:0}
+.stab-bar .was{background:#c3c7d4;z-index:1;height:100%}
+
+@media (max-width:1000px){.run-grid{grid-template-columns:1fr}.run-kpis{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
 <div class="auth-overlay" id="authOverlay" style="display:none">
   <div class="auth-box">
-    <h2>🔒 Full Report is Protected</h2>
+    <h2>Unlock case-level detail</h2>
     <p style="color:#666;margin-bottom:20px;font-size:.9em">Some sections require a password to view</p>
     <div id="authStep1">
       <button class="btn btn-primary" onclick="showPasswordInput()" style="margin-bottom:10px">🔓 Unlock Full Report</button>
@@ -166,23 +572,93 @@ details.fold[open]>summary h2::after,details.fold[open]>summary h3::after{conten
     </div>
   </div>
 </div>
-<div class="container">
-  <div class="header">
-    <h1>🧪 Mumzworld Automation Test Coverage</h1>
-    <p>automation_web_2.0 @ main | Source of Truth for Regression &amp; Release-Check Coverage</p>
-    <p style="font-size:.8em;opacity:.85;margin-top:6px">
-      mWeb: <a href="https://mumzworld.testmo.net/repositories/3?group_id=73697" target="_blank" style="color:#fff;text-decoration:underline">regression repository 3 / group 73697</a> (read via run 2154, which carries the case names) ·
-      App: <a href="https://mumzworld.testmo.net/repositories/9?group_id=110524" target="_blank" style="color:#fff;text-decoration:underline">repository 241 release checklist</a>
-    </p>
-    <p style="font-size:.8em;opacity:.8;margin-top:6px">Scope: TestMO cases flagged <strong>Automated = YES or NO</strong>. “Not planned” cases are kept for reference but excluded from every percentage.</p>
-    <div style="display:flex;justify-content:space-between;margin-top:12px;font-size:.8em;opacity:.85">
-      <span>Owner: <strong>Saifulla Attar</strong></span>
-      <span id="lastUpdated"></span>
+<div class="topbar" id="topbar" aria-hidden="true">
+  <div class="topbar-inner">
+    <a class="brand" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false"><span class="brand-mark">M</span><span>Coverage</span></a>
+    <div class="tb-stats" id="tbStats"></div>
+    <nav class="tb-nav" id="tbNav">
+      <a href="#tenureSection">Since April</a><a href="#trendSection">Trend</a><a href="#folderSection">Folders</a>
+      <a href="#runsSection">Runs</a><a href="#casesTitle" data-cases onclick="drillInto({});return false">Cases</a>
+    </nav>
+  </div>
+</div>
+<button class="to-top" id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+<header class="masthead">
+  <div class="mast-inner">
+    <div class="mast-top">
+      <div class="brand"><span class="brand-mark">M</span><span>Mumzworld <span class="brand-sep">/</span> QA Engineering</span></div>
+      <nav class="mast-nav">
+        <a href="#tenureSection">Since April</a><a href="#trendSection">Trend</a><a href="#folderSection">Folders</a><a href="#runsSection">Runs</a>
+        <a href="#" onclick="drillInto({});return false">Cases</a>
+      </nav>
+    </div>
+    <p class="eyebrow">Automation test coverage</p>
+    <h1>Release-check and <em>regression</em> coverage</h1>
+    <p class="lede">Every in-scope TestMO case, mapped to the automated tests that prove it — measured against
+      <code>automation_web_2.0</code> on <strong>main</strong>.</p>
+    <div class="mast-meta">
+      <span class="pill live"><span class="pulse-dot"></span><span id="lastUpdated"></span></span>
+      <a class="pill" href="https://mumzworld.testmo.net/repositories/9?group_id=110524" target="_blank" rel="noopener">App · release checklist ↗</a>
+      <a class="pill" href="https://mumzworld.testmo.net/repositories/3?group_id=73697" target="_blank" rel="noopener">mWeb · regression repository ↗</a>
+      <span class="pill">Owner · Saifulla Attar</span>
     </div>
   </div>
+</header>
+<div class="container">
 
-  <div class="toolbar" id="toolbar">
-    <input type="text" id="searchInput" placeholder="🔍 Search by test name, folder, case ID...">
+
+  <div class="hero" id="hero"></div>
+  <div class="kpi-strip" id="statsGrid"></div>
+  <div id="scopeNote" class="note">
+    <span class="note-icon">i</span>
+    <div><strong>What this measures.</strong> A case counts once at least one automated test on
+    <span id="scopeCommit">main</span> is mapped to it; the Evidence column says what each test proves. Only cases TestMO flags
+    <em>Automated = YES / NO</em> count — “Not planned” ones are kept for reference. This is coverage, not a pass rate:
+    execution results are under <a href="#runsSection">Regression runs</a>.</div>
+  </div>
+  <div class="lock-banner" id="lockBanner">
+    <span class="lock-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+    <p><strong>Case-by-case detail is locked.</strong> The figures above are public; the case tables, blocked tests and unlinked tests need the team password.</p>
+    <button class="btn" onclick="openUnlock()">Unlock full report</button>
+  </div>
+
+  <section class="section tenure" id="tenureSection" style="display:none"></section>
+
+  <div class="section" id="trendSection" style="margin-top:0;margin-bottom:20px">
+    <div class="sec-head"><h2>Coverage over time</h2><p>From 1 April 2026 · each point is today's mapping applied to main as it stood that day</p></div>
+    <div class="trend-legend" id="trendLegend"></div>
+    <div class="trend-wrap" id="trendChart"></div>
+    <h3 class="sub-title">What moved the number</h3>
+    <div id="changeLog"></div>
+  </div>
+
+  <div class="section" id="folderSection" style="margin-top:0;margin-bottom:20px">
+    <div class="sec-head"><h2>mWeb coverage by folder</h2><p>Least complete first. Click a folder to open its cases.</p></div>
+    <div class="folder-breakdown" id="folderBreakdown"></div>
+  </div>
+
+  <div class="section protected" id="riskSection" style="background:#fff5f5;border:2px solid #fc8181;margin-bottom:20px">
+    <div class="sec-head"><h2>Written but blocked</h2></div>
+    <p style="color:#666;margin-bottom:10px;font-size:.9em">
+      Tests that exist but cannot prove their case everywhere. The first group is <strong>not counted as automated</strong>
+      — nothing runs. The second <strong>is</strong> counted: it runs wherever the product allows.</p>
+    <div id="riskList"></div>
+  </div>
+  <div id="arabicPanel" class="section" style="margin-bottom:20px"></div>
+
+  <div id="unmappedNotice" class="protected" style="display:none;background:#fff8e1;border:2px solid #ffc107;border-radius:10px;padding:16px;margin-bottom:20px">
+    <div class="sec-head"><h2>Automated tests not linked to any TestMO case</h2></div>
+    <div id="unmappedList"></div>
+  </div>
+
+  <div class="section" id="runsSection" style="margin-bottom:20px">
+    <div class="sec-head"><h2>Regression runs</h2><p>Full regressions from the FALCON runner, read from Allure · separate from coverage</p></div>
+    <div id="regressionTable"></div>
+  </div>
+
+  <h2 class="group-title protected" id="casesTitle">Case-by-case detail</h2>
+  <div class="toolbar protected" id="toolbar">
+    <input type="text" id="searchInput" placeholder="Search cases, tests, folders, case IDs…">
     <select id="filterFolder"><option value="">All Folders</option></select>
     <select id="filterStatus">
       <option value="">All Status</option>
@@ -208,93 +684,18 @@ details.fold[open]>summary h2::after,details.fold[open]>summary h3::after{conten
     <label style="display:flex;align-items:center;gap:6px;font-size:.85em;color:#555;cursor:pointer" title="Turn on the inline editing controls">
       <input type="checkbox" id="editMode" onchange="render()"> ✏️ Edit mode
     </label>
+    <details class="admin-menu"><summary>Admin ▾</summary><div class="admin-pop">
     <span id="unsavedBadge" class="unsaved-badge hidden">⚠ Unsaved Changes</span>
     <button class="btn btn-success" onclick="saveForEveryone()">💾 Save for Everyone</button>
     <button class="btn btn-outline" onclick="exportMapping()">📥 Export JSON</button>
     <button class="btn btn-outline" onclick="importMapping()">📤 Import</button>
     <button class="btn btn-danger" onclick="resetChanges()">🔄 Reset</button>
     <button class="btn btn-primary" id="updateBtn" onclick="updateFromMain()">🔄 Update from Main</button>
-  </div>
-
-  <div class="hero" id="hero"></div>
-  <div class="kpi-strip" id="statsGrid"></div>
-  <div id="scopeNote" style="background:#fff;border:1px solid #e2e1dc;border-left:4px solid #667eea;border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:.85em;color:#444">
-    <strong>What this shows.</strong> Release-check cases with at least one automated test mapped to them, read from
-    <code>automation_web_2.0</code> <span id="scopeCommit">main</span>. Each row's Evidence column says what its tests cover.
-    This is coverage, not a pass rate — run results are in <a href="#regressionTable" style="color:#667eea">Regression Run History</a>.
-  </div>
-  <div class="lock-banner" id="lockBanner">
-    <span style="font-size:1.4em">🔒</span>
-    <p><strong>Case-by-case detail is locked.</strong> The figures above are public; the case tables, blocked tests and unlinked tests need the team password.</p>
-    <button class="btn" onclick="openUnlock()">Unlock full report</button>
-  </div>
-
-  <div class="section" id="trendSection" style="margin-top:0;margin-bottom:20px">
-    <h2>📈 Coverage over time</h2>
-    <div class="trend-legend" id="trendLegend"></div>
-    <div class="trend-wrap" id="trendChart"></div>
-    <h3 style="font-size:.95em;margin:18px 0 8px">What moved the number</h3>
-    <div id="changeLog"></div>
-  </div>
-
-  <div class="section" style="margin-top:0;margin-bottom:20px">
-    <h2>📊 mWeb coverage by folder</h2>
-    <p style="color:#666;font-size:.85em;margin:8px 0 0">
-      <strong style="color:#28a745">automated</strong> — the case has automation mapped to it ·
-      <strong style="color:#dc3545">pending</strong> — nothing covers it yet.
-      Least-complete folders come first; the deeper the green, the closer to done. Click a folder to open its cases.
-    </p>
-    <div class="folder-breakdown" id="folderBreakdown"></div>
-  </div>
-
-  <div class="section protected" id="riskSection" style="background:#fff5f5;border:2px solid #fc8181;margin-bottom:20px">
-    <h2 style="color:#c53030;border-bottom-color:#fc8181">⚠️ Written but Blocked</h2>
-    <p style="color:#666;margin-bottom:10px;font-size:.9em">
-      Tests that exist but cannot prove their case everywhere. The first group is <strong>not counted as automated</strong>
-      — nothing runs. The second <strong>is</strong> counted: it runs wherever the product allows.</p>
-    <div id="riskList"></div>
-  </div>
-  <div id="arabicPanel" class="section" style="margin-bottom:20px"></div>
-
-  <div id="unmappedNotice" class="protected" style="display:none;background:#fff8e1;border:2px solid #ffc107;border-radius:10px;padding:16px;margin-bottom:20px">
-    <h3 style="margin:0 0 8px;color:#f57c00">🔗 Automated tests not linked to any TestMO case</h3>
-    <div id="unmappedList"></div>
-  </div>
-
-  <div class="section" style="margin-bottom:20px">
-    <h2>🏁 FALCON Regression Run History</h2>
-    <p style="color:#666;font-size:.85em;margin:8px 0 4px">Execution results — separate from the coverage figures above, which measure mapping only.
-      Runs marked <em>published run</em> come from the Allure reports cited in FALCONS-333; the May figures were hand-entered.
-      Every run here is an <strong>English</strong> run.</p>
-    <div id="regressionTable" style="margin-top:10px"></div>
-  </div>
-
-  <!-- Add Run Modal -->
-  <div class="auth-overlay" id="addRunModal" style="display:none">
-    <div class="auth-box" style="max-width:500px;text-align:left">
-      <h2 style="text-align:center;margin-bottom:20px">➕ Add Regression Run</h2>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-        <div><label style="font-size:.8em;color:#666">Date</label><input type="date" id="runDate" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"></div>
-        <div><label style="font-size:.8em;color:#666">Environment</label><select id="runEnv" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"><option>PREPROD</option><option>STPP</option><option>UAT</option><option>PROD</option></select></div>
-        <div><label style="font-size:.8em;color:#666">Country</label><select id="runCountry" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"><option>AE</option><option>SA</option><option>BH</option><option>KW</option></select></div>
-        <div><label style="font-size:.8em;color:#666">Platform</label><select id="runPlatform" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"><option>Android</option><option>iOS</option></select></div>
-        <div style="grid-column:1/-1;text-align:center;margin:5px 0">
-          <button class="btn btn-warning" onclick="fetchFromAllure()" id="fetchAllureBtn">⚡ Fetch from Allure</button>
-          <span id="fetchStatus" style="font-size:.8em;color:#666;margin-left:8px"></span>
-        </div>
-        <div><label style="font-size:.8em;color:#666">Passed</label><input type="number" id="runPassed" min="0" value="0" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"></div>
-        <div><label style="font-size:.8em;color:#666">Failed</label><input type="number" id="runFailed" min="0" value="0" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"></div>
-        <div><label style="font-size:.8em;color:#666">Skipped</label><input type="number" id="runSkipped" min="0" value="0" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"></div>
-      </div>
-      <div style="text-align:center;margin-top:20px">
-        <button class="btn btn-primary" onclick="saveRun()">Save Run</button>
-        <button class="btn btn-outline" onclick="document.getElementById('addRunModal').style.display='none'" style="margin-left:10px">Cancel</button>
-      </div>
-    </div>
+    </div></details>
   </div>
 
   <div class="section protected" id="appSection">
-    <h2>📱 Mobile App Tests</h2>
+    <div class="sec-head"><h2>App cases</h2><p>TestMO release checklist</p></div>
     <div class="stats-grid" id="appStatsGrid"></div>
     <div class="progress-bar"><div class="progress-fill" id="appProgressFill"></div></div>
     <div style="overflow-x:auto;margin-top:15px">
@@ -319,7 +720,7 @@ details.fold[open]>summary h2::after,details.fold[open]>summary h3::after{conten
 
   <div id="webSection" class="protected">
   <div class="section" style="padding:20px;margin-bottom:0">
-    <h2>🌐 Web Tests</h2>
+    <div class="sec-head"><h2>mWeb cases</h2><p>TestMO regression repository, group 73697</p></div>
     <div class="stats-grid" id="webStatsGrid" style="margin-top:15px"></div>
     <div class="progress-bar"><div class="progress-fill" id="webProgressFill"></div></div>
   </div>
@@ -344,12 +745,12 @@ details.fold[open]>summary h2::after,details.fold[open]>summary h3::after{conten
   </div>
   </div>
 
-  <div class="footer">
-    <p><strong>Mumzworld SDET Team</strong> | 
-      <a href="https://github.com/mumzworld-tech/automation_web_2.0" target="_blank">GitHub Repo</a> | 
-      <a href="https://allure-reports.mumzstage.com/allure-docker-service" target="_blank">Allure Reports</a>
-    </p>
-  </div>
+  <footer class="footer">
+    <span><strong>Mumzworld SDET</strong> · generated from <code>automation_web_2.0</code></span>
+    <span><a href="https://github.com/mumzworld-tech/automation_web_2.0" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://allure-reports.mumzstage.com/allure-docker-service" target="_blank" rel="noopener">Allure</a>
+      <a href="https://mumzworld.testmo.net" target="_blank" rel="noopener">TestMO</a></span>
+  </footer>
 </div>
 
 <input type="file" id="importFile" accept=".json" style="display:none">
@@ -405,6 +806,7 @@ function drillInto({status = '', folder = '', target = 'appSection'} = {}) {
 }
 
 let DATA = null;
+let TENURE = null;   // tenure.json: the suite at 1 April 2026 and each month since
 let hasUnsavedChanges = false;
 const LS_KEY = 'mumz_coverage_edits';
 
@@ -504,67 +906,251 @@ function renderStats() {
   const skipped = skippedRefs().length;
   const n = k => (DATA.automated_tests[k] || []).length;
 
-  // Delta against the last point on the trend whose figures differ from today's,
-  // so a CI refresh that changed nothing does not reset the arrow to zero.
-  const hist = (DATA.metadata.history || []).map(histPct);
-  const cur = {web: web.pct, app: app.pct, all: all.pct};
-  const prior = [...hist].reverse().find(h => h.web !== cur.web || h.app !== cur.app || h.all !== cur.all);
-  const delta = key => {
-    if (!prior) return '';
-    const d = cur[key] - prior[key];
-    const cls = d > 0 ? 'up' : d < 0 ? 'down' : 'flat';
-    const arrow = d > 0 ? '▲' : d < 0 ? '▼' : '■';
-    return `<span class="delta ${cls}" title="Against ${prior.date} (main @ ${prior.sha})">${arrow} ${d > 0 ? '+' : ''}${d} pts since ${fmtDate(prior.date)}</span>`;
-  };
-
   const reg = DATA.metadata.regression_repo;
-  const ringCard = (key, icon, title, colour, t, size, scripts, main) => `
+  const ringCard = (icon, title, colour, t, size, scripts, main) => `
     <div class="ring-card${main ? ' main' : ''}" style="--c:${colour}">
       ${ring(t, colour, size)}
       <div class="ring-body">
-        <h3>${icon} ${title}</h3>
-        <div class="counts">
-          <span class="legend-dot" style="background:${colour}"></span><strong class="countup" data-to="${t.full}">${t.full}</strong> full
-          &nbsp;<span class="legend-dot" style="background:${colour};opacity:.4"></span><strong class="countup" data-to="${t.partial}">${t.partial}</strong> partial
-          &nbsp;<span class="legend-dot" style="background:#e6e6ef"></span><strong class="countup" data-to="${t.none}">${t.none}</strong> not yet<br>
-          <span style="color:#888">${t.covered} of ${t.inScope} in-scope cases · ${t.outOfScope} not planned</span>
+        <h3>${title}</h3>
+        <div class="ring-legend">
+          <div><span class="legend-dot" style="background:${colour}"></span>Full<b class="countup" data-to="${t.full}">${t.full}</b></div>
+          <div><span class="legend-dot" style="background:${colour};opacity:.35"></span>Partial<b class="countup" data-to="${t.partial}">${t.partial}</b></div>
+          <div><span class="legend-dot" style="background:#dfe1ea"></span>Not yet<b class="countup" data-to="${t.none}">${t.none}</b></div>
         </div>
-        ${delta(key)}
+        <div class="ring-foot">${t.covered} of ${t.inScope} in scope · ${t.outOfScope} not planned</div>
         ${scripts ? `<div class="scripts">${scripts}</div>` : ''}
       </div>
     </div>`;
   document.getElementById('hero').innerHTML =
-    ringCard('all', '🎯', 'Combined coverage', '#5b5fd6', all, 150, '', true) +
-    ringCard('app', '📱', 'App', '#764ba2', app, 112,
-             `${n('app')} test scripts · TestMO release checklist`) +
-    ringCard('web', '🌐', 'mWeb', '#0e9f6e', web, 112,
-             `${n('web_uae') + n('web_ksa') + n('web_commons')} test scripts · regression repository` +
-             (reg ? ` (${reg.total_cases} cases, ${reg.in_scope} in scope)` : ''));
+    ringCard('', 'Combined coverage', '#5b5fd6', all, 150, '', true) +
+    ringCard('', 'App', '#764ba2', app, 112,
+             `${n('app')} test scripts · release checklist`) +
+    ringCard('', 'mWeb', '#0e9f6e', web, 112,
+             `${n('web_uae') + n('web_ksa') + n('web_commons')} test scripts · regression repository`);
 
-  const kpi = (value, label, colour, drill) => `
-    <div class="stat-card${drill ? ' clickable' : ''}" ${drill ? `onclick='drillInto(${JSON.stringify(drill)})' title="Open these cases"` : ''}>
-      <div class="stat-number countup" data-to="${value}" style="color:${colour}">${value}</div>
-      <div class="stat-label">${label}</div></div>`;
-  const growth = (() => {
-    const b = DATA.metadata.baseline; if (!b || !b.tests) return '';
-    const d = auto.length - b.tests;
-    return d > 0 ? `<br><small style="color:#28a745">+${d} since ${fmtDate(b.date)}</small>` : '';
-  })();
+  const kpi = (value, label, sub, colour, drill) => `
+    <div class="kpi${drill ? ' clickable' : ''}" style="--k:${colour}" ${drill ? `onclick='drillInto(${JSON.stringify(drill)})' title="Open these cases"` : ''}>
+      <div class="kpi-label">${label}</div>
+      <div class="kpi-value countup" data-to="${value}">${value}</div>
+      <div class="kpi-sub">${sub}</div>
+      ${drill ? '<span class="kpi-go">View cases →</span>' : ''}</div>`;
+  const b = DATA.metadata.baseline;
+  const growth = b && b.tests && auto.length > b.tests ? `<span class="up-text">+${auto.length - b.tests}</span> since ${fmtDate(b.date)}` : 'on main';
   document.getElementById('statsGrid').innerHTML =
-    kpi(all.inScope, `Cases in scope<br><small style="color:#999">${all.outOfScope} “Not planned” excluded</small>`, '#667eea') +
-    kpi(all.covered, 'Automated', '#28a745', {status: 'covered'}) +
-    kpi(all.partial, 'Automated, with gaps', '#d39e00', {status: 'gaps'}) +
-    kpi(all.none, 'Not automated', '#dc3545', {status: 'none'}) +
-    kpi(auto.length, `Automated tests${growth}`, '#667eea') +
-    kpi(skipped, 'Written, not running<br><small style="color:#999">hard-skipped scripts</small>', skipped ? '#dc3545' : '#28a745', {target: 'riskSection'}) +
+    kpi(all.inScope, 'Cases in scope', `${all.outOfScope} “Not planned” excluded`, '#5b5fd6') +
+    kpi(all.covered, 'Automated', `${all.full} full · ${all.partial} partial`, '#12a150', {status: 'covered'}) +
+    kpi(all.partial, 'Automated, with gaps', 'a scenario still uncovered', '#d99a00', {status: 'gaps'}) +
+    kpi(all.none, 'Not automated', 'nothing covers these yet', '#e5484d', {status: 'none'}) +
+    kpi(auto.length, 'Automated tests', growth, '#5b5fd6') +
+    kpi(skipped, 'Written, not running', 'hard-skipped scripts', skipped ? '#e5484d' : '#12a150', {target: 'riskSection'}) +
     kpi((DATA.metadata.unmapped_count || 0) - (DATA.metadata.unmapped_and_skipped || 0),
-        'Passing, no TestMO case<br><small style="color:#999">coverage the plan does not describe</small>', '#0e6b3d', {target: 'unmappedNotice'});
+        'Passing, no TestMO case', 'coverage the plan does not describe', '#0e9f6e', {target: 'unmappedNotice'});
 
   if (document.getElementById('scopeNote')) {
     document.getElementById('scopeCommit').textContent = `main (${DATA.metadata.source_branch || 'origin/main'}, generated ${DATA.metadata.last_updated})`;
   }
   renderTrend();
   requestAnimationFrame(animateFigures);
+}
+
+
+// === Before and since 1 April 2026 ===
+function renderTenure() {
+  const box = document.getElementById('tenureSection');
+  if (!TENURE || !TENURE.points || !TENURE.points.length) return;
+  const first = TENURE.points[0], now = TENURE.points[TENURE.points.length - 1];
+  const pc = s => Math.round(s[0] / s[2] * 100);
+  const all = p => Math.round((p.web[0] + p.app[0]) / (p.web[2] + p.app[2]) * 100);
+  const areasOf = p => Object.keys(p.areas).filter(k => p.areas[k] > 0).length;
+  const startLabel = new Date(TENURE.start + 'T00:00:00').toLocaleDateString('en-GB', {day: 'numeric', month: 'long', year: 'numeric'});
+
+  const compare = (label, a, b, unit, note) => {
+    const d = b - a;
+    const ratio = a > 0 && !unit && b / a >= 1.5 ? ` · ${(b / a).toFixed(1)}×` : '';
+    return `<div class="cmp">
+      <div class="cmp-label">${label}</div>
+      <div class="cmp-row"><span class="cmp-before">${a}${unit}</span><span class="cmp-arrow">→</span>
+        <span class="cmp-after countup-once" data-to="${b}">${b}</span><span class="cmp-unit">${unit}</span></div>
+      <div class="cmp-delta ${d > 0 ? 'up' : d < 0 ? 'down' : ''}">${d > 0 ? '+' : ''}${d}${unit ? ' pts' : ''}${ratio}</div>
+      ${note ? `<div class="cmp-note">${note}</div>` : ''}</div>`;
+  };
+
+  // Stability: full regressions only, first month each suite had them against the latest.
+  const full = fullRuns();
+  const suiteSpan = suite => {
+    const rs = full.filter(r => r.suite === suite);
+    if (!rs.length) return null;
+    const m0 = rs[0].date.slice(0, 7), m1 = rs[rs.length - 1].date.slice(0, 7);
+    const inM = m => rs.filter(r => r.date.startsWith(m));
+    return {m0, m1, r0: passRate(inM(m0)), r1: passRate(inM(m1)), n0: inM(m0).length, n1: inM(m1).length,
+            t0: Math.max(...inM(m0).map(r => r.total)), t1: Math.max(...inM(m1).map(r => r.total))};
+  };
+  const stab = (title, sp) => sp ? `<div class="stab">
+      <div class="stab-top"><span>${title}</span><span class="stab-tag">${sp.n0 + sp.n1 > 0 ? 'full regressions' : ''}</span></div>
+      <div class="stab-pair"><span class="cmp-before">${sp.r0}%</span><span class="cmp-arrow">→</span>
+        <span class="stab-rate" style="--rate:${rateColour(sp.r1)}">${sp.r1}<small>%</small></span></div>
+      <div class="stab-bar"><i class="was" style="width:${sp.r0}%"></i><i style="width:${sp.r1}%;background:${rateColour(sp.r1)}"></i></div>
+      <div class="stab-sub">${monthName(sp.m0)} (${sp.n0} run${sp.n0 === 1 ? '' : 's'}, ${sp.t0} tests) → ${monthName(sp.m1)} (${sp.n1} runs, ${sp.t1} tests)</div>
+    </div>` : '';
+  const firstFull = full[0];
+
+  // Areas: before as a grey segment, growth in colour, one scale for all rows.
+  const names = [...new Set([...Object.keys(first.areas), ...Object.keys(now.areas)])]
+    .sort((a, b) => (now.areas[b] || 0) - (now.areas[a] || 0));
+  const max = Math.max(...names.map(n => now.areas[n] || 0), 1);
+  const areaRows = names.map(n => {
+    const a = first.areas[n] || 0, b = now.areas[n] || 0;
+    return `<div class="area-row">
+      <div class="area-name">${n}${a === 0 && b > 0 ? '<span class="new-tag">new</span>' : ''}</div>
+      <div class="area-bar"><i class="was" style="width:${a / max * 100}%"></i><i class="grew" style="left:${a / max * 100}%;width:${Math.max(0, b - a) / max * 100}%"></i></div>
+      <div class="area-num"><span>${a}</span> → <b>${b}</b></div></div>`;
+  }).join('');
+
+  // Contributors since the start date, with a person's two git spellings merged.
+  const merged = {};
+  (TENURE.commit_authors_since || []).forEach(([name, n]) => {
+    const key = name.toLowerCase().replace(/\s+/g, '');
+    const pretty = /\s/.test(name) ? name : (merged[key] && merged[key].name) || name;
+    merged[key] = {name: merged[key] && /\s/.test(merged[key].name) ? merged[key].name : pretty, n: ((merged[key] || {}).n || 0) + n};
+  });
+  const people = Object.values(merged).sort((a, b) => b.n - a.n);
+  const totalCommits = people.reduce((n, p) => n + p.n, 0);
+  const palette = ['#5b5fd6', '#8b5cf6', '#0e9f6e', '#d99a00', '#e5484d', '#64748b'];
+  const top = people.slice(0, 5), rest = people.slice(5).reduce((n, p) => n + p.n, 0);
+  const shareBar = [...top.map((p, i) => [p.name, p.n, palette[i]]), ...(rest ? [['Others', rest, '#cbd5e1']] : [])];
+
+  box.style.display = '';
+  box.innerHTML = `
+    <div class="sec-head"><h2>Before and since ${startLabel}</h2>
+      <p>The suite as it stood on ${fmtDate(TENURE.start)} against main today</p></div>
+    <div class="tenure-hero">
+      <div class="th-main">
+        <div class="cmp-label">Combined coverage</div>
+        <div class="th-pair"><span class="th-before">${all(first)}%</span><span class="th-arrow">→</span>
+          <span class="th-after"><span class="countup-once" data-to="${all(now)}">${all(now)}</span>%</span></div>
+        <div class="th-delta">+${all(now) - all(first)} points · ${first.web[0] + first.app[0]} → ${now.web[0] + now.app[0]} of ${now.web[2] + now.app[2]} in-scope cases</div>
+        <div class="th-track"><i class="was" style="width:${all(first)}%"></i><i class="now" style="width:${all(now)}%"></i></div>
+        <div class="th-legend"><span><i class="lg was"></i>${fmtDate(TENURE.start)}</span><span><i class="lg now"></i>Today</span></div>
+      </div>
+      <div class="cmp-grid">
+        ${compare('App coverage', pc(first.app), pc(now.app), '%')}
+        ${compare('mWeb coverage', pc(first.web), pc(now.web), '%')}
+        ${compare('Automated tests', first.tests, now.tests, '')}
+        ${compare('Arabic-ready tests', first.ar_safe, now.ar_safe, '')}
+        ${compare('Test files', first.files, now.files, '')}
+        ${compare('Product areas automated', areasOf(first), areasOf(now), '')}
+      </div>
+    </div>
+
+    <div class="tenure-cols">
+      <div>
+        <h3 class="sub-title">Stability</h3>
+        <div class="stab-grid">
+          <div class="stab empty"><div class="stab-top"><span>Before ${fmtDate(TENURE.start)}</span></div>
+            <div class="stab-none">No runs published</div>
+            <div class="stab-sub">The first FALCON run reached Allure on ${RUNS ? fmtDate(RUNS.runs[0].date) : '—'}</div></div>
+          <div class="stab"><div class="stab-top"><span>Full regressions</span><span class="stab-tag">since ${fmtDate(TENURE.start)}</span></div>
+            <div class="stab-rate" style="--rate:var(--ink)">${full.length}</div>
+            <div class="stab-sub">${(RUNS ? RUNS.runs.length : 0) - full.length} partial runs not counted · first full run ${firstFull ? fmtDate(firstFull.date) : '—'}</div></div>
+          ${stab('App pass rate', suiteSpan('app'))}
+          ${stab('mWeb pass rate', suiteSpan('mweb'))}
+        </div>
+        <div class="stab-foot">
+          <span>Hard-skipped scripts: <b>${first.hard_skipped}</b> → <b>${now.hard_skipped}</b> <a href="#" onclick="drillInto({target:'riskSection'});return false">why</a></span>
+        </div>
+      </div>
+      <div>
+        <h3 class="sub-title">Where the suite grew <span class="sub-hint">tests per area</span></h3>
+        <div class="areas">${areaRows}</div>
+      </div>
+    </div>
+
+    <h3 class="sub-title">What shipped since ${fmtDate(TENURE.start)}
+      <span class="sub-hint">${TENURE.prs.length} merged PRs · ${TENURE.tickets} FALCONS tickets · ${totalCommits} commits</span></h3>
+    <div class="share">
+      <div class="share-bar">${shareBar.map(([n, c, col]) => `<i style="width:${c / totalCommits * 100}%;background:${col}" title="${n}: ${c} commits"></i>`).join('')}</div>
+      <div class="share-legend">${shareBar.map(([n, c, col]) => `<span><i style="background:${col}"></i>${n} <b>${c / totalCommits < .005 ? '<1' : Math.round(c / totalCommits * 100)}%</b></span>`).join('')}</div>
+    </div>
+    <div class="months" id="prMonths"></div>
+    <div class="pr-tools"><input id="prSearch" placeholder="Filter by ticket, title or area…" oninput="renderPrList()"></div>
+    <div class="pr-list" id="prList"></div>
+    <p class="method">${TENURE.method} Before ${fmtDate(TENURE.start)}: ${TENURE.commits_before} commits on main since ${fmtDate(TENURE.first_commit)}.</p>`;
+  renderPrMonths();
+  renderPrList();
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) countUpOnce(box);
+}
+
+let PR_MONTH = '';
+function renderPrMonths() {
+  const counts = {};
+  TENURE.prs.forEach(p => { const m = p.date.slice(0, 7); counts[m] = (counts[m] || 0) + 1; });
+  const months = Object.keys(counts).sort();
+  const max = Math.max(...Object.values(counts));
+  document.getElementById('prMonths').innerHTML = months.map(m => {
+    const label = new Date(m + '-01T00:00:00').toLocaleDateString('en-GB', {month: 'short'});
+    return `<button class="month${PR_MONTH === m ? ' on' : ''}" onclick="PR_MONTH = PR_MONTH === '${m}' ? '' : '${m}'; renderPrMonths(); renderPrList()">
+      <span class="m-bar"><i style="height:${counts[m] / max * 100}%"></i></span><b>${counts[m]}</b><span>${label}</span></button>`;
+  }).join('');
+}
+
+function renderPrList(showAll) {
+  const q = (document.getElementById('prSearch').value || '').toLowerCase();
+  const rows = TENURE.prs.filter(p => (!PR_MONTH || p.date.startsWith(PR_MONTH)) &&
+    (!q || (p.title + ' ' + p.tickets.join(' ') + ' ' + p.areas.join(' ')).toLowerCase().includes(q)));
+  const limit = showAll || PR_MONTH || q ? rows.length : 8;
+  document.getElementById('prList').innerHTML = rows.slice(0, limit).map(p => `
+    <a class="pr" href="https://github.com/mumzworld-tech/automation_web_2.0/pull/${p.pr}" target="_blank" rel="noopener">
+      <span class="pr-date">${fmtDate(p.date)}</span>
+      <span class="pr-num">#${p.pr}</span>
+      <span class="pr-title">${p.title.replace(/^FALCONS-\d+:?\s*/, '')}</span>
+      <span class="pr-tags">${p.tickets.map(t => `<i class="t-ticket">${t}</i>`).join('')}${p.app ? '<i class="t-app">app</i>' : ''}${p.web ? '<i class="t-web">mWeb</i>' : ''}${p.areas.slice(0, 2).map(a => `<i>${a}</i>`).join('')}</span>
+    </a>`).join('') || '<div class="pr-empty">No pull requests match.</div>' +
+    '';
+  if (rows.length > limit) document.getElementById('prList').insertAdjacentHTML('beforeend',
+    `<button class="btn btn-outline pr-more" onclick="renderPrList(true)">Show all ${rows.length} pull requests</button>`);
+}
+
+function countUpOnce(root) {
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    io.unobserve(e.target);
+    const el = e.target, to = +el.dataset.to, t0 = performance.now();
+    const step = now => { const k = Math.min(1, (now - t0) / 1000); el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }), {threshold: .6});
+  root.querySelectorAll('.countup-once').forEach(el => io.observe(el));
+}
+
+// === Scroll: slim top bar, section spy, reveal, back to top ===
+function initScrollUi() {
+  const bar = document.getElementById('topbar'), top = document.getElementById('toTop');
+  const mast = document.querySelector('.masthead');
+  const cov = DATA.metadata.coverage;
+  document.getElementById('tbStats').innerHTML = [
+    ['Combined', cov.combined.pct, '#5b5fd6'], ['App', cov.app.pct, '#8b5cf6'], ['mWeb', cov.web.pct, '#0e9f6e']]
+    .map(([l, v, c]) => `<span class="tb-stat"><i style="background:${c}"></i>${l} <b>${v}%</b></span>`).join('');
+  const links = [...document.querySelectorAll('#tbNav a[href^="#"]')];
+  const targets = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const onScroll = () => {
+    const y = window.scrollY, show = y > mast.offsetHeight - 40;
+    bar.classList.toggle('show', show); top.classList.toggle('show', y > 900);
+    let current = null;
+    targets.forEach(t => { if (t.offsetParent && t.getBoundingClientRect().top < window.innerHeight * .35) current = t.id; });
+    links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + current));
+  };
+  window.addEventListener('scroll', onScroll, {passive: true});
+  onScroll();
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  // Only sections still below the fold get the fade-in; anything on screen is
+  // never hidden. A timer reveals the lot regardless, so the content can never
+  // stay invisible if the observer does not fire (printing, some embeds).
+  const show = el => el.classList.add('in');
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } }),
+                                      {rootMargin: '0px 0px -8% 0px'});
+  const pending = [...document.querySelectorAll('.container > .section, .container > section')]
+    .filter(el => el.getBoundingClientRect().top > window.innerHeight);
+  pending.forEach(el => { el.classList.add('reveal'); io.observe(el); });
+  setTimeout(() => pending.forEach(show), 1500);
 }
 
 // === Rings, count-up and the trend ===
@@ -578,7 +1164,7 @@ function histPct(h) {
   const p = ([c, , s]) => s ? Math.round(c / s * 100) : 0;
   const c = h.web[0] + h.app[0], s = h.web[2] + h.app[2];
   return {date: h.date, sha: h.sha, web: p(h.web), app: p(h.app), all: s ? Math.round(c / s * 100) : 0,
-          tests: h.tests, changes: h.changes || []};
+          tests: h.tests, changes: h.changes || [], reconstructed: !!h.reconstructed};
 }
 
 // Two arcs on one track: full in solid colour, partial after it at 40%. The
@@ -591,10 +1177,13 @@ function ring(t, colour, size) {
       stroke="${colour}" stroke-opacity="${opacity}" stroke-width="${stroke}" stroke-linecap="butt"
       stroke-dasharray="${length} ${len}" stroke-dashoffset="${-from}" data-len="${length}"
       style="stroke-dasharray:0 ${len}"/>`;
+  const gid = 'g' + colour.slice(1);
   return `<div class="ring" style="width:${size}px;height:${size}px">
     <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" aria-hidden="true">
-      <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="#ececf4" stroke-width="${stroke}"/>
-      ${arc(0, fullLen, 1)}${arc(fullLen, partLen, .4)}
+      <defs><linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="${colour}" stop-opacity=".75"/><stop offset="1" stop-color="${colour}"/></linearGradient></defs>
+      <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="#eef0f6" stroke-width="${stroke}"/>
+      ${arc(0, fullLen, 1).replace(`stroke="${colour}"`, `stroke="url(#${gid})"`)}${arc(fullLen, partLen, .32)}
     </svg>
     <div class="ring-label">
       <div class="ring-pct" style="font-size:${size > 130 ? 2.4 : 1.8}em"><span class="countup" data-to="${t.pct}">${t.pct}</span>%</div>
@@ -633,10 +1222,11 @@ const TREND_SERIES = [
 function renderTrend() {
   const box = document.getElementById('trendChart');
   const raw = (DATA.metadata.history || []).map(histPct);
-  if (raw.length < 2) { document.getElementById('trendSection').style.display = 'none'; return; }
-  // Several re-maps can land on one day; the chart keeps that day's last state,
-  // the change log below keeps every step.
-  const byDay = new Map(); raw.forEach(p => byDay.set(p.date, p));
+  // The line is the tenure estimate when it is available: one method from
+  // 1 April to today. The recorded history (from 6 Sep) drives the change log.
+  const series = TENURE && TENURE.points ? TENURE.points.map(histPct) : raw;
+  if (series.length < 2) { document.getElementById('trendSection').style.display = 'none'; return; }
+  const byDay = new Map(); series.forEach(p => byDay.set(p.date, p));
   const pts = [...byDay.values()];
 
   const W = 1000, H = 260, L = 44, R = 20, T = 16, B = 34;
@@ -659,10 +1249,21 @@ function renderTrend() {
     const d = pts.map((p, i) => `${i ? 'L' : 'M'}${x(p.date).toFixed(1)},${y(p[s.key]).toFixed(1)}`).join(' ');
     const dots = pts.map(p => `<circle cx="${x(p.date)}" cy="${y(p[s.key])}" r="${s.key === 'all' ? 4.5 : 3}" fill="#fff" stroke="${s.colour}" stroke-width="2"/>`).join('');
     return `<path d="${d}" fill="none" stroke="${s.colour}" stroke-width="${s.width}" stroke-linejoin="round" stroke-linecap="round"
-              pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:1;animation:drawLine 1.6s ease forwards"/>${dots}`;
+              pathLength="1" class="trend-line"/>${dots}`;
   }).join('');
   const area = `<path d="M${x(pts[0].date)},${y(lo)} ${pts.map(p => `L${x(p.date)},${y(p.all)}`).join(' ')} L${x(pts[pts.length-1].date)},${y(lo)} Z"
                   fill="url(#trendFill)"/>`;
+  // Milestones drawn behind the lines: when the current owner started, and when
+  // the case-by-case record began.
+  function marks() {
+    const at = [];
+    if (TENURE) at.push([TENURE.start, 'Saifulla joined', '#8b5cf6']);
+    if (raw.length) at.push([raw[0].date, 'Case map began', '#0e9f6e']);
+    return at.filter(([d]) => new Date(d) >= new Date(pts[0].date)).map(([d, label, c]) => `
+      <line x1="${x(d)}" x2="${x(d)}" y1="${T}" y2="${H - B}" stroke="${c}" stroke-dasharray="4 4" opacity=".55"/>
+      <rect x="${x(d) + 6}" y="${T + 2}" width="${label.length * 6.6 + 14}" height="20" rx="10" fill="${c}" opacity=".12"/>
+      <text x="${x(d) + 13}" y="${T + 16}" font-size="11" font-weight="600" fill="${c}">${label}</text>`).join('');
+  }
   // Hit zones: each point owns the band halfway to its neighbours.
   const hits = pts.map((p, i) => {
     const a = i ? (x(pts[i - 1].date) + x(p.date)) / 2 : L;
@@ -673,13 +1274,13 @@ function renderTrend() {
   box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Coverage over time">
       <defs><linearGradient id="trendFill" x1="0" x2="0" y1="0" y2="1">
         <stop offset="0" stop-color="#5b5fd6" stop-opacity=".18"/><stop offset="1" stop-color="#5b5fd6" stop-opacity="0"/></linearGradient></defs>
-      ${grid.join('')}${area}${lines}${ticks.join('')}
+      ${grid.join('')}${area}${marks()}${lines}${ticks.join('')}
       <line id="trendCursor" x1="0" x2="0" y1="${T}" y2="${H - B}" stroke="#5b5fd6" stroke-dasharray="3 3" opacity="0"/>
       <g id="trendHits">${hits}</g></svg>
     <div class="trend-tip" id="trendTip"></div>`;
   document.getElementById('trendLegend').innerHTML = TREND_SERIES.map(s =>
     `<span><span class="legend-dot" style="background:${s.colour}"></span>${s.label}</span>`).join('') +
-    `<span style="color:#999">Hover a point for the detail · measured against main at each refresh</span>`;
+    `<span style="color:#999">Hover a point for the detail · estimated from git: today's mapping, the suite as it stood</span>`;
 
   const tip = document.getElementById('trendTip'), cursor = document.getElementById('trendCursor');
   const svg = box.querySelector('svg');
@@ -688,7 +1289,7 @@ function renderTrend() {
       const p = pts[+rect.dataset.i];
       const dayChanges = raw.filter(r => r.date === p.date).reduce((n, r) => n + r.changes.length, 0);
       cursor.setAttribute('x1', x(p.date)); cursor.setAttribute('x2', x(p.date)); cursor.setAttribute('opacity', '1');
-      tip.innerHTML = `<strong>${fmtDate(p.date)}</strong> · main @ <code style="color:#c7c9ff">${p.sha}</code><br>` +
+      tip.innerHTML = `<strong>${fmtDate(p.date)}</strong> · main @ <code style="color:#c7c9ff">${p.sha}</code>${p.reconstructed ? ' · estimate' : ''}<br>` +
         TREND_SERIES.map(s => `<span class="legend-dot" style="background:${s.colour}"></span>${s.label} <strong>${p[s.key]}%</strong>`).join('<br>') +
         `<br><span style="opacity:.75">${p.tests} automated tests · ${dayChanges} case${dayChanges === 1 ? '' : 's'} changed</span>`;
       const scale = svg.clientWidth / W;
@@ -778,7 +1379,7 @@ function testTag(caseId, ref, remover) {
     ? `${meta.path || meta.file || ''}${meta.title ? ' — ' + meta.title : ''}${skip ? '\nSKIPPED: ' + (skip.reason || skip.type) : ''}`
     : 'Not found in the current main branch';
   return `<span class="test-tag" title="${String(title).replace(/"/g, '&quot;')}" style="${hard ? 'opacity:.7;border:1px dashed #dc3545' : ''}">
-    <span style="background:${colour};color:#fff;padding:0 4px;border-radius:3px;font-size:.85em;margin-right:4px">${label}</span>${hard ? '⚠️ ' : ''}${refName(ref)}${meta ? '' : ' ❓'}${
+    <span style="background:${colour};color:#fff;padding:0 4px;border-radius:3px;font-size:.85em;margin-right:4px">${label}</span>${hard ? '⚠️ ' : ''}${refName(ref).replace(/_/g, '_<wbr>')}${meta ? '' : ' ❓'}${
       isEditing() ? `<span class="remove-tag" onclick="${remover}('${caseId}','${ref}')">×</span>` : ''}</span>`;
 }
 
@@ -850,7 +1451,7 @@ function notesRows(text) {
 function notesCell(t, handler) {
   if (!isEditing()) {
     return t.notes
-      ? `<div style="font-size:.82em;line-height:1.5;color:#444">${t.notes}</div>`
+      ? `<div class="notes-clamp" title="Click to expand" onclick="this.classList.toggle('open')">${t.notes}</div>`
       : '<span style="color:#bbb;font-size:.8em">—</span>';
   }
   return `<textarea class="notes-input" rows="${notesRows(t.notes)}" onchange="${handler}('${t.case_id}', this.value)" placeholder="What is and is not covered...">${t.notes || ''}</textarea>`;
@@ -878,7 +1479,7 @@ function coverageSelect(t, handler) {
     } else if (t.gated_only) {
       marks.push(`<div style="font-size:.7em;color:#b8860b;margin-top:4px" title="${(t.gate_reasons || []).join(' | ').replace(/"/g, '&quot;')}">${gateLabel(t)}</div>`);
     }
-    return `<span class="${covered ? 'status-full' : 'status-none'}">${covered ? '✅ Automated' : '❌ Not automated'}</span>${marks.join('')}`;
+    return `<span class="${covered ? 'status-full' : 'status-none'}"><i class="sdot"></i>${covered ? 'Automated' : 'Not automated'}</span>${marks.join('')}`;
   }
   const bg = t.coverage_status === 'full' ? '#d4edda' : t.coverage_status === 'partial' ? '#fff3cd' : '#f8d7da';
   return `<select class="coverage-select" onchange="${handler}('${t.case_id}', this.value)" style="padding:4px;border-radius:4px;border:1px solid #ddd;font-size:.8em;background:${bg}">
@@ -972,7 +1573,7 @@ function renderArabicPanel() {
   // Collapsed by default: it is reference detail, and it pushed the run history
   // and the folder view a full screen down.
   panel.innerHTML = `<details class="fold"><summary>
-    <h2 style="color:#0e9f6e;border-bottom-color:#0e9f6e">🌍 Arabic Locale Coverage
+    <h2>Arabic locale readiness
       <span style="font-size:.6em;font-weight:400;color:#666">${arTests.length} of ${auto.length} tests AR-safe · ${ar.stores.length} storefronts</span></h2></summary>
     <p style="color:#555;font-size:.9em;margin:10px 0 10px">${ar.summary}</p>
     ${ar.caveat ? `<div style="background:#fff8e1;border-left:4px solid #f0ad4e;border-radius:4px;padding:10px 12px;margin-bottom:16px;font-size:.85em;color:#5d4037"><strong>Read this before quoting the number.</strong> ${ar.caveat}</div>` : ''}
@@ -1030,7 +1631,7 @@ function renderFolderBreakdown() {
       // Red through amber to green by share covered, kept pale so text stays legible.
       const share = covered / s.total;
       const hue = Math.round(share * 130);
-      const tint = `hsl(${hue} 70% ${96 - share * 6}%)`;
+      const tint = `linear-gradient(180deg,#fff,hsl(${hue} 70% 98.5%))`;
       return `<div class="folder-card ${cls}" style="--tint:${tint}" title="Open the ${s.total} case(s) in ${name}"
                    onclick='drillInto(${JSON.stringify({folder: name, target: "webSection"})})'>
         <div class="folder-name"><span class="folder-pct" style="color:hsl(${hue} 65% 35%)">${Math.round(share * 100)}%</span>${name}</div>
@@ -1040,7 +1641,7 @@ function renderFolderBreakdown() {
           <span style="color:#999;margin-left:auto">of ${s.total}</span>
         </div>
         <div style="height:6px;border-radius:3px;overflow:hidden;background:#e9ecef;margin-top:7px">
-          <div style="height:100%;width:${covered / s.total * 100}%;background:#28a745"></div>
+          <div style="height:100%;width:${covered / s.total * 100}%;background:hsl(${hue} 62% 45%);border-radius:3px"></div>
         </div>
       </div>`;
     }).join('');
@@ -1266,79 +1867,6 @@ function renderRiskSection() {
           'These run green wherever the product allows. Each gate is a product or tooling limitation rather than missing test work, so they are counted — excluding them would lower the figure because of an app bug. Listed here so the limitation is visible.');
 }
 
-// === Regression Run History ===
-let REGRESSION_RUNS = [];
-const ENV_COLORS = {STPP:'#667eea', PREPROD:'#f59e0b', PROD:'#10b981', UAT:'#8b5cf6'};
-
-const ALLURE_BASE = 'https://allure-reports.mumzstage.com/allure-docker-service';
-const ALLURE_RUNS = [
-  {project: '40878e36-5b02-47cc-90cb-9876754ef89d-ae-android', country: 'AE', platform: 'Android'},
-  {project: '92100adb-705d-4162-b91e-c23b52dfeabf-ae-ios', country: 'AE', platform: 'iOS'},
-  {project: '556dd6d6-9c83-47d4-99b1-726f8e740b0d-sa-android', country: 'SA', platform: 'Android'},
-  {project: 'd63c9675-c32c-4f8d-82d4-7972b0c2e871-sa-ios', country: 'SA', platform: 'iOS'},
-];
-
-async function loadRegressionRuns() {
-  // The committed file is authoritative: its rows carry provenance (published
-  // Allure run vs hand-entered) and are deduplicated. The Gist is where the
-  // FALCON Lambda appends new runs, so it is merged in for anything the file
-  // does not already have -- it must not overwrite the file, which is what it
-  // used to do, hiding every corrected row behind a stale copy.
-  const key = r => `${r.date}|${r.suite || 'app'}|${r.country}|${r.platform}|${r.environment}`;
-  let fileRuns = [];
-  try {
-    const resp = await fetch('regression_runs.json?t=' + Date.now());
-    if (resp.ok) fileRuns = await resp.json();
-  } catch(e) { /* fall back to the gist alone */ }
-
-  const seen = new Set(fileRuns.map(key));
-  try {
-    const gistResp = await fetch(`https://api.github.com/gists/${GIST_ID}?t=${Date.now()}`);
-    if (gistResp.ok) {
-      const gist = await gistResp.json();
-      const raw = gist.files['regression_runs.json']?.content;
-      if (raw) {
-        for (const r of JSON.parse(raw)) {
-          if (!seen.has(key(r))) { seen.add(key(r)); fileRuns.push({...r, source: r.source || 'manual'}); }
-        }
-      }
-    }
-  } catch(e) { /* gist optional */ }
-
-  REGRESSION_RUNS = fileRuns.sort((a, b) => (a.date || '').localeCompare(b.date || ''));
-
-  // Fetch latest from Allure API and append if newer
-  try {
-    const results = await Promise.all(ALLURE_RUNS.map(async (r) => {
-      const resp = await fetch(`${ALLURE_BASE}/projects/${r.project}/reports/latest/widgets/summary.json`);
-      if (!resp.ok) return null;
-      const data = await resp.json();
-      const s = data.statistic;
-      const stop = data.time?.stop;
-      if (!stop || s.total < 2) return null;
-      return {
-        date: new Date(stop).toISOString().split('T')[0],
-        environment: 'STPP',
-        country: r.country,
-        platform: r.platform,
-        passed: s.passed,
-        failed: s.failed + (s.broken || 0),
-        skipped: s.skipped,
-        total: s.total
-      };
-    }));
-    const liveRuns = results.filter(Boolean);
-    // Append live runs if their date is newer than last historical entry
-    const lastHistDate = REGRESSION_RUNS.length ? REGRESSION_RUNS[REGRESSION_RUNS.length - 1].date : '';
-    liveRuns.forEach(run => {
-      const exists = REGRESSION_RUNS.some(r => r.date === run.date && r.country === run.country && r.platform === run.platform);
-      if (!exists && run.date >= lastHistDate) REGRESSION_RUNS.push(run);
-    });
-  } catch(e) { /* Allure unavailable, use historical only */ }
-
-  renderRegressionChart();
-}
-
 function refreshUnmapped() {
   const mapped = new Set();
   for (const t of DATA.testmo_tests) t.automated_tests.forEach(r => mapped.add(r));
@@ -1387,130 +1915,146 @@ function refreshUnmapped() {
   list.innerHTML = html;
 }
 
-function renderRegressionChart() {
-  const container = document.getElementById('regressionTable');
-  if (!REGRESSION_RUNS.length) {
-    container.innerHTML = '<p style="color:#999;text-align:center;padding:20px">No regression runs recorded yet.</p>';
-    return;
-  }
+// === Regression runs ===
+// runs.json is generated by build_runs.py from every FALCON run published to
+// Allure. Only full regressions are in the figures; partial runs (targeted
+// re-runs, runs that ended early) are counted but never averaged in.
+let RUNS = null;
+const ENV_ORDER = ['PREPROD', 'STPP', 'UAT', 'PROD'];
+let RUN_FILTER = {suite: '', env: ''};
 
-  // Build allure report URL from run data
-  function getAllureUrl(run) {
-    const country = (run.country || 'ae').toLowerCase();
-    const platform = (run.platform || 'android').toLowerCase();
-    const project = run.project || `${run.environment?.toLowerCase() || 'preprod'}-${country}-${platform}`;
-    return `${ALLURE_BASE}/projects/${project}/reports/latest`;
-  }
+const passRate = rs => {
+  const ex = rs.reduce((n, r) => n + r.passed + r.failed, 0);
+  return ex ? Math.round(rs.reduce((n, r) => n + r.passed, 0) / ex * 100) : 0;
+};
+const rateColour = v => v >= 90 ? 'var(--good)' : v >= 75 ? 'var(--warn)' : 'var(--bad)';
+const fullRuns = () => (RUNS && RUNS.runs || []).filter(r => r.kind === 'regression');
 
-  function getRunLabel(run) {
-    return `${run.suite || 'app'} · ${run.country}/${run.platform}`;
-  }
+function renderRuns() {
+  const box = document.getElementById('regressionTable');
+  if (!RUNS) { box.innerHTML = '<p class="muted-note">runs.json not found — run <code>make runs</code>.</p>'; return; }
+  const all = RUNS.runs, full = fullRuns();
+  const shown = full.filter(r => (!RUN_FILTER.suite || r.suite === RUN_FILTER.suite) && (!RUN_FILTER.env || r.env === RUN_FILTER.env));
+  const last = full[full.length - 1];
+  const recent = suite => {
+    const rs = full.filter(r => r.suite === suite);
+    if (!rs.length) return null;
+    const month = rs[rs.length - 1].date.slice(0, 7);
+    return {month, rate: passRate(rs.filter(r => r.date.startsWith(month))), n: rs.filter(r => r.date.startsWith(month)).length};
+  };
+  const ra = recent('app'), rw = recent('mweb');
+  const chip = (key, val, label) => `<button class="chip${RUN_FILTER[key] === val ? ' on' : ''}" onclick="RUN_FILTER.${key}='${val}';renderRuns()">${label}</button>`;
+  const envs = ENV_ORDER.filter(e => full.some(r => r.env === e));
 
-  const runs = REGRESSION_RUNS.slice().reverse();
-  container.innerHTML = `
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px">
-      ${runs.map(d => {
-        const runTotal = d.passed + d.failed;
-        const passRate = runTotal ? Math.round(d.passed / runTotal * 100) : 0;
-        const color = passRate >= 90 ? '#28a745' : passRate >= 70 ? '#f59e0b' : '#dc3545';
-        const url = getAllureUrl(d);
-        const label = getRunLabel(d);
-        return `<a href="${url}" target="_blank" style="text-decoration:none;display:block;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 18px;transition:all .2s;border-left:4px solid ${ENV_COLORS[d.environment]||'#667eea'};" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,.1)';this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <div style="font-weight:700;font-size:1em;color:#1a202c">${label}</div>
-              <div style="font-size:.75em;color:#888;margin-top:2px">${d.date} · ${d.environment}
-                ${d.source === 'allure'
-                  ? '<span style="background:#d4edda;color:#155724;padding:1px 5px;border-radius:3px;margin-left:4px">published run</span>'
-                  : '<span style="background:#f1f1f1;color:#777;padding:1px 5px;border-radius:3px;margin-left:4px" title="Hand-entered figure, not a published Allure report">manually recorded</span>'}</div>
-              <div style="font-size:.8em;color:#666;margin-top:4px">
-                <span style="color:#28a745">✅ ${d.passed}</span> · 
-                <span style="color:#dc3545">❌ ${d.failed}</span> · 
-                <span style="color:#f59e0b">⏭️ ${d.skipped||0}</span>
-              </div>
-            </div>
-            <div style="text-align:right">
-              <div style="font-size:1.4em;font-weight:700;color:${color}">${passRate}%</div>
-              <div style="font-size:.75em;color:#999">${runTotal} run</div>
-            </div>
-          </div>
-        </a>`;
-      }).join('')}
-    </div>`;
+  box.innerHTML = `
+    <div class="run-kpis">
+      <div class="rk"><span>Full regressions</span><b>${full.length}</b><em>${all.length - full.length} partial runs left out</em></div>
+      <div class="rk"><span>App pass rate</span><b style="color:${rateColour(ra ? ra.rate : 0)}">${ra ? ra.rate + '%' : '—'}</b><em>${ra ? `${monthName(ra.month)} · ${ra.n} full runs` : 'no full runs'}</em></div>
+      <div class="rk"><span>mWeb pass rate</span><b style="color:${rateColour(rw ? rw.rate : 0)}">${rw ? rw.rate + '%' : '—'}</b><em>${rw ? `${monthName(rw.month)} · ${rw.n} full runs` : 'no full runs'}</em></div>
+      <div class="rk"><span>Last full regression</span><b>${last ? fmtDate(last.date) : '—'}</b><em>${last ? `${last.suite === 'app' ? 'App' : 'mWeb'} · ${last.env} ${last.country} ${last.os}` : ''}</em></div>
+    </div>
+    <div class="run-grid">
+      <div class="run-panel">
+        <h3 class="sub-title">Pass rate by month <span class="sub-hint">executed tests, full regressions only</span></h3>
+        <div id="runMonthly"></div>
+      </div>
+      <div class="run-panel">
+        <h3 class="sub-title">Latest full regression per combination</h3>
+        <div class="chips">${chip('suite', '', 'All')}${chip('suite', 'app', 'App')}${chip('suite', 'mweb', 'mWeb')}
+          <span class="chip-sep"></span>${chip('env', '', 'All envs')}${envs.map(e => chip('env', e, e)).join('')}</div>
+        <div class="combos" id="runCombos"></div>
+      </div>
+    </div>
+    <details class="fold run-log"><summary><h3 class="sub-title" style="margin:6px 0">Every full regression <span class="sub-hint">${shown.length} runs · newest first</span></h3></summary>
+      <div id="runLog"></div></details>
+    <p class="method">Source: ${RUNS.runs.length} runs published to Allure by the FALCON runner, ${fmtDate(all[0].date)} – ${fmtDate(all[all.length - 1].date)}.
+      A run counts as a full regression when it ran at least 85% of its suite as it stood then (per suite and country, against the largest run in the 45 days before it);
+      everything smaller is a targeted re-run or a run that ended early. Pass rate = passed ÷ (passed + failed + broken); skips are excluded. Every run is English.</p>`;
+  renderRunMonthly();
+  renderRunCombos(shown);
+  renderRunLog(shown);
+}
+
+function monthName(m) { return new Date(m + '-01T00:00:00').toLocaleDateString('en-GB', {month: 'short', year: 'numeric'}); }
+
+function renderRunMonthly() {
+  const full = fullRuns();
+  const months = [...new Set(full.map(r => r.date.slice(0, 7)))].sort();
+  const series = [['app', 'App', '#8b5cf6'], ['mweb', 'mWeb', '#0e9f6e']];
+  const W = 560, H = 210, L = 34, B = 26, T = 18, gw = (W - L - 8) / months.length, bw = Math.min(22, gw / 3);
+  const y = v => T + (100 - v) / 100 * (H - T - B);
+  let bars = '';
+  months.forEach((m, i) => {
+    series.forEach(([key, label, colour], j) => {
+      const rs = full.filter(r => r.suite === key && r.date.startsWith(m));
+      if (!rs.length) return;
+      const v = passRate(rs), x = L + i * gw + gw / 2 + (j - .5) * (bw + 4) - bw / 2;
+      bars += `<g class="mbar" data-tip="${label} · ${monthName(m)}<br><b>${v}%</b> of ${rs.reduce((n, r) => n + r.passed + r.failed, 0)} executed<br>${rs.length} full run${rs.length === 1 ? '' : 's'}">
+        <rect x="${x}" y="${y(v)}" width="${bw}" height="${H - B - y(v)}" rx="5" fill="${colour}"/>
+        <text x="${x + bw / 2}" y="${y(v) - 5}" text-anchor="middle" font-size="10" font-weight="600" fill="${colour}">${v}</text></g>`;
+    });
+  });
+  const grid = [25, 50, 75, 100].map(v => `<line x1="${L}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="#eef0f6"/>
+    <text x="${L - 6}" y="${y(v) + 3}" text-anchor="end" font-size="10" fill="#9aa0b4">${v}%</text>`).join('');
+  const ticks = months.map((m, i) => `<text x="${L + i * gw + gw / 2}" y="${H - 8}" text-anchor="middle" font-size="10.5" fill="#6b7085">${
+    new Date(m + '-01T00:00:00').toLocaleDateString('en-GB', {month: 'short'})}</text>`).join('');
+  const el = document.getElementById('runMonthly');
+  el.innerHTML = `<div class="trend-legend">${series.map(([, l, c]) => `<span><span class="legend-dot" style="background:${c}"></span>${l}</span>`).join('')}</div>
+    <div class="trend-wrap"><svg viewBox="0 0 ${W} ${H}">${grid}${bars}${ticks}</svg><div class="trend-tip" id="runTip"></div></div>`;
+  const tip = document.getElementById('runTip'), svg = el.querySelector('svg');
+  el.querySelectorAll('.mbar').forEach(g => {
+    g.addEventListener('mouseenter', () => {
+      const r = g.querySelector('rect'), k = svg.clientWidth / W;
+      tip.innerHTML = g.dataset.tip;
+      tip.style.left = Math.min(+r.getAttribute('x') * k + 14, svg.clientWidth - 170) + 'px';
+      tip.style.top = (+r.getAttribute('y') * k - 6) + 'px'; tip.style.opacity = 1;
+    });
+    g.addEventListener('mouseleave', () => { tip.style.opacity = 0; });
+  });
+}
+
+function sparkline(values) {
+  if (values.length < 2) return '';
+  const W = 92, H = 26, lo = Math.min(...values, 50), hi = 100;
+  const pts = values.map((v, i) => `${(i / (values.length - 1) * W).toFixed(1)},${(H - 3 - (v - lo) / (hi - lo) * (H - 6)).toFixed(1)}`);
+  const lastPt = pts[pts.length - 1].split(',');
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}"><polyline points="${pts.join(' ')}" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="${lastPt[0]}" cy="${lastPt[1]}" r="2.6" fill="currentColor"/></svg>`;
+}
+
+function renderRunCombos(rows) {
+  const groups = new Map();
+  rows.forEach(r => { const k = [r.suite, r.env, r.country, r.os].join('|'); (groups.get(k) || groups.set(k, []).get(k)).push(r); });
+  const cards = [...groups.values()].map(rs => ({latest: rs[rs.length - 1], rs}))
+    .sort((a, b) => b.latest.start.localeCompare(a.latest.start));
+  document.getElementById('runCombos').innerHTML = cards.map(({latest: r, rs}) => {
+    const v = passRate([r]);
+    return `<a class="combo" href="${r.url}" target="_blank" rel="noopener" style="--rate:${rateColour(v)}">
+      <div class="combo-top"><span class="suite-tag ${r.suite}">${r.suite === 'app' ? 'App' : 'mWeb'}</span>
+        <span class="combo-name">${r.country} · ${r.os}</span><span class="combo-env">${r.env}</span></div>
+      <div class="combo-mid"><b>${v}<small>%</small></b><span style="color:${rateColour(v)}">${sparkline(rs.slice(-8).map(x => passRate([x])))}</span></div>
+      <div class="combo-bar"><i style="width:${v}%"></i></div>
+      <div class="combo-sub">${r.passed} passed · ${r.failed} failed · ${r.skipped} skipped · ${fmtDate(r.date)} · ${rs.length} run${rs.length === 1 ? '' : 's'}</div>
+    </a>`;
+  }).join('') || '<div class="pr-empty">No full regressions match.</div>';
+}
+
+function renderRunLog(rows, showAll) {
+  const list = rows.slice().reverse(), limit = showAll ? list.length : 12;
+  document.getElementById('runLog').innerHTML = `<table class="run-table"><thead><tr>
+      <th>Date</th><th>Suite</th><th>Env</th><th>Country · OS</th><th class="num">Passed</th><th class="num">Failed</th><th class="num">Skipped</th><th class="num">Pass rate</th><th class="num">Duration</th><th></th></tr></thead>
+    <tbody>${list.slice(0, limit).map(r => { const v = passRate([r]); return `<tr>
+      <td>${fmtDate(r.date)}</td><td><span class="suite-tag ${r.suite}">${r.suite === 'app' ? 'App' : 'mWeb'}</span></td><td>${r.env}</td><td>${r.country} · ${r.os}</td>
+      <td class="num">${r.passed}</td><td class="num">${r.failed}</td><td class="num">${r.skipped}</td>
+      <td class="num"><b style="color:${rateColour(v)}">${v}%</b></td><td class="num">${r.minutes} min</td>
+      <td><a href="${r.url}" target="_blank" rel="noopener">Report ↗</a></td></tr>`; }).join('')}</tbody></table>` +
+    (list.length > limit ? `<button class="btn btn-outline pr-more" onclick="renderRunLog(fullRuns().filter(r => (!RUN_FILTER.suite || r.suite === RUN_FILTER.suite) && (!RUN_FILTER.env || r.env === RUN_FILTER.env)), true)">Show all ${list.length} runs</button>` : '');
 }
 
 // === Persist to Gist ===
 const GIST_ID = '37aafe3290f5c00dbd0ddb910a19f939';
 const GIST_RAW = `https://gist.githubusercontent.com/saifullaAttar/${GIST_ID}/raw/mapping.json`;
 
-function showAddRunModal() {
-  document.getElementById('runDate').value = new Date().toISOString().split('T')[0];
-  document.getElementById('addRunModal').style.display = 'flex';
-}
-
-async function fetchFromAllure() {
-  const btn = document.getElementById('fetchAllureBtn');
-  const status = document.getElementById('fetchStatus');
-  const date = document.getElementById('runDate').value;
-  const country = document.getElementById('runCountry').value.toLowerCase();
-  const platform = document.getElementById('runPlatform').value.toLowerCase();
-  const suffix = `${country}-${platform}`;
-
-  btn.disabled = true;
-  btn.textContent = '⏳ Fetching...';
-  status.textContent = '';
-
-  try {
-    // Get all projects from Allure
-    const projResp = await fetch(`${ALLURE_BASE}/projects`);
-    const projData = await projResp.json();
-    const allProjects = Object.keys(projData.data?.projects || {});
-    const matching = allProjects.filter(p => p.endsWith(`-${suffix}`) && p !== `latest-${suffix}`);
-
-    // Check each matching project's date to find the one for selected date
-    let found = null;
-    for (const proj of matching.reverse()) {
-      try {
-        const resp = await fetch(`${ALLURE_BASE}/projects/${proj}/reports/latest/widgets/summary.json`);
-        if (!resp.ok) continue;
-        const d = await resp.json();
-        const stop = d.time?.stop;
-        if (!stop) continue;
-        const projDate = new Date(stop).toISOString().split('T')[0];
-        if (projDate === date) {
-          if ((found === null) && d.statistic.total >= 10) {
-            found = d.statistic;
-            break;
-          }
-        }
-      } catch { continue; }
-    }
-
-    if (found) {
-      document.getElementById('runPassed').value = found.passed || 0;
-      document.getElementById('runFailed').value = (found.failed || 0) + (found.broken || 0);
-      document.getElementById('runSkipped').value = found.skipped || 0;
-      status.textContent = '✅ Data filled from Allure';
-      status.style.color = '#28a745';
-    } else {
-      status.textContent = `❌ No report found for ${date} / ${country.toUpperCase()} / ${platform}`;
-      status.style.color = '#dc3545';
-    }
-  } catch(e) {
-    status.textContent = '❌ Failed to fetch: ' + e.message;
-    status.style.color = '#dc3545';
-  }
-  btn.disabled = false;
-  btn.textContent = '⚡ Fetch from Allure';
-}
-
-// GitHub PAT. Never baked into this file: this page is served from a PUBLIC
-// repo, so anything embedded here is readable by every visitor -- the previous
-// XOR-obfuscated constant granted read access to the PRIVATE automation repo
-// and to gists. The token now lives only in the viewer's own localStorage.
-//
-// Reads (trend, inventory refresh, per-module counts) degrade silently without
-// one: the committed JSON already holds everything the report renders.
 const PAT_KEY = 'mumz_gh_pat';
 function _gt() { try { return localStorage.getItem(PAT_KEY) || ''; } catch { return ''; } }
 function requireToken() {
@@ -1523,41 +2067,6 @@ function requireToken() {
   return t;
 }
 function forgetToken() { try { localStorage.removeItem(PAT_KEY); } catch {} }
-
-async function saveRun() {
-  const pwd = prompt('Enter edit password:');
-  if (pwd !== 'Mumz@SDET2026') { alert('❌ Incorrect password'); return; }
-  const token = requireToken();
-  if (!token) { alert('A GitHub token is required to save.'); return; }
-  const passed = parseInt(document.getElementById('runPassed').value) || 0;
-  const failed = parseInt(document.getElementById('runFailed').value) || 0;
-  const skipped = parseInt(document.getElementById('runSkipped').value) || 0;
-  const entry = {
-    date: document.getElementById('runDate').value,
-    environment: document.getElementById('runEnv').value,
-    country: document.getElementById('runCountry').value,
-    platform: document.getElementById('runPlatform').value,
-    project: `${document.getElementById('runEnv').value.toLowerCase()}-${document.getElementById('runCountry').value.toLowerCase()}-${document.getElementById('runPlatform').value.toLowerCase()}`,
-    passed, failed, skipped, total: passed + failed + skipped
-  };
-  try {
-    const gistResp = await fetch(`https://api.github.com/gists/${GIST_ID}`, { headers: { 'Authorization': `token ${token}` } });
-    if (!gistResp.ok) throw new Error(gistResp.statusText);
-    const gist = await gistResp.json();
-    const runs = JSON.parse(gist.files['regression_runs.json']?.content || '[]');
-    runs.push(entry);
-    const resp = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
-      method: 'PATCH',
-      headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ files: { 'regression_runs.json': { content: JSON.stringify(runs, null, 2) } } })
-    });
-    if (!resp.ok) throw new Error(resp.statusText);
-    REGRESSION_RUNS.push(entry);
-    renderRegressionChart();
-    document.getElementById('addRunModal').style.display = 'none';
-    alert('✅ Run added!');
-  } catch(e) { alert('❌ Failed: ' + e.message); }
-}
 
 async function saveForEveryone() {
   const pwd = prompt('Enter edit password to save for everyone:');
@@ -1652,10 +2161,9 @@ async function updateFromMain() {
     const since = '2026-04-01T00:00:00Z';
     
     // Fetch mapping, trend commits, regression runs, and test file listings in parallel
-    const [mappingResp, trendResp, regResp, appDirResp, uaeDirResp, ksaDirResp, commonsDirResp] = await Promise.all([
+    const [mappingResp, trendResp, appDirResp, uaeDirResp, ksaDirResp, commonsDirResp] = await Promise.all([
       fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/mapping.json?t=${ts}`),
       fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/commits?path=tests/&since=${since}&per_page=100`, {headers:{'Authorization':`token ${token}`}}),
-      fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/regression_runs.json?t=${ts}`),
       fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/tests/app`, {headers:{'Authorization':`token ${token}`}}),
       fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/tests/web/UAE`, {headers:{'Authorization':`token ${token}`}}),
       fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/tests/web/KSA`, {headers:{'Authorization':`token ${token}`}}),
@@ -1739,7 +2247,6 @@ async function updateFromMain() {
     DATA.metadata.last_updated = new Date().toISOString().split('T')[0];
     
     
-    if (regResp.ok) { REGRESSION_RUNS = await regResp.json(); renderRegressionChart(); }
     
     // Sync gist with updated data
     try {
@@ -1801,6 +2308,11 @@ function mergeGistEdits(base, gist) {
 async function init() {
   let repoData = null, gistData = null;
   try {
+    const [t, r] = await Promise.all([fetch('tenure.json?t=' + Date.now()), fetch('runs.json?t=' + Date.now())]);
+    if (t.ok) TENURE = await t.json();
+    if (r.ok) RUNS = await r.json();
+  } catch(e) { /* optional: those sections hide or explain themselves */ }
+  try {
     const resp = await fetch('mapping.json?t=' + Date.now());
     if (resp.ok) repoData = await resp.json();
   } catch(e) { /* fall through to the gist */ }
@@ -1850,9 +2362,11 @@ async function init() {
   }
 
   render();
+  renderTenure();
+  initScrollUi();
   renderRiskSection();
   refreshUnmapped();
-  loadRegressionRuns();
+  renderRuns();
   refreshTestsFromMain();
 }
 

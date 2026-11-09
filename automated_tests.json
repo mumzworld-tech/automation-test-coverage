@@ -2904,11 +2904,7 @@
       ],
       "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Proceed to checkout 7. Verify order summary calculation 8. Select the credit card 9. Place order",
       "parametrized": false,
-      "skip": {
-        "type": "conditional",
-        "reason": "Safari cannot type into the Checkout.com card iframes, so the Visa card this  bank coupon requires can never be entered and no discount reaches the order [OS.lower() == \"ios\"]",
-        "condition": "OS.lower() == \"ios\""
-      },
+      "skip": null,
       "locales": [
         "en"
       ]
@@ -3999,11 +3995,7 @@
       ],
       "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Proceed to checkout 7. Verify order summary calculation 8. Select the credit card 9. Place order",
       "parametrized": false,
-      "skip": {
-        "type": "conditional",
-        "reason": "Safari cannot type into the Checkout.com card iframes, so the Visa card this  bank coupon requires can never be entered and no discount reaches the order [OS.lower() == \"ios\"]",
-        "condition": "OS.lower() == \"ios\""
-      },
+      "skip": null,
       "locales": [
         "en"
       ]
@@ -4999,7 +4991,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "fb3e584",
+    "sha": "0dea341",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }

@@ -1900,12 +1900,9 @@
         "web_ksa::test_ksa_bank_discount_percentage_of_product_price_rule"
       ],
       "coverage_status": "full",
-      "notes": "Bank coupon viewed on the cart, re-checked after a quantity change, applied, order summary verified and a CC order placed. Both tests are skipif OS == ios, so this runs on Android/Chrome only. LIMITED TO SOME TARGETS: Safari cannot type into the Checkout.com card iframes, so the Visa card this  bank coupon requires can never b",
+      "notes": "Bank coupon viewed on the cart, re-checked after a quantity change, applied, order summary verified and a CC order placed. Both tests are skipif OS == ios, so this runs on Android/Chrome only.",
       "skipped_only": false,
-      "gated_only": true,
-      "gate_reasons": [
-        "Safari cannot type into the Checkout.com card iframes, so the Visa card this  bank coupon requires can never b"
-      ],
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -7714,11 +7711,7 @@
         ],
         "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Proceed to checkout 7. Verify order summary calculation 8. Select the credit card 9. Place order",
         "parametrized": false,
-        "skip": {
-          "type": "conditional",
-          "reason": "Safari cannot type into the Checkout.com card iframes, so the Visa card this  bank coupon requires can never be entered and no discount reaches the order [OS.lower() == \"ios\"]",
-          "condition": "OS.lower() == \"ios\""
-        },
+        "skip": null,
         "locales": [
           "en"
         ]
@@ -8809,11 +8802,7 @@
         ],
         "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Proceed to checkout 7. Verify order summary calculation 8. Select the credit card 9. Place order",
         "parametrized": false,
-        "skip": {
-          "type": "conditional",
-          "reason": "Safari cannot type into the Checkout.com card iframes, so the Visa card this  bank coupon requires can never be entered and no discount reaches the order [OS.lower() == \"ios\"]",
-          "condition": "OS.lower() == \"ios\""
-        },
+        "skip": null,
         "locales": [
           "en"
         ]
@@ -10361,8 +10350,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-11-09",
-    "generated_at": "2026-11-09T06:21:17+00:00",
-    "source_sha": "fb3e584",
+    "generated_at": "2026-11-09T06:36:14+00:00",
+    "source_sha": "0dea341",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -10484,14 +10473,14 @@
       "web_commons": 23
     },
     "total_automated_tests": 224,
-    "active_tests": 200,
+    "active_tests": 202,
     "skipped_hard": 18,
     "cases_not_running": {
       "hard_skipped": 1,
-      "gated": 1
+      "gated": 0
     },
     "gate_note": "Hard-skipped cases are not counted as automated: nothing runs. Platform-gated cases are counted -- they run wherever the product allows, and every gate is a product or tooling limitation rather than missing test work -- with the limitation shown on the case.",
-    "skipped_conditional": 6,
+    "skipped_conditional": 4,
     "links": {
       "direct": 122,
       "listing_with_page": 4,

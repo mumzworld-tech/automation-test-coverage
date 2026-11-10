@@ -10350,8 +10350,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-11-10",
-    "generated_at": "2026-11-10T06:14:55+00:00",
-    "source_sha": "a0cf2d1",
+    "generated_at": "2026-11-10T06:39:18+00:00",
+    "source_sha": "cc3a590",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",

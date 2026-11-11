@@ -136,22 +136,20 @@ in. Pass rate is passed ÷ (passed + failed + broken). Refresh with `make runs`.
 
 ### Keeping it current
 
-`ci/automation-repo-workflow.yml` is the one to use. Copy it into `automation_web_2.0` as
-`.github/workflows/publish-coverage.yml`. On every push to `main` that touches `tests/`, it
-regenerates the inventory and mapping and pushes them here.
+This project stands alone: nothing in `automation_web_2.0` refers to it.
+`.github/workflows/refresh-coverage.yml` polls that repo's `main` every 30 minutes in Dubai
+working hours (08:00–20:00, Mon–Fri) and once a day at weekends. When `main` has moved past the
+commit `mapping.json` was built from (`metadata.source_sha`), it regenerates the inventory and
+mapping and commits them here. A merged test therefore shows up within about half an hour;
+**Actions → Refresh coverage from main → Run workflow** does it at once.
 
-It runs *there* rather than here because fine-grained PATs can only reach `mumzworld-tech`
-repos if the organisation opts into them, and it has not — `automation_web_2.0` does not
-appear in the token UI at all. Running inside that repo means reading the tests needs no
-token (the built-in `GITHUB_TOKEN` covers it), and the only credential is a PAT on a repo
-owned personally, which no org policy gates:
+The schedule is set by cost: the repo is private, so each run bills at least one Actions
+minute against the organisation's Free-plan allowance.
 
-* Fine-grained PAT, resource owner **yourself**, repository `automation-test-coverage`,
-  permission **Contents: Read and write**.
-* `gh secret set COVERAGE_REPO_TOKEN --repo mumzworld-tech/automation_web_2.0`
+It reads `automation_web_2.0` with a classic PAT (`repo` scope). `mumzworld-tech` does not
+accept fine-grained PATs. Setting the secret needs admin on this repo:
 
-`.github/workflows/refresh-coverage.yml` is the reverse arrangement — this repo pulling from
-the automation repo. It is kept, manual-only, for if the org ever enables fine-grained PATs.
+* `gh secret set AUTOMATION_REPO_TOKEN --repo mumzworld-tech/automation-test-coverage`
 
 Structural changes (new cases, re-mapping a whole area) belong in `build_mapping.py`, not
 in the browser — that file is the record of *why* each link exists.

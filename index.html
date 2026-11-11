@@ -2317,7 +2317,8 @@ async function init() {
     if (resp.ok) repoData = await resp.json();
   } catch(e) { /* fall through to the gist */ }
   try {
-    const gistResp = await fetch(GIST_RAW + '?t=' + Date.now());
+    // Bounded: the Gist can take 8s+ to answer, and the whole page waits on it.
+    const gistResp = await fetch(GIST_RAW + '?t=' + Date.now(), { signal: AbortSignal.timeout(3000) });
     if (gistResp.ok) gistData = await gistResp.json();
   } catch(e) { /* gist optional */ }
 

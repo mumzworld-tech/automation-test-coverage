@@ -2162,7 +2162,9 @@ async function updateFromMain() {
     
     // Fetch mapping, trend commits, regression runs, and test file listings in parallel
     const [mappingResp, trendResp, appDirResp, uaeDirResp, ksaDirResp, commonsDirResp] = await Promise.all([
-      fetch(`https://raw.githubusercontent.com/mumzworld-tech/automation-test-coverage/main/mapping.json?t=${ts}`),
+      // Same origin, not raw.githubusercontent: the repo is private, and the
+      // copy deployed next to this page is the one CI just pushed.
+      fetch(`mapping.json?t=${ts}`),
       fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/commits?path=tests/&since=${since}&per_page=100`, {headers:{'Authorization':`token ${token}`}}),
       fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/tests/app`, {headers:{'Authorization':`token ${token}`}}),
       fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/tests/web/UAE`, {headers:{'Authorization':`token ${token}`}}),

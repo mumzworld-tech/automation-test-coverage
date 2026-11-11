@@ -3,18 +3,20 @@
 # Why it lives in the automation repo rather than the coverage repo:
 # the automation repo pushes to the coverage repo, so reading the tests needs
 # no token at all -- the built-in GITHUB_TOKEN already has it. The only
-# credential is one that can write to mumzworld-tech/automation-test-coverage.
+# credential is one that can write to mumzworld-tech/automation-test-coverage
+# (private). mumzworld-tech does not accept fine-grained PATs, so it is one of:
 #
-# mumzworld-tech does not accept fine-grained PATs, so use either:
-#   a. a deploy key (preferred -- scoped to the one repo, owned by no person).
-#      Needs an admin on automation-test-coverage to add the public half:
-#        ssh-keygen -t ed25519 -N '' -f coverage_key
-#        gh repo deploy-key add coverage_key.pub --allow-write \
-#          --repo mumzworld-tech/automation-test-coverage
-#        gh secret set COVERAGE_DEPLOY_KEY < coverage_key --repo mumzworld-tech/automation_web_2.0
-#      and replace `token:` below with `ssh-key: ${{ secrets.COVERAGE_DEPLOY_KEY }}`; or
-#   b. a classic PAT with the `repo` scope from anyone with push access:
-#        gh secret set COVERAGE_REPO_TOKEN --repo mumzworld-tech/automation_web_2.0
+#   COVERAGE_DEPLOY_KEY  preferred: scoped to the one repo, owned by no person.
+#                        Needs an admin on automation-test-coverage once:
+#                          ssh-keygen -t ed25519 -N '' -f coverage_key
+#                          gh repo deploy-key add coverage_key.pub --allow-write \
+#                            --repo mumzworld-tech/automation-test-coverage
+#                          gh secret set COVERAGE_DEPLOY_KEY < coverage_key \
+#                            --repo mumzworld-tech/automation_web_2.0
+#   COVERAGE_REPO_TOKEN  a classic PAT, `repo` scope, from anyone with push access.
+#
+# When both are set the deploy key wins; an unset secret is an empty string,
+# which checkout skips.
 name: Publish coverage report
 
 on:
@@ -39,10 +41,11 @@ jobs:
         with:
           fetch-depth: 0          # extract_tests.py reads origin/main and the AR ticket history
 
-      - name: Check out the coverage report (public — no auth to read)
+      - name: Check out the coverage report
         uses: actions/checkout@v4
         with:
           repository: mumzworld-tech/automation-test-coverage
+          ssh-key: ${{ secrets.COVERAGE_DEPLOY_KEY }}
           token: ${{ secrets.COVERAGE_REPO_TOKEN }}
           path: coverage
 

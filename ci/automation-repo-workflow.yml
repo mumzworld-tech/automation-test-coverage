@@ -1,21 +1,20 @@
 # Copy this to automation_web_2.0 as .github/workflows/publish-coverage.yml
 #
 # Why it lives in the automation repo rather than the coverage repo:
-# fine-grained PATs can only reach mumzworld-tech repos if the ORG opts into
-# them, and it has not. So instead of the public coverage repo pulling from the
-# private automation repo, the automation repo pushes to it. Reading the tests
-# then needs no token at all -- the built-in GITHUB_TOKEN already has it -- and
-# the only credential is a PAT on a repo you own personally, which no org policy
-# gates.
+# the automation repo pushes to the coverage repo, so reading the tests needs
+# no token at all -- the built-in GITHUB_TOKEN already has it. The only
+# credential is one that can write to mumzworld-tech/automation-test-coverage.
 #
-# Setup:
-#   1. Fine-grained PAT, resource owner = saifullaAttar (yourself, NOT the org):
-#        Repository access : Only select repositories -> automation-test-coverage
-#        Permissions       : Contents -> Read and write
-#   2. Add it here as a secret on automation_web_2.0:
+# mumzworld-tech does not accept fine-grained PATs, so use either:
+#   a. a deploy key (preferred -- scoped to the one repo, owned by no person).
+#      Needs an admin on automation-test-coverage to add the public half:
+#        ssh-keygen -t ed25519 -N '' -f coverage_key
+#        gh repo deploy-key add coverage_key.pub --allow-write \
+#          --repo mumzworld-tech/automation-test-coverage
+#        gh secret set COVERAGE_DEPLOY_KEY < coverage_key --repo mumzworld-tech/automation_web_2.0
+#      and replace `token:` below with `ssh-key: ${{ secrets.COVERAGE_DEPLOY_KEY }}`; or
+#   b. a classic PAT with the `repo` scope from anyone with push access:
 #        gh secret set COVERAGE_REPO_TOKEN --repo mumzworld-tech/automation_web_2.0
-#
-# The token can write to one public repo of yours and nothing else.
 name: Publish coverage report
 
 on:
@@ -43,7 +42,7 @@ jobs:
       - name: Check out the coverage report (public — no auth to read)
         uses: actions/checkout@v4
         with:
-          repository: saifullaattar/automation-test-coverage
+          repository: mumzworld-tech/automation-test-coverage
           token: ${{ secrets.COVERAGE_REPO_TOKEN }}
           path: coverage
 

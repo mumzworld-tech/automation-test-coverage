@@ -1,6 +1,6 @@
 # Mumzworld Automation Test Coverage
 
-**Live:** https://saifullaattar.github.io/automation-test-coverage/
+**Live:** https://mumzworld-tech.github.io/automation-test-coverage/
 
 Single source of truth for what the `automation_web_2.0` suite actually guards, mapped
 case by case against TestMO.

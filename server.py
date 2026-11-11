@@ -41,7 +41,7 @@ PUBLIC = {"/", "/index.html", "/mapping.json", "/automated_tests.json",
 DATA = Path(os.environ.get("DATA_DIR") or ("/data" if Path("/data").is_dir() else HERE / ".data"))
 CLONE = DATA / "automation_web_2.0"
 _lock = threading.Lock()
-_state = {"checked": 0.0, "built": None}
+_state = {"checked": 0.0, "built": None, "live": False}
 
 
 def log(msg):
@@ -126,7 +126,7 @@ class Handler(SimpleHTTPRequestHandler):
         if path not in PUBLIC:
             self.send_error(404)
             return
-        if path == "/mapping.json":
+        if path == "/mapping.json" and _state["live"]:
             refresh()
         super().do_GET()
 
@@ -141,12 +141,16 @@ class Handler(SimpleHTTPRequestHandler):
 
 
 def serve():
+    # Without a token or git the report still serves -- as committed, never
+    # refreshed -- so a missing setting shows up in the log, not as a dead site.
     if not os.environ.get("AUTOMATION_REPO_TOKEN"):
-        sys.exit("AUTOMATION_REPO_TOKEN is not set: a classic PAT (repo scope) that can read "
-                 "mumzworld-tech/automation_web_2.0")
-    if not shutil.which("git"):
-        sys.exit("git is not installed")
-    threading.Thread(target=refresh, daemon=True).start()   # warm the clone before the first visitor
+        log("AUTOMATION_REPO_TOKEN is not set (classic PAT, repo scope, that can read "
+            "mumzworld-tech/automation_web_2.0): serving the committed report, never refreshed")
+    elif not shutil.which("git"):
+        log("git is not installed: serving the committed report, never refreshed")
+    else:
+        _state["live"] = True
+        threading.Thread(target=refresh, daemon=True).start()   # warm the clone before the first visitor
     port = int(os.environ.get("PORT", "8080"))
     log(f"serving on :{port}")
     ThreadingHTTPServer(("", port), partial(Handler, directory=str(HERE))).serve_forever()

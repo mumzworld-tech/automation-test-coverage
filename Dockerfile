@@ -10,5 +10,5 @@ WORKDIR /app
 COPY *.py *.json index.html ./
 ENV PORT=8080 PYTHONUNBUFFERED=1
 EXPOSE 8080
-HEALTHCHECK --interval=30s --timeout=5s CMD python3 -c "import urllib.request,os;urllib.request.urlopen(f'http://127.0.0.1:{os.environ[\"PORT\"]}/healthz')"
+HEALTHCHECK --interval=10s --timeout=5s --start-period=5s --retries=3 CMD python3 -c "import urllib.request,os;urllib.request.urlopen(f'http://127.0.0.1:{os.environ[\"PORT\"]}/healthz')"
 CMD ["python3", "server.py"]

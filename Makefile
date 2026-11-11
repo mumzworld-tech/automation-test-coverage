@@ -13,7 +13,7 @@ APP_CSV ?= $(HOME)/Downloads/testmo-export-repository-241 (2).csv
 REG_CSV ?= $(HOME)/Downloads/testmo-export-repository-3 (1).csv
 REPO    ?= $(HOME)/automation_web_2.0
 
-.PHONY: generate clean open verify tenure runs
+.PHONY: generate clean open verify tenure runs serve
 
 generate: testmo_tests.json app_testmo_tests.json web_regression_tests.json automated_tests.json mapping.json
 	@$(MAKE) --no-print-directory verify
@@ -63,3 +63,8 @@ clean:
 
 open: generate
 	open index.html
+
+# The report, rebuilt from automation_web_2.0 @ main when a visitor opens it.
+# Needs AUTOMATION_REPO_TOKEN (classic PAT, repo scope); keeps its clone in .data/.
+serve:
+	python3 server.py

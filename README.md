@@ -136,20 +136,23 @@ in. Pass rate is passed ÷ (passed + failed + broken). Refresh with `make runs`.
 
 ### Keeping it current
 
-This project stands alone: nothing in `automation_web_2.0` refers to it.
-`.github/workflows/refresh-coverage.yml` polls that repo's `main` every 30 minutes in Dubai
-working hours (08:00–20:00, Mon–Fri) and once a day at weekends. When `main` has moved past the
-commit `mapping.json` was built from (`metadata.source_sha`), it regenerates the inventory and
-mapping and commits them here. A merged test therefore shows up within about half an hour;
-**Actions → Refresh coverage from main → Run workflow** does it at once.
+This project stands alone: nothing in `automation_web_2.0` refers to it, and nothing is
+scheduled. `server.py` serves the report and, when a visitor's page asks for `mapping.json`,
+fetches `automation_web_2.0` `main`. If `main` has moved it reruns extract → map → verify
+(about 2 seconds) before answering, so a merged test shows up the next time anyone opens the
+page. Checks are shared and run at most once a minute. A failed fetch or build keeps serving
+the last good report and logs the reason. Locally: `make serve`.
 
-The schedule is set by cost: the repo is private, so each run bills at least one Actions
-minute against the organisation's Free-plan allowance.
+`automation_web_2.0` is private, so the server holds the token and the browser never sees it:
+`AUTOMATION_REPO_TOKEN` must be a classic PAT with the `repo` scope (`mumzworld-tech` rejects
+fine-grained PATs). The server serves only the page and its JSON, never the scripts.
 
-It reads `automation_web_2.0` with a classic PAT (`repo` scope). `mumzworld-tech` does not
-accept fine-grained PATs. Setting the secret needs admin on this repo:
+#### Deploying on Coolify
 
-* `gh secret set AUTOMATION_REPO_TOKEN --repo mumzworld-tech/automation-test-coverage`
+New resource → this repository → **Build pack: Dockerfile**, **port 8080**, health check
+`/healthz`, and `AUTOMATION_REPO_TOKEN` as a secret environment variable. Optionally mount a
+volume at `/data` so the clone survives restarts. `tenure.json` and `runs.json` are still
+built locally (`make tenure`, `make runs`) and committed; Coolify redeploys on push.
 
 Structural changes (new cases, re-mapping a whole area) belong in `build_mapping.py`, not
 in the browser — that file is the record of *why* each link exists.

@@ -173,7 +173,7 @@
       "priority": "P1 - High",
       "status": "Passed",
       "automated_flag": "Not planned",
-      "in_scope": false,
+      "in_scope": true,
       "summary": "Verify that the filters (Category, Brand, Price) on the Sale Page work correctly and that displayed products align with selected criteria.",
       "steps": "Click on the “Sale” tab in the menu. Select a specific Category from the filters, apply it, and check the products on PLP. Reset the filters. (Optional) Combine multiple filters (Category, Brand, Price) and check filter criteria match.",
       "preconditions": "",
@@ -188,8 +188,10 @@
       "skipped_only": false,
       "gated_only": false,
       "locales": [
-        "en"
-      ]
+        "en",
+        "ar"
+      ],
+      "scope_override": "automated_but_not_planned"
     },
     {
       "_exported": "2026-06-25",
@@ -202,7 +204,7 @@
       "priority": "P1 - High",
       "status": "Passed",
       "automated_flag": "Not planned",
-      "in_scope": false,
+      "in_scope": true,
       "summary": "Verify that the filters (Category, Brand, Price) on the category Page work correctly and that displayed products align with selected criteria.",
       "steps": "Scenario 1 To check category filters on desktop Click on the Category tab in the menu. Select a specific Price range from the filters, apply it, and check the products on PLP. Reset the filters. Combine multiple filters (Category, Brand, Price) and check filter criteria match. Scenario 2 To check category filters which are present on mobile Click on the menu on Mweb Select the category On PLP select category filter Check few child subcategory filter Check the products update on PLP Reset the category filter and check the product updates on PLP",
       "preconditions": "",
@@ -219,8 +221,10 @@
       "skipped_only": false,
       "gated_only": false,
       "locales": [
-        "en"
-      ]
+        "en",
+        "ar"
+      ],
+      "scope_override": "automated_but_not_planned"
     },
     {
       "_exported": "2026-06-25",
@@ -304,7 +308,8 @@
       "skipped_only": false,
       "gated_only": false,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -335,7 +340,8 @@
       "skipped_only": false,
       "gated_only": false,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -2086,10 +2092,11 @@
       "page": 4,
       "run_id": 2154,
       "automated_tests": [
-        "web_commons::test_gift_registry_order_from_share_link"
+        "web_commons::test_gift_registry_order_from_share_link",
+        "web_commons::test_gift_registry_guest_order_from_share_link"
       ],
       "coverage_status": "full",
-      "notes": "FALCONS-341 covers scenario 1 exactly: the buyer signs in with an empty cart, adds an item of their own, opens the owner's share link and adds every registry product. The cart then shows two groups and the registry group is asserted to hold all of them.",
+      "notes": "FALCONS-341 covers scenario 1 exactly: the buyer signs in with an empty cart, adds an item of their own, opens the owner's share link and adds every registry product. The cart then shows two groups and the registry group is asserted to hold all of them. FALCONS-399 adds the guest buyer: each product lands once, at quantity 1 and its PDP price.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -2117,10 +2124,11 @@
       "page": 4,
       "run_id": 2154,
       "automated_tests": [
-        "web_commons::test_gift_registry_order_from_share_link"
+        "web_commons::test_gift_registry_order_from_share_link",
+        "web_commons::test_gift_registry_guest_order_from_share_link"
       ],
       "coverage_status": "full",
-      "notes": "FALCONS-341. The buyer switches the cart to the registry group, checks out that group alone and pays by credit card. Replaces the old link to test_ksa_checkout_cc_normal_coupon, which was unrelated and hard-skipped.",
+      "notes": "FALCONS-341. The buyer switches the cart to the registry group, checks out that group alone and pays by credit card. Replaces the old link to test_ksa_checkout_cc_normal_coupon, which was unrelated and hard-skipped. FALCONS-399: a guest buyer signs up at checkout and pays by card.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -3353,7 +3361,7 @@
       "priority": "",
       "status": "Passed",
       "automated_flag": "Not planned",
-      "in_scope": false,
+      "in_scope": true,
       "summary": "",
       "steps": "",
       "preconditions": "",
@@ -3363,13 +3371,15 @@
       "automated_tests": [
         "app::test_app_explore_screen_elements_and_navigate_to_account"
       ],
-      "coverage_status": "full",
-      "notes": "Verifies the explore feed, search header and bottom navigation load, then navigates to Account. TestMO flags this Not planned even though it is automated.",
+      "coverage_status": "partial",
+      "notes": "Verifies the explore feed, search header and bottom navigation load, then navigates to Account. Partial at the QA owner's review (25 Nov 2026): the home page's content sections are not each asserted to load. TestMO flags this Not planned even though it is automated.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
-        "en"
-      ]
+        "en",
+        "ar"
+      ],
+      "scope_override": "automated_but_not_planned"
     },
     {
       "_exported": "2026-08-12",
@@ -3382,21 +3392,26 @@
       "priority": "",
       "status": "Passed",
       "automated_flag": "Not planned",
-      "in_scope": false,
+      "in_scope": true,
       "summary": "",
       "steps": "",
       "preconditions": "",
       "tags": "",
       "source": "release_check",
       "run_id": 2192,
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": "Home-page banners are not asserted.",
+      "automated_tests": [
+        "app::test_app_recommendation_banners_price_filter",
+        "app::test_app_recommendation_banners_top_filters",
+        "app::test_app_recommendation_banners_price_sort"
+      ],
+      "coverage_status": "partial",
+      "notes": "FALCONS-396 discovers every Algolia recommendation banner on Home and opens each one's listing. Only the recommendation banners are exercised; the CMS hero and promo banners are not asserted.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
         "en"
-      ]
+      ],
+      "scope_override": "automated_but_not_planned"
     },
     {
       "_exported": "2026-08-12",
@@ -3424,7 +3439,8 @@
       "skipped_only": true,
       "gated_only": false,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -3513,10 +3529,13 @@
         "app::test_app_filters_multiple_filters_from_sheet",
         "app::test_app_filters_yalla_from_listing",
         "app::test_app_filters_from_both_entry_points",
-        "app::test_app_sort_by_price_from_both_entry_points"
+        "app::test_app_sort_by_price_from_both_entry_points",
+        "app::test_app_recommendation_banners_price_filter",
+        "app::test_app_recommendation_banners_top_filters",
+        "app::test_app_recommendation_banners_price_sort"
       ],
       "coverage_status": "full",
-      "notes": "FALCONS-388. Filters on category listings: Category, Colour, Diaper Size and Shoe Size on the Sale listing, the price slider there with every price checked against the ceiling, and Discounts on a sub-category listing with every card showing a was-price. The rest of the suite applies, stacks and clears Age, Gender, Category, Brand and Yalla from both the top row and the floating bar, and sorts by price both ways with the order verified. Sort runs on a listing opened from search -- the same PLP screen and controls.",
+      "notes": "FALCONS-388. Filters on category listings: Category, Colour, Diaper Size and Shoe Size on the Sale listing, the price slider there with every price checked against the ceiling, and Discounts on a sub-category listing with every card showing a was-price. The rest of the suite applies, stacks and clears Age, Gender, Category, Brand and Yalla from both the top row and the floating bar, and sorts by price both ways with the order verified. Sort runs on a listing opened from search -- the same PLP screen and controls. FALCONS-396 repeats the price slider, the Age / Category / Gender / Brand rotation and both price sorts on every listing opened from a Home Algolia recommendation banner.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -3534,7 +3553,7 @@
       "priority": "",
       "status": "Passed",
       "automated_flag": "Not planned",
-      "in_scope": false,
+      "in_scope": true,
       "summary": "",
       "steps": "",
       "preconditions": "",
@@ -3551,7 +3570,8 @@
       "locales": [
         "en",
         "ar"
-      ]
+      ],
+      "scope_override": "automated_but_not_planned"
     },
     {
       "_exported": "2026-08-12",
@@ -3649,7 +3669,7 @@
       "priority": "",
       "status": "Passed",
       "automated_flag": "Not planned",
-      "in_scope": false,
+      "in_scope": true,
       "summary": "",
       "steps": "",
       "preconditions": "",
@@ -3664,8 +3684,10 @@
       "skipped_only": false,
       "gated_only": false,
       "locales": [
-        "en"
-      ]
+        "en",
+        "ar"
+      ],
+      "scope_override": "automated_but_not_planned"
     },
     {
       "_exported": "2026-08-12",
@@ -3685,9 +3707,17 @@
       "tags": "",
       "source": "release_check",
       "page": 3,
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": "Brand-page product loading with filter and sort is not automated. FALCONS-388 filters and sorts search and category listings only; test_customer_can_search_brand opens a brand page but neither filters nor sorts it.",
+      "automated_tests": [
+        "app::test_app_filters_one_filter_at_a_time",
+        "app::test_app_filters_multiple_filters_from_sheet",
+        "app::test_app_filters_from_both_entry_points",
+        "app::test_app_sort_by_price_from_both_entry_points",
+        "app::test_app_recommendation_banners_price_filter",
+        "app::test_app_recommendation_banners_top_filters",
+        "app::test_app_recommendation_banners_price_sort"
+      ],
+      "coverage_status": "full",
+      "notes": "FALCONS-388. The case has no steps beyond its title, so it is read as written: a listing loads its products, filters apply (chip, products and the 'Show N Results' count all agree) and sort reorders by price both ways. Re-credited on 24 Nov 2026 at the QA owner's review -- it was earlier read as brand-page only, which the case does not say. FALCONS-396 adds the same checks on the listings behind each Home Algolia recommendation banner.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -4487,10 +4517,11 @@
       "run_id": 2192,
       "automated_tests": [
         "app::test_app_gift_registry_order_from_share_link",
+        "app::test_app_gift_registry_guest_order_from_share_link",
         "app::test_app_gift_registry_scenario_4_add_to_cart_via_deeplink"
       ],
       "coverage_status": "full",
-      "notes": "FALCONS-355. A per-product-type owner builds a registry from the PDP, the share link is copied, a brand-new buyer adds the registry product to their cart alongside one of their own, and pays by card. The older deep-link script is still hard-skipped pending an app- side fix and carries the AE-only marker; the new share-link test does not, so this case runs on SA too.",
+      "notes": "FALCONS-355. A per-product-type owner builds a registry from the PDP, the share link is copied, a brand-new buyer adds the registry product to their cart alongside one of their own, and pays by card. The older deep-link script is still hard-skipped pending an app- side fix and carries the AE-only marker; the new share-link test does not, so this case runs on SA too. FALCONS-400 adds the guest buyer: every product of a six-type registry is added from the share link and ordered.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -4573,21 +4604,26 @@
       "priority": "",
       "status": "Passed",
       "automated_flag": "Not planned",
-      "in_scope": false,
+      "in_scope": true,
       "summary": "",
       "steps": "",
       "preconditions": "",
       "tags": "",
       "source": "release_check",
       "run_id": 2192,
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": "Algolia recommendations across screens are not automated.",
+      "automated_tests": [
+        "app::test_app_recommendation_banners_price_filter",
+        "app::test_app_recommendation_banners_top_filters",
+        "app::test_app_recommendation_banners_price_sort"
+      ],
+      "coverage_status": "partial",
+      "notes": "FALCONS-396 covers the Home screen: every Algolia recommendation banner opens a listing that loads, filters and sorts correctly. Recommendations on the other screens (PDP, cart, search) are not automated.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
         "en"
-      ]
+      ],
+      "scope_override": "automated_but_not_planned"
     },
     {
       "_exported": "2026-08-12",
@@ -5019,7 +5055,7 @@
         "tags": [
           "Delivery Address"
         ],
-        "docstring": "1. Navigate to account page 2. Click on Signin 3. Sign in to an existing account (USER_EMAIL_4) 4. Go to Delivery Address 5. Click on 'Add New Address' button 6. Fill in all address fields using test_data.json 7. Set the address as default using the toggle 8. Save the address 9. Verify the new address is added and set as default 10. Set second address as default 11. Delete the third address 12. Ve",
+        "docstring": "1. Navigate to account page 2. Click on Signin 3. Sign in to an existing account (USER_EMAIL_47) 4. Go to Delivery Address 5. Click on 'Add New Address' button 6. Fill in all address fields using test_data.json 7. Set the address as default using the toggle 8. Save the address 9. Verify the new address is added and set as default 10. Set second address as default 11. Delete the third address 12. V",
         "parametrized": false,
         "skip": null,
         "locales": [
@@ -5071,6 +5107,76 @@
         "locales": [
           "en",
           "ar"
+        ]
+      },
+      {
+        "ref": "app::test_app_recommendation_banners_price_filter",
+        "name": "test_app_recommendation_banners_price_filter",
+        "platform": "app",
+        "path": "tests/app/test_app_algolia_recommendations_filters.py",
+        "file": "test_app_algolia_recommendations_filters.py",
+        "title": "Recommendation banners: the price slider narrows every banner's listing",
+        "feature": "Home Recommendation Banners",
+        "story": "FALCONS-396 - Price filter on every recommendation listing",
+        "severity": "critical",
+        "tags": [
+          "Filters",
+          "Price",
+          "Home",
+          "Algolia",
+          "Logged In User"
+        ],
+        "docstring": "1. Sign in, then open each Algolia recommendation banner on home in turn 2. Lower the price ceiling on its listing and verify the chip, the count and every price 3. The banner set is CMS-driven, so it is discovered on the page rather than named",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_recommendation_banners_top_filters",
+        "name": "test_app_recommendation_banners_top_filters",
+        "platform": "app",
+        "path": "tests/app/test_app_algolia_recommendations_filters.py",
+        "file": "test_app_algolia_recommendations_filters.py",
+        "title": "Recommendation banners: Age, Category, Gender and Brand rotate across the listings",
+        "feature": "Home Recommendation Banners",
+        "story": "FALCONS-396 - Most-used filters on every recommendation listing",
+        "severity": "critical",
+        "tags": [
+          "Filters",
+          "Home",
+          "Algolia",
+          "Logged In User"
+        ],
+        "docstring": "1. Sign in, then open each Algolia recommendation banner on home in turn 2. Apply one facet per banner, rotating Age, Category, Gender and Brand, then clear it 3. Every banner gets a filter and every facet is applied on at least one banner",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_recommendation_banners_price_sort",
+        "name": "test_app_recommendation_banners_price_sort",
+        "platform": "app",
+        "path": "tests/app/test_app_algolia_recommendations_filters.py",
+        "file": "test_app_algolia_recommendations_filters.py",
+        "title": "Recommendation banners: sorting by '{option}' orders each listing",
+        "feature": "Home Recommendation Banners",
+        "story": "FALCONS-396 - Price sort on every recommendation listing",
+        "severity": "critical",
+        "tags": [
+          "Sort",
+          "Home",
+          "Algolia",
+          "Logged In User"
+        ],
+        "docstring": "1. Sign in, then open each Algolia recommendation banner on home in turn 2. Sort by price in this direction; the listed prices must follow it 3. Each direction runs as its own test, side by side",
+        "parametrized": true,
+        "skip": null,
+        "locales": [
+          "en"
         ]
       },
       {
@@ -5606,7 +5712,11 @@
         ],
         "docstring": "1. Login to App 2. Click on Explore 3. Click on Search and enter: Search > Category 11 - Fashion > press enter 4. Add first product on plp page 5. Click on cart 6. Click on Checkout button 7. Find payment option \"Cash On Delivery\" 8. Click Cash On Delivery 9. Click on Place Order button 10. Wait for Order placed successfully! page to load and verify",
         "parametrized": false,
-        "skip": null,
+        "skip": {
+          "type": "conditional",
+          "reason": "not profile_for()[\"cod_available\"]",
+          "condition": "not profile_for()[\"cod_available\"]"
+        },
         "locales": [
           "en"
         ]
@@ -6552,6 +6662,30 @@
         ]
       },
       {
+        "ref": "app::test_app_gift_registry_guest_order_from_share_link",
+        "name": "test_app_gift_registry_guest_order_from_share_link",
+        "platform": "app",
+        "path": "tests/app/test_app_gift_registry.py",
+        "file": "test_app_gift_registry.py",
+        "title": "Guest adds every product of a shared registry to the cart, then orders it",
+        "feature": "Gift Registry",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Gift Registry",
+          "Share Link",
+          "Guest",
+          "FALCONS-400"
+        ],
+        "docstring": "A guest adds every product of someone else's shared registry to the cart and orders it. The owner and the buyer are both brand-new accounts, so nothing depends on seeded users. The guest add has been seen listing a product twice, so the cart is checked per product.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
         "ref": "app::test_customer_can_search_brand",
         "name": "test_customer_can_search_brand",
         "platform": "app",
@@ -6568,7 +6702,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -6591,7 +6726,8 @@
           "reason": "Not applicable after the new Algolia search implementation: search no longer"
         },
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -6612,7 +6748,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -6771,7 +6908,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       }
     ],
@@ -8057,6 +8195,120 @@
         ]
       },
       {
+        "ref": "web_uae::test_super_app_now_non_serviceable_address_validation",
+        "name": "test_super_app_now_non_serviceable_address_validation",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_super_app_logged_in_user_flow.py",
+        "file": "test_super_app_logged_in_user_flow.py",
+        "title": "Now vertical rejects a non-serviceable address across home, categories and listing",
+        "feature": "SuperApp",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "SuperApp",
+          "Now",
+          "Serviceability"
+        ],
+        "docstring": "1. Sign in with a user whose default address is outside the Now delivery range 2. Open the Now vertical — the sheet must raise itself; validate and close it 3. Tap a category on the Now home — the address sheet must raise; validate and close 4. Tap Categories in the Now bottom nav — the sheet must raise again; validate and close 5. Open a Now product — the product page must state the location is o",
+        "parametrized": false,
+        "skip": {
+          "type": "conditional",
+          "reason": "Now vertical is UAE-only; the only dark store is UAE-DS-01, so no other  country can place a 2-hour order. Coverage for those countries lives in  test_super_app_vertical_availability.py, which asserts the tab is absent. ",
+          "condition": "(COUNTRY or \"AE\").upper() != \"AE\"",
+          "scope": "module"
+        },
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
+        "ref": "web_uae::test_super_app_now_serviceable_address_restores_availability",
+        "name": "test_super_app_now_serviceable_address_restores_availability",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_super_app_logged_in_user_flow.py",
+        "file": "test_super_app_logged_in_user_flow.py",
+        "title": "Serviceable address restores Now availability, and reverting restores the block",
+        "feature": "SuperApp",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "SuperApp",
+          "Now",
+          "Serviceability"
+        ],
+        "docstring": "1. Sign in and open the Now vertical 2. Select a serviceable delivery location, verified by the resulting state 3. Assert availability is restored: no notice, products addable, cart orderable 4. Assert the out-of-range address cannot be selected back Web disables a saved address Now cannot deliver to, so a signed-in user cannot switch back to one — a stronger guarantee than the ticket asks for, an",
+        "parametrized": false,
+        "skip": {
+          "type": "conditional",
+          "reason": "Now vertical is UAE-only; the only dark store is UAE-DS-01, so no other  country can place a 2-hour order. Coverage for those countries lives in  test_super_app_vertical_availability.py, which asserts the tab is absent. ",
+          "condition": "(COUNTRY or \"AE\").upper() != \"AE\"",
+          "scope": "module"
+        },
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
+        "ref": "web_uae::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
+        "name": "test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_super_app_now_guest_order_journey.py",
+        "file": "test_super_app_now_guest_order_journey.py",
+        "title": "Now vertical: guest shops, coupons, logs in from the cart and pays by card",
+        "feature": "SuperApp",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "SuperApp",
+          "Now",
+          "Guest",
+          "Coupon",
+          "CC"
+        ],
+        "docstring": "1. Empty the login account's cart by API — the guest basket merges into it at sign-in 2. Enter the Now vertical as a guest 3. Search the vertical for one product of every type and add each to the cart 4. Assert the cart holds them all and is presented as a quick-commerce order 5. Claim the free gift when the basket unlocked one 6. Apply a coupon on the cart, then remove it 7. Check out as a guest,",
+        "parametrized": false,
+        "skip": {
+          "type": "conditional",
+          "reason": "The Now vertical is served by the single UAE-DS-01 dark store, so an order  journey through it only exists on AE [(COUNTRY or \"AE\").upper() != \"AE\"]",
+          "condition": "(COUNTRY or \"AE\").upper() != \"AE\"",
+          "scope": "module"
+        },
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_uae::test_superapp_new_user_end_to_end_journey",
+        "name": "test_superapp_new_user_end_to_end_journey",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_superapp_new_user_end_to_end_journey.py",
+        "file": "test_superapp_new_user_end_to_end_journey.py",
+        "title": "Now vertical: browse by category, sort, then a new user pays by Tabby",
+        "feature": "SuperApp",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "SuperApp",
+          "Now",
+          "Discovery",
+          "Signup",
+          "Tabby"
+        ],
+        "docstring": "1. Enter the Now vertical as a guest 2. Open a category listing and sort it by price, high to low 3. Apply the first filter the listing offers, then assert every product is a Now product 4. Add one of every Tabby-eligible product type 5. Validate the cart holds them all as a quick-commerce order 6. Claim the free gift when the basket unlocked one 7. Check out as a guest and create the account ther",
+        "parametrized": false,
+        "skip": {
+          "type": "conditional",
+          "reason": "The Now vertical is served by the single UAE-DS-01 dark store, so an order  journey through it only exists on AE [(COUNTRY or \"AE\").upper() != \"AE\"]",
+          "condition": "(COUNTRY or \"AE\").upper() != \"AE\"",
+          "scope": "module"
+        },
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "web_uae::test_uae_user_register_from_account_page",
         "name": "test_uae_user_register_from_account_page",
         "platform": "web_uae",
@@ -8349,6 +8601,50 @@
           "type": "hard",
           "reason": "Gift wrap is deferred — the UAE counterpart is skipped as a duplicate of"
         },
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
+        "ref": "web_ksa::test_ksa_cart_increase_and_decrease_quantity",
+        "name": "test_ksa_cart_increase_and_decrease_quantity",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_cart_ksa.py",
+        "file": "test_cart_ksa.py",
+        "title": "",
+        "feature": "Cart",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Quantity"
+        ],
+        "docstring": "1. Sign in and clear the cart through the API 2. Add one product of the given type to the cart 3. Increase the quantity twice (1 -> 3) 4. Decrease the quantity twice (3 -> 1) :param search_term: The product search term to use :param product_type: Type of product (simple, bundle, configurable, custom) :param email: Email ID to use for login",
+        "parametrized": true,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
+        "ref": "web_ksa::test_ksa_cart_add_all_product_types_and_verify",
+        "name": "test_ksa_cart_add_all_product_types_and_verify",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_cart_ksa.py",
+        "file": "test_cart_ksa.py",
+        "title": "KSA - Every product type can be added to the cart and is listed",
+        "feature": "Cart",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "ProductTypes"
+        ],
+        "docstring": "1. Sign in and clear the cart through the API 2. Add one product of every supported type through its PDP 3. Verify the cart lists all of them and nothing else",
+        "parametrized": false,
+        "skip": null,
         "locales": [
           "en",
           "ar"
@@ -9164,7 +9460,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9184,7 +9481,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9204,7 +9502,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9224,7 +9523,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9266,7 +9566,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9286,7 +9587,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       }
     ],
@@ -9380,6 +9682,76 @@
         ]
       },
       {
+        "ref": "web_commons::test_web_recommendation_banners_price_filter",
+        "name": "test_web_recommendation_banners_price_filter",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_algolia_recommendations_banner_filter_sort.py",
+        "file": "test_algolia_recommendations_banner_filter_sort.py",
+        "title": "mWeb recommendation banners: the price slider narrows every banner's listing",
+        "feature": "Home Recommendation Banners",
+        "story": "FALCONS-397 - Price filter on every recommendation listing",
+        "severity": "critical",
+        "tags": [
+          "Filters",
+          "Price",
+          "Home",
+          "Algolia",
+          "mWeb"
+        ],
+        "docstring": "1. Open each Algolia recommendation banner on home in turn 2. Lower the price ceiling on its listing; the total narrows and every listed price respects it 3. The banner set is CMS-driven, so it is discovered on the page rather than named",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_commons::test_web_recommendation_banners_top_filters",
+        "name": "test_web_recommendation_banners_top_filters",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_algolia_recommendations_banner_filter_sort.py",
+        "file": "test_algolia_recommendations_banner_filter_sort.py",
+        "title": "mWeb recommendation banners: Age, Category, Gender and Brand rotate across the listings",
+        "feature": "Home Recommendation Banners",
+        "story": "FALCONS-397 - Most-used filters on every recommendation listing",
+        "severity": "critical",
+        "tags": [
+          "Filters",
+          "Home",
+          "Algolia",
+          "mWeb"
+        ],
+        "docstring": "1. Open each Algolia recommendation banner on home in turn 2. Apply one facet per banner, rotating Age, Category, Gender and Brand, then clear it 3. Every banner gets a filter and every facet is applied on at least one banner",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_commons::test_web_recommendation_banners_price_sort",
+        "name": "test_web_recommendation_banners_price_sort",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_algolia_recommendations_banner_filter_sort.py",
+        "file": "test_algolia_recommendations_banner_filter_sort.py",
+        "title": "mWeb recommendation banners: sorting by '{sort_option}' orders each listing",
+        "feature": "Home Recommendation Banners",
+        "story": "FALCONS-397 - Price sort on every recommendation listing",
+        "severity": "critical",
+        "tags": [
+          "Sort",
+          "Home",
+          "Algolia",
+          "mWeb"
+        ],
+        "docstring": "1. Open each Algolia recommendation banner on home in turn 2. Sort by price in this direction; the listed prices must follow it 3. Each direction runs as its own test, side by side",
+        "parametrized": true,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "web_commons::test_categories_levels_load",
         "name": "test_categories_levels_load",
         "platform": "web_commons",
@@ -9397,7 +9769,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9456,6 +9829,27 @@
           "Gift Registry"
         ],
         "docstring": "A guest orders every product on someone else's published gift registry. 1. The owner signs in, builds a registry with every product type and publishes it (delivery address, event date, location, public) 2. Capture the registry's share link 3. The buyer signs in with an empty cart and adds a product of their own 4. The buyer opens the share link and adds every registry product to cart 5. The cart s",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
+        "ref": "web_commons::test_gift_registry_guest_order_from_share_link",
+        "name": "test_gift_registry_guest_order_from_share_link",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_gift_registry.py",
+        "file": "test_gift_registry.py",
+        "title": "",
+        "feature": "Gift Registry",
+        "story": "FALCONS-399 - Guest orders a gift registry; cart has no duplicates",
+        "severity": "critical",
+        "tags": [
+          "Gift Registry"
+        ],
+        "docstring": "A guest adds every product of a published registry to the cart and orders it. 1. A fresh owner builds a registry with every product type, noting each PDP price 2. Publish it, capture the share link and sign out, so the buyer is a guest 3. Open the link and add every product to the cart 4. The cart holds each product once, at quantity 1 and its PDP price 5. Proceed to checkout, sign up a fresh buye",
         "parametrized": false,
         "skip": null,
         "locales": [
@@ -9532,6 +9926,28 @@
         ]
       },
       {
+        "ref": "web_commons::test_super_app_vertical_switcher_only_in_uae",
+        "name": "test_super_app_vertical_switcher_only_in_uae",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_super_app_vertical_availability.py",
+        "file": "test_super_app_vertical_availability.py",
+        "title": "Now vertical is offered in UAE only",
+        "feature": "SuperApp",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "SuperApp",
+          "Now",
+          "Vertical"
+        ],
+        "docstring": "The Now (2-hour) vertical is fulfilled from the single UAE-DS-01 dark store, so the 'now within 2 hrs' tab must appear for AE and must not appear anywhere else. Runs on every country — it is the only SuperApp test a KSA regression executes. Runs as a guest: unlike the app, the web switcher needs no session, so signing in would add Turnstile exposure without adding coverage.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "web_commons::test_web_filters_one_filter_at_a_time",
         "name": "test_web_filters_one_filter_at_a_time",
         "platform": "web_commons",
@@ -9550,7 +9966,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9572,7 +9989,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9595,7 +10013,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9618,7 +10037,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9640,7 +10060,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9663,7 +10084,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9685,7 +10107,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9706,7 +10129,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9727,7 +10151,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9748,7 +10173,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9770,7 +10196,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -9792,14 +10219,15 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       }
     ]
   },
   "arabic": {
     "summary": "Arabic is a run dimension, not a separate set of cases: the same suites run with LOCALE=en and LOCALE=ar, so the case counts below are unchanged.",
-    "caveat": "AR-safe covers two designs: suites carrying locale-aware locators and data (FALCONS-321/330/335/336), and suites written locale-agnostic -- asserting whatever the UI rendered rather than an English string, so they need no per-locale data at all. Neither is a passing Arabic run: as of the 31 Aug review the Arabic suite had not been executed on BrowserStack on either platform, so every pass rate quoted anywhere is an English run.",
+    "caveat": "AR-ready is credited three ways: suites carrying locale-aware locators and data (FALCONS-321/330/335/336/394), suites written locale-agnostic -- asserting whatever the UI rendered rather than an English string -- and, per test, a pass in a full Arabic run. The mWeb KSA suite ran in full in Arabic (sa-ar) on 13 Nov 2026, 92 tests on Android and on iOS (85% and 84% passed); every test that passed on both is credited. The KSA coupon tests mostly failed in that run and are not credited from it. The app has no full Arabic regression yet: FALCONS-394 ran its KSA suites in Arabic one at a time (checkout, coupon, brand / category) on 10-11 Nov.",
     "tickets": [
       {
         "id": "FALCONS-321",
@@ -9820,6 +10248,16 @@
         "id": "FALCONS-336",
         "pr": null,
         "what": "Locale-aware cart wishlist title and quantity alert; products that resolve to one slug in both locales"
+      },
+      {
+        "id": "FALCONS-393",
+        "pr": 348,
+        "what": "mWeb KSA suites run in Arabic (sa-ar); full Arabic regression on Android and iOS, 13 Nov 2026"
+      },
+      {
+        "id": "FALCONS-394",
+        "pr": 349,
+        "what": "Arabic locators and RTL handling for the KSA app suites"
       }
     ],
     "stores": [
@@ -9850,79 +10288,94 @@
         {
           "case_id": "1018709",
           "name": "Accessing My profile page by users",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "1018708",
           "name": "Order details and order status in the My orders page",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "1018714",
           "name": "New user with no items added in the Wishlist",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "1018719",
           "name": "Existing user with orders & address in 1 country added to the Wishlist  Configurable, Custom and Bundle",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "2337022",
           "name": "UF3 - Guest (and login existing)  with multiple addresses in 1 country and wallet balance.",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "2337034",
           "name": "UF7- Checkout with cart items as a guest . Log onto an existing user with wallet balance.",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "2337043",
           "name": "Checkout - Tamara payment",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "2337044",
           "name": "Checkout - TABBY Payment",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "1084824",
           "name": "Multiple Tiered Discount rule",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "2337059",
           "name": "Gift Registry creation on My account ( My registries)  and PDP",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "2337061",
           "name": "Setup the Gift registry",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "2337060",
           "name": "Adding product  to GR",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "2337062",
           "name": "Add to cart GR products",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "2337063",
           "name": "Checkout with GR",
-          "status": "full"
+          "status": "full",
+          "counted": false
         }
       ],
       "yes_but_none": [
         {
           "case_id": "2337045",
           "name": "Exit Checkout Prompt Feature",
-          "status": "none"
+          "status": "none",
+          "counted": false
         }
       ],
       "yes_but_partial": [],
@@ -9930,12 +10383,14 @@
         {
           "case_id": "1548291",
           "name": "Check Sale Page for correct applying Filters (Category, Brand, Price) and mweb",
-          "status": "partial"
+          "status": "partial",
+          "counted": true
         },
         {
           "case_id": "1548292",
           "name": "Check Category Page for correct applying Filters (Category, Brand, Price)",
-          "status": "full"
+          "status": "full",
+          "counted": true
         }
       ]
     },
@@ -9944,69 +10399,88 @@
         {
           "case_id": "1435390",
           "name": "Categories tab - Verify categories L1,L2 and L3 are loading",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "1435404",
           "name": "Verify customer can apply filter and sort on PLP",
-          "status": "full"
+          "status": "full",
+          "counted": false
+        },
+        {
+          "case_id": "2885050",
+          "name": "Verify products are loading , and applying filter and sort",
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "1435392",
           "name": "Verify new user registration",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "1435408",
           "name": "Verify user can apply GW to products",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "1435393",
           "name": "Verify existing user can access their profile",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "1435396",
           "name": "Verify user can add all product types to wishlist from cart, PLP and PDP",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "1435397",
           "name": "Verify user can remove all product types from wishlist",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "1435402",
           "name": "Verify customer can search  for products",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "1435403",
           "name": "Verify customer can apply filter and sort on search page",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "1435419",
           "name": "Verify GR cart and proceed to checkout",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "1435420",
           "name": "Verify multiple carts and proceed to checkout",
-          "status": "full"
+          "status": "full",
+          "counted": false
         },
         {
           "case_id": "1543957",
           "name": "Verify cart merge guest > existing user with items",
-          "status": "full"
+          "status": "full",
+          "counted": false
         }
       ],
       "yes_but_none": [
         {
           "case_id": "2885053",
           "name": "Verify user can login from gmail",
-          "status": "none"
+          "status": "none",
+          "counted": false
         }
       ],
       "yes_but_partial": [],
@@ -10014,17 +10488,32 @@
         {
           "case_id": "1435389",
           "name": "Verify home page is loading",
-          "status": "full"
+          "status": "partial",
+          "counted": true
+        },
+        {
+          "case_id": "1435417",
+          "name": "Verify home page  banners are loading",
+          "status": "partial",
+          "counted": true
         },
         {
           "case_id": "1435391",
           "name": "Verify PDP for all product types (Simple, custom , installation , configurable, configurable custom , colour variant  bundle, and egift )",
-          "status": "partial"
+          "status": "partial",
+          "counted": true
         },
         {
           "case_id": "1435416",
           "name": "Verify brand name and logo in brand page",
-          "status": "full"
+          "status": "full",
+          "counted": true
+        },
+        {
+          "case_id": "1543908",
+          "name": "Verify Algolia recommendations across all screens",
+          "status": "partial",
+          "counted": true
         }
       ]
     }
@@ -10049,18 +10538,28 @@
     "app::test_uae_checkout_invalid_cc_no_coupon",
     "web_commons::test_home_screen_elements_and_navigate_to_account",
     "web_commons::test_home_search_product_in_specific_category",
+    "web_commons::test_super_app_vertical_switcher_only_in_uae",
     "web_commons::test_web_filters_multiple_filters",
     "web_commons::test_web_filters_one_filter_at_a_time",
     "web_commons::test_web_filters_yalla_from_listing",
+    "web_commons::test_web_recommendation_banners_price_filter",
+    "web_commons::test_web_recommendation_banners_price_sort",
+    "web_commons::test_web_recommendation_banners_top_filters",
     "web_commons::test_web_sort_by_price_from_both_entry_points",
     "web_ksa::test_ksa_auto_discount_applied_without_coupon",
     "web_ksa::test_ksa_brand_restricted_coupon_discount",
+    "web_ksa::test_ksa_cart_add_all_product_types_and_verify",
     "web_ksa::test_ksa_cart_apply_gift_wrap_and_place_order",
+    "web_ksa::test_ksa_cart_increase_and_decrease_quantity",
     "web_ksa::test_ksa_category_restricted_coupon_discount",
     "web_ksa::test_ksa_new_user_auto_discount_applied_without_coupon",
     "web_ksa::test_ksa_new_user_brand_restricted_coupon_discount",
     "web_ksa::test_ksa_new_user_category_restricted_coupon_discount",
     "web_ksa::test_ksa_wishlist_guest_add_prompts_login",
+    "web_uae::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
+    "web_uae::test_super_app_now_non_serviceable_address_validation",
+    "web_uae::test_super_app_now_serviceable_address_restores_availability",
+    "web_uae::test_superapp_new_user_end_to_end_journey",
     "web_uae::test_uae_auto_discount_applied_without_coupon",
     "web_uae::test_uae_brand_restricted_coupon_discount",
     "web_uae::test_uae_cart_add_all_product_types_and_verify",
@@ -10191,6 +10690,27 @@
       "path": "tests/web/commons/test_home.py",
       "mirrors_case": "1435425",
       "mirrors_name": "Categories from home page (app case; the mWEB set has no equivalent)"
+    },
+    {
+      "ref": "web_commons::test_web_recommendation_banners_price_filter",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_algolia_recommendations_banner_filter_sort.py",
+      "mirrors_case": "1543908",
+      "mirrors_name": "Verify Algolia recommendations across all screens"
+    },
+    {
+      "ref": "web_commons::test_web_recommendation_banners_price_sort",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_algolia_recommendations_banner_filter_sort.py",
+      "mirrors_case": "1543908",
+      "mirrors_name": "Verify Algolia recommendations across all screens"
+    },
+    {
+      "ref": "web_commons::test_web_recommendation_banners_top_filters",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_algolia_recommendations_banner_filter_sort.py",
+      "mirrors_case": "1543908",
+      "mirrors_name": "Verify Algolia recommendations across all screens"
     },
     {
       "ref": "web_ksa::test_ksa_auto_discount_applied_without_coupon",
@@ -10349,11 +10869,11 @@
   ],
   "metadata": {
     "schema": 2,
-    "last_updated": "2026-11-11",
-    "generated_at": "2026-11-11T13:50:44+00:00",
-    "source_sha": "cc3a590",
+    "last_updated": "2026-11-25",
+    "generated_at": "2026-11-25T13:06:17+00:00",
+    "source_sha": "2918673",
     "source_branch": "origin/main",
-    "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
+    "scope_rule": "Automated in [YES, NO], plus 'Not planned' cases the suite automates anyway; other 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
     "testmo_url_app": "https://mumzworld.testmo.net/repositories/9?group_id=110524",
     "testmo_url_web_regression": "https://mumzworld.testmo.net/repositories/3?group_id=73697",
@@ -10370,33 +10890,33 @@
     "coverage": {
       "web": {
         "total": 115,
-        "in_scope": 55,
-        "out_of_scope": 60,
-        "full": 34,
-        "partial": 6,
-        "covered": 40,
+        "in_scope": 57,
+        "out_of_scope": 58,
+        "full": 35,
+        "partial": 7,
+        "covered": 42,
         "none": 15,
-        "pct": 73,
-        "pct_full": 62
+        "pct": 74,
+        "pct_full": 61
       },
       "app": {
         "total": 48,
-        "in_scope": 29,
-        "out_of_scope": 19,
-        "full": 21,
-        "partial": 4,
-        "covered": 25,
-        "none": 4,
-        "pct": 86,
-        "pct_full": 72
+        "in_scope": 34,
+        "out_of_scope": 14,
+        "full": 23,
+        "partial": 8,
+        "covered": 31,
+        "none": 3,
+        "pct": 91,
+        "pct_full": 68
       },
       "combined": {
-        "in_scope": 84,
-        "full": 55,
-        "partial": 10,
-        "covered": 65,
-        "pct": 77,
-        "pct_full": 65
+        "in_scope": 91,
+        "full": 58,
+        "partial": 15,
+        "covered": 73,
+        "pct": 80,
+        "pct_full": 64
       },
       "web_by_source": {
         "other_group": {
@@ -10412,32 +10932,32 @@
         },
         "regression": {
           "total": 104,
-          "in_scope": 55,
-          "out_of_scope": 49,
-          "full": 34,
-          "partial": 6,
-          "covered": 40,
+          "in_scope": 57,
+          "out_of_scope": 47,
+          "full": 35,
+          "partial": 7,
+          "covered": 42,
           "none": 15,
-          "pct": 73,
-          "pct_full": 62
+          "pct": 74,
+          "pct_full": 61
         }
       }
     },
     "projection": {
       "web": {
-        "in_scope": 80,
-        "covered": 66,
-        "pct": 82
+        "in_scope": 83,
+        "covered": 69,
+        "pct": 83
       },
       "app": {
-        "in_scope": 45,
-        "covered": 42,
-        "pct": 93
+        "in_scope": 47,
+        "covered": 45,
+        "pct": 96
       },
       "combined": {
-        "in_scope": 125,
-        "covered": 108,
-        "pct": 86
+        "in_scope": 130,
+        "covered": 114,
+        "pct": 88
       },
       "actions": [
         {
@@ -10448,15 +10968,15 @@
         },
         {
           "id": "B",
-          "what": "Add 38 TestMO case(s) for tests that pass but have none",
+          "what": "Add 41 TestMO case(s) for tests that pass but have none",
           "detail": "the cart scenarios FALCONS-336 ported from the app suite; each names the app case to mirror",
           "effect": "enters scope already covered"
         },
         {
           "id": "C",
-          "what": "Re-flag 5 case(s) marked Not planned that have automation mapped",
-          "detail": "C-1548291, C-1548292, C-1435389, C-1435391, C-1435416",
-          "effect": "enters scope, already covered"
+          "what": "Re-flag 7 case(s) marked Not planned that have automation mapped",
+          "detail": "C-1548291, C-1548292, C-1435389, C-1435417, C-1435391, C-1435416, C-1543908",
+          "effect": "already counted here; re-flagging makes TestMO agree"
         }
       ]
     },
@@ -10467,29 +10987,29 @@
       "other_group": 11
     },
     "platforms": {
-      "app": 86,
-      "web_uae": 65,
-      "web_ksa": 50,
-      "web_commons": 23
+      "app": 90,
+      "web_uae": 69,
+      "web_ksa": 52,
+      "web_commons": 28
     },
-    "total_automated_tests": 224,
-    "active_tests": 202,
+    "total_automated_tests": 239,
+    "active_tests": 212,
     "skipped_hard": 18,
     "cases_not_running": {
       "hard_skipped": 1,
       "gated": 0
     },
     "gate_note": "Hard-skipped cases are not counted as automated: nothing runs. Platform-gated cases are counted -- they run wherever the product allows, and every gate is a product or tooling limitation rather than missing test work -- with the limitation shown on the case.",
-    "skipped_conditional": 4,
+    "skipped_conditional": 9,
     "links": {
       "direct": 122,
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 48,
-    "plan_gap_count": 38,
+    "unmapped_count": 58,
+    "plan_gap_count": 41,
     "unmapped_and_skipped": 13,
-    "arabic_ready_tests": 114,
+    "arabic_ready_tests": 143,
     "baseline": {
       "tests": 131,
       "date": "2026-09-02",
@@ -10901,6 +11421,111 @@
             "name": "Verify customer can apply filter and sort on search page",
             "from": "none",
             "to": "full"
+          }
+        ]
+      },
+      {
+        "date": "2026-11-24",
+        "sha": "f9e7080",
+        "web": [
+          40,
+          34,
+          55
+        ],
+        "app": [
+          26,
+          22,
+          29
+        ],
+        "tests": 231,
+        "changes": [
+          {
+            "case": "app:2885050",
+            "name": "Verify products are loading , and applying filter and sort",
+            "from": "none",
+            "to": "full"
+          }
+        ]
+      },
+      {
+        "date": "2026-11-25",
+        "sha": "2918673",
+        "web": [
+          42,
+          35,
+          57
+        ],
+        "app": [
+          31,
+          24,
+          34
+        ],
+        "tests": 239,
+        "changes": [
+          {
+            "case": "web:1548291",
+            "name": "Check Sale Page for correct applying Filters (Category, Brand, Price) and mweb",
+            "from": "out",
+            "to": "partial"
+          },
+          {
+            "case": "web:1548292",
+            "name": "Check Category Page for correct applying Filters (Category, Brand, Price)",
+            "from": "out",
+            "to": "full"
+          },
+          {
+            "case": "app:1435389",
+            "name": "Verify home page is loading",
+            "from": "out",
+            "to": "full"
+          },
+          {
+            "case": "app:1435417",
+            "name": "Verify home page  banners are loading",
+            "from": "out",
+            "to": "partial"
+          },
+          {
+            "case": "app:1435391",
+            "name": "Verify PDP for all product types (Simple, custom , installation , configurable, configurab",
+            "from": "out",
+            "to": "partial"
+          },
+          {
+            "case": "app:1435416",
+            "name": "Verify brand name and logo in brand page",
+            "from": "out",
+            "to": "full"
+          },
+          {
+            "case": "app:1543908",
+            "name": "Verify Algolia recommendations across all screens",
+            "from": "out",
+            "to": "partial"
+          }
+        ]
+      },
+      {
+        "date": "2026-11-25",
+        "sha": "2918673",
+        "web": [
+          42,
+          35,
+          57
+        ],
+        "app": [
+          31,
+          23,
+          34
+        ],
+        "tests": 239,
+        "changes": [
+          {
+            "case": "app:1435389",
+            "name": "Verify home page is loading",
+            "from": "full",
+            "to": "partial"
           }
         ]
       }

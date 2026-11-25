@@ -33,7 +33,11 @@ for key, label in (("testmo_tests", "mWEB"), ("app_testmo_tests", "App")):
             problems.append(f"{cid}: status '{c['coverage_status']}' with no refs")
         if c["coverage_status"] != "none" and not (c.get("notes") or "").strip():
             problems.append(f"{cid}: '{c['coverage_status']}' with no note saying what is covered")
-        if c["in_scope"] != (c["automated_flag"].upper() in ("YES", "NO")):
+        # Not planned cases the suite automates are counted anyway (build_mapping.main);
+        # the override must still carry real evidence.
+        overridden = (c.get("scope_override") == "automated_but_not_planned"
+                      and c["automated_flag"].upper() == "NOT PLANNED" and c["coverage_status"] != "none")
+        if c["in_scope"] != (c["automated_flag"].upper() in ("YES", "NO") or overridden):
             problems.append(f"{cid}: in_scope disagrees with Automated='{c['automated_flag']}'")
         # Locales are derived, never hand-set.
         expected = set()

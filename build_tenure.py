@@ -76,6 +76,10 @@ def inventory_at(repo, sha):
             found += ex.parse_file(src, path, platform, ar)
         ex.disambiguate(found)
         tests += found
+    # The Arabic regression is evidence from 13 Nov on; earlier snapshots
+    # must not inherit it.
+    if git(repo, "log", "-1", "--format=%cs", sha).strip() >= ex.ARABIC_RUN_DATE:
+        ex.mark_run_verified(tests)
     return tests
 
 

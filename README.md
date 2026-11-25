@@ -17,12 +17,17 @@ Measured against `automation_web_2.0` **`origin/main`**.
 
 | | Full | Partial | Not covered | In scope | Coverage |
 |---|---|---|---|---|---|
-| mWeb — regression repo 3 / group 73697 | 34 | 6 | 15 | 55 | **73 %** |
-| Native app — repository 241 | 21 | 4 | 4 | 29 | **86 %** |
-| **Combined** | **55** | **10** | **19** | **84** | **77 %** |
+| mWeb — regression repo 3 / group 73697 | 35 | 7 | 15 | 57 | **74 %** |
+| Native app — repository 241 | 23 | 8 | 3 | 34 | **91 %** |
+| **Combined** | **58** | **15** | **18** | **91** | **80 %** |
 
-Automated tests on main (`53d29c8`, 3 Nov 2026): **224** — 200 active, 18 hard-skipped, 6 OS-gated.
-114 are verified in Arabic as well as English.
+In scope = TestMO `Automated` YES / NO, plus 7 cases flagged *Not planned* that the suite
+automates anyway (C-1548291, C-1548292, C-1435389, C-1435391, C-1435416, C-1435417,
+C-1543908). Those are counted at the status their tests support and badged **n/p → auto** in
+the report; their TestMO flag should be changed to YES so the two agree.
+
+Automated tests on main (`2918673`, 25 Nov 2026): **239** — 212 active, 18 hard-skipped, 9 OS-gated.
+143 are verified in Arabic as well as English.
 
 ### Scope: only `Automated = YES` or `NO` counts
 
@@ -164,8 +169,10 @@ it has been removed.
 
 ## What is not mapped
 
-48 tests on main are not linked to any case. 13 of those are hard-skipped, so they guard
-nothing today. The rest are UAE cart-behaviour tests (`test_uae_cart_remove_item`,
+58 tests on main are not linked to any case. 13 of those are hard-skipped, so they guard
+nothing today. 41 are plan gaps -- running tests whose TestMO case does not exist yet, each
+naming the app case it would mirror. They include the mWeb Algolia recommendation-banner
+filter and sort tests (FALCONS-397), the Now journeys on mWeb, and UAE cart-behaviour tests (`test_uae_cart_remove_item`,
 `..._increase_and_decrease_quantity`, `..._bundle_multiple_variants`,
 `..._order_summary_updates_after_item_removal`, `..._add_all_product_types_and_verify` and
 friends) plus `test_app_cart_existing_user_orders_no_coupon_yalla` and

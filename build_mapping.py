@@ -17,9 +17,10 @@ Rules encoded here
                       covers it is skipped. `notes` says what is missing.
   status "none"    -- nothing covers it. `notes` may still explain why, or why a
                       previously-recorded link was removed.
-* Scope: only cases flagged Automated = YES/NO count towards coverage
-  (see parse_testmo_csv.py). "Not planned" cases keep their mapping but sit
-  outside every percentage.
+* Scope: cases flagged Automated = YES/NO count towards coverage (see
+  parse_testmo_csv.py), and so do cases flagged "Not planned" that the suite
+  automates anyway -- the flag is stale for those. "Not planned" cases with
+  nothing mapped keep their notes but sit outside every percentage.
 """
 import datetime as _dt
 import json
@@ -357,14 +358,18 @@ WEB_MAPPING = {
         "it; the test does that for every product type and verifies each one landed. Complete per the "
         "QA owner (8 Sep 2026) -- the quantity and delete actions in the steps field exercise the "
         "registry screen rather than the add-from-PDP behaviour the case is about."),
-    "2337062": ("full", ["web_commons::test_gift_registry_order_from_share_link"],
+    "2337062": ("full", ["web_commons::test_gift_registry_order_from_share_link",
+                         "web_commons::test_gift_registry_guest_order_from_share_link"],
         "FALCONS-341 covers scenario 1 exactly: the buyer signs in with an empty cart, adds an item "
         "of their own, opens the owner's share link and adds every registry product. The cart then "
-        "shows two groups and the registry group is asserted to hold all of them."),
-    "2337063": ("full", ["web_commons::test_gift_registry_order_from_share_link"],
+        "shows two groups and the registry group is asserted to hold all of them. FALCONS-399 adds "
+        "the guest buyer: each product lands once, at quantity 1 and its PDP price."),
+    "2337063": ("full", ["web_commons::test_gift_registry_order_from_share_link",
+                         "web_commons::test_gift_registry_guest_order_from_share_link"],
         "FALCONS-341. The buyer switches the cart to the registry group, checks out that group alone "
         "and pays by credit card. Replaces the old link to test_ksa_checkout_cc_normal_coupon, which "
-        "was unrelated and hard-skipped."),
+        "was unrelated and hard-skipped. FALCONS-399: a guest buyer signs up at checkout and pays "
+        "by card."),
     "1018774": ("partial", ["web_commons::test_gift_registry_purchase_shows_for_owner"],
         "The owner builds and publishes a registry, a buyer orders from the share link and pays by "
         "card, then the owner signs back in and the order is found under the registry's Purchased "
@@ -393,10 +398,16 @@ for _case, _why in (
 # Native app -- release checklist, TestMO repository 241
 # --------------------------------------------------------------------------
 APP_MAPPING = {
-    "1435389": ("full", ["app::test_app_explore_screen_elements_and_navigate_to_account"],
+    "1435389": ("partial", ["app::test_app_explore_screen_elements_and_navigate_to_account"],
         "Verifies the explore feed, search header and bottom navigation load, then navigates to "
-        "Account. TestMO flags this Not planned even though it is automated."),
-    "1435417": ("none", [], "Home-page banners are not asserted."),
+        "Account. Partial at the QA owner's review (25 Nov 2026): the home page's content sections "
+        "are not each asserted to load. TestMO flags this Not planned even though it is automated."),
+    "1435417": ("partial", ["app::test_app_recommendation_banners_price_filter",
+                         "app::test_app_recommendation_banners_top_filters",
+                         "app::test_app_recommendation_banners_price_sort"],
+        "FALCONS-396 discovers every Algolia recommendation banner on Home and opens each one's "
+        "listing. Only the recommendation banners are exercised; the CMS hero and promo banners are "
+        "not asserted."),
     "1435425": ("partial", ["app::test_customer_can_search_product_in_specific_category"],
         "Reaches the category PLP through a search suggestion rather than the home-page category "
         "entry point, and only on the configured store -- UAE/KSA/GCC/International are not each "
@@ -416,13 +427,18 @@ APP_MAPPING = {
                          "app::test_app_filters_multiple_filters_from_sheet",
                          "app::test_app_filters_yalla_from_listing",
                          "app::test_app_filters_from_both_entry_points",
-                         "app::test_app_sort_by_price_from_both_entry_points"],
+                         "app::test_app_sort_by_price_from_both_entry_points",
+                         "app::test_app_recommendation_banners_price_filter",
+                         "app::test_app_recommendation_banners_top_filters",
+                         "app::test_app_recommendation_banners_price_sort"],
         "FALCONS-388. Filters on category listings: Category, Colour, Diaper Size and Shoe Size on "
         "the Sale listing, the price slider there with every price checked against the ceiling, and "
         "Discounts on a sub-category listing with every card showing a was-price. The rest of the "
         "suite applies, stacks and clears Age, Gender, Category, Brand and Yalla from both the top "
         "row and the floating bar, and sorts by price both ways with the order verified. Sort runs "
-        "on a listing opened from search -- the same PLP screen and controls."),
+        "on a listing opened from search -- the same PLP screen and controls. FALCONS-396 repeats the "
+        "price slider, the Age / Category / Gender / Brand rotation and both price sorts on every "
+        "listing opened from a Home Algolia recommendation banner."),
     "1435391": ("partial", ["app::test_app_gift_registry_create_from_pdp_all_product_types"],
         "Opens the PDP for simple, bundle, configurable, custom, custom-configurable and "
         "installation products and selects their options, but as part of the gift-registry flow -- "
@@ -438,10 +454,18 @@ APP_MAPPING = {
         "Now automated: the script that was hard-skipped because the app had no brand page is live "
         "again on main, opening the brand page from a search suggestion. Still flagged Not planned "
         "in TestMO, so it sits outside the percentages until that changes."),
-    "2885050": ("none", [],
-        "Brand-page product loading with filter and sort is not automated. FALCONS-388 filters and "
-        "sorts search and category listings only; test_customer_can_search_brand opens a brand page "
-        "but neither filters nor sorts it."),
+    "2885050": ("full", ["app::test_app_filters_one_filter_at_a_time",
+                         "app::test_app_filters_multiple_filters_from_sheet",
+                         "app::test_app_filters_from_both_entry_points",
+                         "app::test_app_sort_by_price_from_both_entry_points",
+                         "app::test_app_recommendation_banners_price_filter",
+                         "app::test_app_recommendation_banners_top_filters",
+                         "app::test_app_recommendation_banners_price_sort"],
+        "FALCONS-388. The case has no steps beyond its title, so it is read as written: a listing "
+        "loads its products, filters apply (chip, products and the 'Show N Results' count all agree) "
+        "and sort reorders by price both ways. Re-credited on 24 Nov 2026 at the QA owner's review -- "
+        "it was earlier read as brand-page only, which the case does not say. FALCONS-396 adds the "
+        "same checks on the listings behind each Home Algolia recommendation banner."),
     "2885052": ("full", ["app::test_existing_user_profile",
                          "app::test_app_invalid_login_combinations"],
         "Positive sign-in through the bottom sheet, plus a parametrised negative test asserting the "
@@ -588,12 +612,14 @@ APP_MAPPING = {
         "flaky, and the ODP / Admin / invoice checks named in the case title are not verified on "
         "the app. Removed the web CC and Tabby tests that were wrongly credited here."),
     "1435419": ("full", ["app::test_app_gift_registry_order_from_share_link",
+                         "app::test_app_gift_registry_guest_order_from_share_link",
                          "app::test_app_gift_registry_scenario_4_add_to_cart_via_deeplink"],
         "FALCONS-355. A per-product-type owner builds a registry from the PDP, the share link is "
         "copied, a brand-new buyer adds the registry product to their cart alongside one of their "
         "own, and pays by card. The older deep-link script is still hard-skipped pending an app- "
         "side fix and carries the AE-only marker; the new share-link test does not, so this case "
-        "runs on SA too."),
+        "runs on SA too. FALCONS-400 adds the guest buyer: every product of a six-type registry is "
+        "added from the share link and ordered."),
     "1435420": ("full", ["app::test_app_gift_registry_order_from_share_link",
                          "app::test_app_gift_registry_scenario_4_add_to_cart_via_deeplink"],
         "FALCONS-355 covers the multiple-cart case directly: the buyer holds their own product and "
@@ -606,7 +632,12 @@ APP_MAPPING = {
         "is still in the cart; parametrised by product type. The iOS gate this case used to carry "
         "has been removed on main. The store- "
         "credit variant of the same flow is unskipped on main again."),
-    "1543908": ("none", [], "Algolia recommendations across screens are not automated."),
+    "1543908": ("partial", ["app::test_app_recommendation_banners_price_filter",
+                         "app::test_app_recommendation_banners_top_filters",
+                         "app::test_app_recommendation_banners_price_sort"],
+        "FALCONS-396 covers the Home screen: every Algolia recommendation banner opens a listing "
+        "that loads, filters and sorts correctly. Recommendations on the other screens (PDP, cart, "
+        "search) are not automated."),
     "1435415": ("none", [], "App close / reopen is not automated."),
     "1543946": ("none", [],
         "External, email and banner deep links are not automated. The only deep-link script is the "
@@ -629,6 +660,10 @@ APP_MAPPING = {
 # Each entry names the app case that already describes the same behaviour, so the
 # mWeb case can be written by mirroring it.
 PLAN_GAPS = {
+    # FALCONS-397: the mWeb regression repository has no recommendation-banner case.
+    **{f"web_commons::test_web_recommendation_banners_{n}":
+       ("1543908", "Verify Algolia recommendations across all screens")
+       for n in ("price_filter", "top_filters", "price_sort")},
     "web_uae::test_uae_cart_remove_item":
         ("1435407", "Verify user can remove products from cart - All product types"),
     "web_uae::test_uae_cart_remaining_items_unaffected_after_partial_removal":
@@ -709,17 +744,21 @@ ARABIC = {
     "summary": ("Arabic is a run dimension, not a separate set of cases: the same suites run with "
                 "LOCALE=en and LOCALE=ar, so the case counts below are unchanged."),
     # Said plainly, because the distinction matters when this is presented.
-    "caveat": ("AR-safe covers two designs: suites carrying locale-aware locators and data "
-               "(FALCONS-321/330/335/336), and suites written locale-agnostic -- asserting whatever "
-               "the UI rendered rather than an English string, so they need no per-locale data at "
-               "all. Neither is a passing Arabic run: as of the 31 Aug review the Arabic suite had "
-               "not been executed on BrowserStack on either platform, so every pass rate quoted "
-               "anywhere is an English run."),
+    "caveat": ("AR-ready is credited three ways: suites carrying locale-aware locators and data "
+               "(FALCONS-321/330/335/336/394), suites written locale-agnostic -- asserting whatever "
+               "the UI rendered rather than an English string -- and, per test, a pass in a full "
+               "Arabic run. The mWeb KSA suite ran in full in Arabic (sa-ar) on 13 Nov 2026, 92 "
+               "tests on Android and on iOS (85% and 84% passed); every test that passed on both "
+               "is credited. The KSA coupon tests mostly failed in that run and are not credited "
+               "from it. The app has no full Arabic regression yet: FALCONS-394 ran its KSA suites "
+               "in Arabic one at a time (checkout, coupon, brand / category) on 10-11 Nov."),
     "tickets": [
         {"id": "FALCONS-321", "pr": 224, "what": "Arabic locale support for the native app, plus Android/iOS optimisations"},
         {"id": "FALCONS-330", "pr": 228, "what": "Arabic locale support for mWeb, plus iOS Safari CC coverage"},
         {"id": "FALCONS-335", "pr": 239, "what": "mWeb UAE cart and user suites stabilised in EN and AR"},
         {"id": "FALCONS-336", "pr": None, "what": "Locale-aware cart wishlist title and quantity alert; products that resolve to one slug in both locales"},
+        {"id": "FALCONS-393", "pr": 348, "what": "mWeb KSA suites run in Arabic (sa-ar); full Arabic regression on Android and iOS, 13 Nov 2026"},
+        {"id": "FALCONS-394", "pr": 349, "what": "Arabic locators and RTL handling for the KSA app suites"},
     ],
     "stores": ["/ar (AE)", "/sa-ar", "/bh-ar", "/kw-ar", "/global-ar"],
     "app_locale_selectors": 233,
@@ -944,7 +983,8 @@ def reconcile(cases):
     out = {"no_but_automated": [], "yes_but_none": [], "yes_but_partial": [], "not_planned_but_automated": []}
     for c in cases:
         flag, status = c["automated_flag"].upper(), c["coverage_status"]
-        entry = {"case_id": c["case_id"], "name": c["name"], "status": status}
+        entry = {"case_id": c["case_id"], "name": c["name"], "status": status,
+                 "counted": c.get("scope_override") == "automated_but_not_planned"}
         if flag == "NO" and status == "full":
             out["no_but_automated"].append(entry)
         elif flag == "YES" and status == "none":
@@ -972,7 +1012,12 @@ def projection(web, app, plan_gaps, reconciliation):
     yes_but_none = len(reconciliation["web"]["yes_but_none"]) + len(reconciliation["app"]["yes_but_none"])
     web_gaps = sum(1 for g in plan_gaps if g["platform"].startswith("web"))
     app_gaps = sum(1 for g in plan_gaps if g["platform"] == "app")
-    np_automated = {k: reconciliation[k]["not_planned_but_automated"] for k in ("web", "app")}
+    # Not planned cases that are automated already count (see main); only the
+    # rest would change the figures if TestMO re-flagged them.
+    np_automated = {k: [e for e in reconciliation[k]["not_planned_but_automated"] if not e["counted"]]
+                    for k in ("web", "app")}
+    np_counted = [e for k in ("web", "app") for e in reconciliation[k]["not_planned_but_automated"]
+                  if e["counted"]]
 
     def apply(t, gaps, drop_yes_none, readmit):
         scope = t["in_scope"] - drop_yes_none + gaps + len(readmit)
@@ -993,11 +1038,11 @@ def projection(web, app, plan_gaps, reconciliation):
             {"id": "B", "what": f"Add {web_gaps + app_gaps} TestMO case(s) for tests that pass but have none",
              "detail": "the cart scenarios FALCONS-336 ported from the app suite; each names the app case to mirror",
              "effect": "enters scope already covered"},
-            {"id": "C", "what": f"Re-flag {len(np_automated['web']) + len(np_automated['app'])} case(s) marked Not planned that have automation mapped",
+            {"id": "C", "what": f"Re-flag {len(np_counted)} case(s) marked Not planned that have automation mapped",
              # Derived, not hardcoded: the old text still named a brand-page case
              # that had since been reclassified as not automated.
-             "detail": ", ".join(f"C-{e['case_id']}" for k in ("web", "app") for e in np_automated[k]) or "none",
-             "effect": "enters scope, already covered"},
+             "detail": ", ".join(f"C-{e['case_id']}" for e in np_counted) or "none",
+             "effect": "already counted here; re-flagging makes TestMO agree"},
         ],
     }
 
@@ -1086,6 +1131,16 @@ def main():
                         inventory, "App", prev.get("app_testmo_tests", []),
                         source="release_check")
 
+    # A case TestMO flags Not planned that the suite automates is plainly
+    # planned -- the flag is stale. It counts at the status its evidence gives
+    # it, and is marked so the flag can be corrected in TestMO (QA owner's
+    # decision, 25 Nov 2026). Not planned cases with nothing mapped stay out.
+    for c in web + app:
+        if (not c["in_scope"] and c["automated_flag"].upper() == "NOT PLANNED"
+                and c["coverage_status"] != "none"):
+            c["in_scope"] = True
+            c["scope_override"] = "automated_but_not_planned"
+
     mapped = {r for c in web + app for r in c["automated_tests"]}
     flat = list(inventory.values())
     hard = [t for t in flat if (t["skip"] or {}).get("type") == "hard"]
@@ -1128,7 +1183,8 @@ def main():
             "generated_at": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
             "source_sha": _source_sha(),
             "source_branch": "origin/main",
-            "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
+            "scope_rule": "Automated in [YES, NO], plus 'Not planned' cases the suite automates anyway; "
+                          "other 'Not planned' cases are kept but excluded from every percentage",
             "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
             "testmo_url_app": "https://mumzworld.testmo.net/repositories/9?group_id=110524",
             "testmo_url_web_regression": "https://mumzworld.testmo.net/repositories/3?group_id=73697",

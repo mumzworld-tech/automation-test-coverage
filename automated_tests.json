@@ -212,7 +212,7 @@
       "tags": [
         "Delivery Address"
       ],
-      "docstring": "1. Navigate to account page 2. Click on Signin 3. Sign in to an existing account (USER_EMAIL_4) 4. Go to Delivery Address 5. Click on 'Add New Address' button 6. Fill in all address fields using test_data.json 7. Set the address as default using the toggle 8. Save the address 9. Verify the new address is added and set as default 10. Set second address as default 11. Delete the third address 12. Ve",
+      "docstring": "1. Navigate to account page 2. Click on Signin 3. Sign in to an existing account (USER_EMAIL_47) 4. Go to Delivery Address 5. Click on 'Add New Address' button 6. Fill in all address fields using test_data.json 7. Set the address as default using the toggle 8. Save the address 9. Verify the new address is added and set as default 10. Set second address as default 11. Delete the third address 12. V",
       "parametrized": false,
       "skip": null,
       "locales": [
@@ -264,6 +264,76 @@
       "locales": [
         "en",
         "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_recommendation_banners_price_filter",
+      "name": "test_app_recommendation_banners_price_filter",
+      "platform": "app",
+      "path": "tests/app/test_app_algolia_recommendations_filters.py",
+      "file": "test_app_algolia_recommendations_filters.py",
+      "title": "Recommendation banners: the price slider narrows every banner's listing",
+      "feature": "Home Recommendation Banners",
+      "story": "FALCONS-396 - Price filter on every recommendation listing",
+      "severity": "critical",
+      "tags": [
+        "Filters",
+        "Price",
+        "Home",
+        "Algolia",
+        "Logged In User"
+      ],
+      "docstring": "1. Sign in, then open each Algolia recommendation banner on home in turn 2. Lower the price ceiling on its listing and verify the chip, the count and every price 3. The banner set is CMS-driven, so it is discovered on the page rather than named",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "app::test_app_recommendation_banners_top_filters",
+      "name": "test_app_recommendation_banners_top_filters",
+      "platform": "app",
+      "path": "tests/app/test_app_algolia_recommendations_filters.py",
+      "file": "test_app_algolia_recommendations_filters.py",
+      "title": "Recommendation banners: Age, Category, Gender and Brand rotate across the listings",
+      "feature": "Home Recommendation Banners",
+      "story": "FALCONS-396 - Most-used filters on every recommendation listing",
+      "severity": "critical",
+      "tags": [
+        "Filters",
+        "Home",
+        "Algolia",
+        "Logged In User"
+      ],
+      "docstring": "1. Sign in, then open each Algolia recommendation banner on home in turn 2. Apply one facet per banner, rotating Age, Category, Gender and Brand, then clear it 3. Every banner gets a filter and every facet is applied on at least one banner",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "app::test_app_recommendation_banners_price_sort",
+      "name": "test_app_recommendation_banners_price_sort",
+      "platform": "app",
+      "path": "tests/app/test_app_algolia_recommendations_filters.py",
+      "file": "test_app_algolia_recommendations_filters.py",
+      "title": "Recommendation banners: sorting by '{option}' orders each listing",
+      "feature": "Home Recommendation Banners",
+      "story": "FALCONS-396 - Price sort on every recommendation listing",
+      "severity": "critical",
+      "tags": [
+        "Sort",
+        "Home",
+        "Algolia",
+        "Logged In User"
+      ],
+      "docstring": "1. Sign in, then open each Algolia recommendation banner on home in turn 2. Sort by price in this direction; the listed prices must follow it 3. Each direction runs as its own test, side by side",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en"
       ]
     },
     {
@@ -799,7 +869,11 @@
       ],
       "docstring": "1. Login to App 2. Click on Explore 3. Click on Search and enter: Search > Category 11 - Fashion > press enter 4. Add first product on plp page 5. Click on cart 6. Click on Checkout button 7. Find payment option \"Cash On Delivery\" 8. Click Cash On Delivery 9. Click on Place Order button 10. Wait for Order placed successfully! page to load and verify",
       "parametrized": false,
-      "skip": null,
+      "skip": {
+        "type": "conditional",
+        "reason": "not profile_for()[\"cod_available\"]",
+        "condition": "not profile_for()[\"cod_available\"]"
+      },
       "locales": [
         "en"
       ]
@@ -1745,6 +1819,30 @@
       ]
     },
     {
+      "ref": "app::test_app_gift_registry_guest_order_from_share_link",
+      "name": "test_app_gift_registry_guest_order_from_share_link",
+      "platform": "app",
+      "path": "tests/app/test_app_gift_registry.py",
+      "file": "test_app_gift_registry.py",
+      "title": "Guest adds every product of a shared registry to the cart, then orders it",
+      "feature": "Gift Registry",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Gift Registry",
+        "Share Link",
+        "Guest",
+        "FALCONS-400"
+      ],
+      "docstring": "A guest adds every product of someone else's shared registry to the cart and orders it. The owner and the buyer are both brand-new accounts, so nothing depends on seeded users. The guest add has been seen listing a product twice, so the cart is checked per product.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
       "ref": "app::test_customer_can_search_brand",
       "name": "test_customer_can_search_brand",
       "platform": "app",
@@ -1761,7 +1859,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -1784,7 +1883,8 @@
         "reason": "Not applicable after the new Algolia search implementation: search no longer"
       },
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -1805,7 +1905,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -1964,7 +2065,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     }
   ],
@@ -3250,6 +3352,120 @@
       ]
     },
     {
+      "ref": "web_uae::test_super_app_now_non_serviceable_address_validation",
+      "name": "test_super_app_now_non_serviceable_address_validation",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_super_app_logged_in_user_flow.py",
+      "file": "test_super_app_logged_in_user_flow.py",
+      "title": "Now vertical rejects a non-serviceable address across home, categories and listing",
+      "feature": "SuperApp",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "SuperApp",
+        "Now",
+        "Serviceability"
+      ],
+      "docstring": "1. Sign in with a user whose default address is outside the Now delivery range 2. Open the Now vertical — the sheet must raise itself; validate and close it 3. Tap a category on the Now home — the address sheet must raise; validate and close 4. Tap Categories in the Now bottom nav — the sheet must raise again; validate and close 5. Open a Now product — the product page must state the location is o",
+      "parametrized": false,
+      "skip": {
+        "type": "conditional",
+        "reason": "Now vertical is UAE-only; the only dark store is UAE-DS-01, so no other  country can place a 2-hour order. Coverage for those countries lives in  test_super_app_vertical_availability.py, which asserts the tab is absent. ",
+        "condition": "(COUNTRY or \"AE\").upper() != \"AE\"",
+        "scope": "module"
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_super_app_now_serviceable_address_restores_availability",
+      "name": "test_super_app_now_serviceable_address_restores_availability",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_super_app_logged_in_user_flow.py",
+      "file": "test_super_app_logged_in_user_flow.py",
+      "title": "Serviceable address restores Now availability, and reverting restores the block",
+      "feature": "SuperApp",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "SuperApp",
+        "Now",
+        "Serviceability"
+      ],
+      "docstring": "1. Sign in and open the Now vertical 2. Select a serviceable delivery location, verified by the resulting state 3. Assert availability is restored: no notice, products addable, cart orderable 4. Assert the out-of-range address cannot be selected back Web disables a saved address Now cannot deliver to, so a signed-in user cannot switch back to one — a stronger guarantee than the ticket asks for, an",
+      "parametrized": false,
+      "skip": {
+        "type": "conditional",
+        "reason": "Now vertical is UAE-only; the only dark store is UAE-DS-01, so no other  country can place a 2-hour order. Coverage for those countries lives in  test_super_app_vertical_availability.py, which asserts the tab is absent. ",
+        "condition": "(COUNTRY or \"AE\").upper() != \"AE\"",
+        "scope": "module"
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
+      "name": "test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_super_app_now_guest_order_journey.py",
+      "file": "test_super_app_now_guest_order_journey.py",
+      "title": "Now vertical: guest shops, coupons, logs in from the cart and pays by card",
+      "feature": "SuperApp",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "SuperApp",
+        "Now",
+        "Guest",
+        "Coupon",
+        "CC"
+      ],
+      "docstring": "1. Empty the login account's cart by API — the guest basket merges into it at sign-in 2. Enter the Now vertical as a guest 3. Search the vertical for one product of every type and add each to the cart 4. Assert the cart holds them all and is presented as a quick-commerce order 5. Claim the free gift when the basket unlocked one 6. Apply a coupon on the cart, then remove it 7. Check out as a guest,",
+      "parametrized": false,
+      "skip": {
+        "type": "conditional",
+        "reason": "The Now vertical is served by the single UAE-DS-01 dark store, so an order  journey through it only exists on AE [(COUNTRY or \"AE\").upper() != \"AE\"]",
+        "condition": "(COUNTRY or \"AE\").upper() != \"AE\"",
+        "scope": "module"
+      },
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_uae::test_superapp_new_user_end_to_end_journey",
+      "name": "test_superapp_new_user_end_to_end_journey",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_superapp_new_user_end_to_end_journey.py",
+      "file": "test_superapp_new_user_end_to_end_journey.py",
+      "title": "Now vertical: browse by category, sort, then a new user pays by Tabby",
+      "feature": "SuperApp",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "SuperApp",
+        "Now",
+        "Discovery",
+        "Signup",
+        "Tabby"
+      ],
+      "docstring": "1. Enter the Now vertical as a guest 2. Open a category listing and sort it by price, high to low 3. Apply the first filter the listing offers, then assert every product is a Now product 4. Add one of every Tabby-eligible product type 5. Validate the cart holds them all as a quick-commerce order 6. Claim the free gift when the basket unlocked one 7. Check out as a guest and create the account ther",
+      "parametrized": false,
+      "skip": {
+        "type": "conditional",
+        "reason": "The Now vertical is served by the single UAE-DS-01 dark store, so an order  journey through it only exists on AE [(COUNTRY or \"AE\").upper() != \"AE\"]",
+        "condition": "(COUNTRY or \"AE\").upper() != \"AE\"",
+        "scope": "module"
+      },
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "web_uae::test_uae_user_register_from_account_page",
       "name": "test_uae_user_register_from_account_page",
       "platform": "web_uae",
@@ -3542,6 +3758,50 @@
         "type": "hard",
         "reason": "Gift wrap is deferred — the UAE counterpart is skipped as a duplicate of"
       },
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_cart_increase_and_decrease_quantity",
+      "name": "test_ksa_cart_increase_and_decrease_quantity",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_cart_ksa.py",
+      "file": "test_cart_ksa.py",
+      "title": "",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Quantity"
+      ],
+      "docstring": "1. Sign in and clear the cart through the API 2. Add one product of the given type to the cart 3. Increase the quantity twice (1 -> 3) 4. Decrease the quantity twice (3 -> 1) :param search_term: The product search term to use :param product_type: Type of product (simple, bundle, configurable, custom) :param email: Email ID to use for login",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_cart_add_all_product_types_and_verify",
+      "name": "test_ksa_cart_add_all_product_types_and_verify",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_cart_ksa.py",
+      "file": "test_cart_ksa.py",
+      "title": "KSA - Every product type can be added to the cart and is listed",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "ProductTypes"
+      ],
+      "docstring": "1. Sign in and clear the cart through the API 2. Add one product of every supported type through its PDP 3. Verify the cart lists all of them and nothing else",
+      "parametrized": false,
+      "skip": null,
       "locales": [
         "en",
         "ar"
@@ -4357,7 +4617,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4377,7 +4638,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4397,7 +4659,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4417,7 +4680,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4459,7 +4723,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4479,7 +4744,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     }
   ],
@@ -4573,6 +4839,76 @@
       ]
     },
     {
+      "ref": "web_commons::test_web_recommendation_banners_price_filter",
+      "name": "test_web_recommendation_banners_price_filter",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_algolia_recommendations_banner_filter_sort.py",
+      "file": "test_algolia_recommendations_banner_filter_sort.py",
+      "title": "mWeb recommendation banners: the price slider narrows every banner's listing",
+      "feature": "Home Recommendation Banners",
+      "story": "FALCONS-397 - Price filter on every recommendation listing",
+      "severity": "critical",
+      "tags": [
+        "Filters",
+        "Price",
+        "Home",
+        "Algolia",
+        "mWeb"
+      ],
+      "docstring": "1. Open each Algolia recommendation banner on home in turn 2. Lower the price ceiling on its listing; the total narrows and every listed price respects it 3. The banner set is CMS-driven, so it is discovered on the page rather than named",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_commons::test_web_recommendation_banners_top_filters",
+      "name": "test_web_recommendation_banners_top_filters",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_algolia_recommendations_banner_filter_sort.py",
+      "file": "test_algolia_recommendations_banner_filter_sort.py",
+      "title": "mWeb recommendation banners: Age, Category, Gender and Brand rotate across the listings",
+      "feature": "Home Recommendation Banners",
+      "story": "FALCONS-397 - Most-used filters on every recommendation listing",
+      "severity": "critical",
+      "tags": [
+        "Filters",
+        "Home",
+        "Algolia",
+        "mWeb"
+      ],
+      "docstring": "1. Open each Algolia recommendation banner on home in turn 2. Apply one facet per banner, rotating Age, Category, Gender and Brand, then clear it 3. Every banner gets a filter and every facet is applied on at least one banner",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_commons::test_web_recommendation_banners_price_sort",
+      "name": "test_web_recommendation_banners_price_sort",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_algolia_recommendations_banner_filter_sort.py",
+      "file": "test_algolia_recommendations_banner_filter_sort.py",
+      "title": "mWeb recommendation banners: sorting by '{sort_option}' orders each listing",
+      "feature": "Home Recommendation Banners",
+      "story": "FALCONS-397 - Price sort on every recommendation listing",
+      "severity": "critical",
+      "tags": [
+        "Sort",
+        "Home",
+        "Algolia",
+        "mWeb"
+      ],
+      "docstring": "1. Open each Algolia recommendation banner on home in turn 2. Sort by price in this direction; the listed prices must follow it 3. Each direction runs as its own test, side by side",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "web_commons::test_categories_levels_load",
       "name": "test_categories_levels_load",
       "platform": "web_commons",
@@ -4590,7 +4926,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4649,6 +4986,27 @@
         "Gift Registry"
       ],
       "docstring": "A guest orders every product on someone else's published gift registry. 1. The owner signs in, builds a registry with every product type and publishes it (delivery address, event date, location, public) 2. Capture the registry's share link 3. The buyer signs in with an empty cart and adds a product of their own 4. The buyer opens the share link and adds every registry product to cart 5. The cart s",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_commons::test_gift_registry_guest_order_from_share_link",
+      "name": "test_gift_registry_guest_order_from_share_link",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_gift_registry.py",
+      "file": "test_gift_registry.py",
+      "title": "",
+      "feature": "Gift Registry",
+      "story": "FALCONS-399 - Guest orders a gift registry; cart has no duplicates",
+      "severity": "critical",
+      "tags": [
+        "Gift Registry"
+      ],
+      "docstring": "A guest adds every product of a published registry to the cart and orders it. 1. A fresh owner builds a registry with every product type, noting each PDP price 2. Publish it, capture the share link and sign out, so the buyer is a guest 3. Open the link and add every product to the cart 4. The cart holds each product once, at quantity 1 and its PDP price 5. Proceed to checkout, sign up a fresh buye",
       "parametrized": false,
       "skip": null,
       "locales": [
@@ -4725,6 +5083,28 @@
       ]
     },
     {
+      "ref": "web_commons::test_super_app_vertical_switcher_only_in_uae",
+      "name": "test_super_app_vertical_switcher_only_in_uae",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_super_app_vertical_availability.py",
+      "file": "test_super_app_vertical_availability.py",
+      "title": "Now vertical is offered in UAE only",
+      "feature": "SuperApp",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "SuperApp",
+        "Now",
+        "Vertical"
+      ],
+      "docstring": "The Now (2-hour) vertical is fulfilled from the single UAE-DS-01 dark store, so the 'now within 2 hrs' tab must appear for AE and must not appear anywhere else. Runs on every country — it is the only SuperApp test a KSA regression executes. Runs as a guest: unlike the app, the web switcher needs no session, so signing in would add Turnstile exposure without adding coverage.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "web_commons::test_web_filters_one_filter_at_a_time",
       "name": "test_web_filters_one_filter_at_a_time",
       "platform": "web_commons",
@@ -4743,7 +5123,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4765,7 +5146,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4788,7 +5170,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4811,7 +5194,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4833,7 +5217,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4856,7 +5241,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4878,7 +5264,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4899,7 +5286,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4920,7 +5308,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4941,7 +5330,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4963,7 +5353,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -4985,13 +5376,14 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     }
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "cc3a590",
-    "repo": "/home/runner/work/automation-test-coverage/automation-test-coverage/automation_web_2.0"
+    "sha": "2918673",
+    "repo": "/Users/user/automation_web_2.0"
   }
 }

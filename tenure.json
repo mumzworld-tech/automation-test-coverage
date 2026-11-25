@@ -1,6 +1,6 @@
 {
  "start": "2026-04-01",
- "generated": "2026-11-03",
+ "generated": "2026-11-25",
  "method": "Reconstructed: today's case mapping applied to automation_web_2.0 as it stood on each date. A mapped test that did not exist yet, or was hard-skipped then, does not count; a case with only some of its tests present counts as partial at best.",
  "points": [
   {
@@ -10,12 +10,12 @@
    "web": [
     27,
     18,
-    55
+    57
    ],
    "app": [
-    7,
-    1,
-    29
+    9,
+    2,
+    34
    ],
    "tests": 79,
    "hard_skipped": 8,
@@ -41,12 +41,12 @@
    "web": [
     27,
     18,
-    55
+    57
    ],
    "app": [
-    8,
-    1,
-    29
+    10,
+    2,
+    34
    ],
    "tests": 82,
    "hard_skipped": 8,
@@ -72,12 +72,12 @@
    "web": [
     27,
     11,
-    55
+    57
    ],
    "app": [
-    16,
-    4,
-    29
+    18,
+    5,
+    34
    ],
    "tests": 99,
    "hard_skipped": 13,
@@ -103,12 +103,12 @@
    "web": [
     27,
     11,
-    55
+    57
    ],
    "app": [
-    19,
-    8,
-    29
+    21,
+    9,
+    34
    ],
    "tests": 107,
    "hard_skipped": 11,
@@ -134,12 +134,12 @@
    "web": [
     27,
     10,
-    55
+    57
    ],
    "app": [
-    22,
-    10,
-    29
+    25,
+    11,
+    34
    ],
    "tests": 115,
    "hard_skipped": 21,
@@ -166,12 +166,12 @@
    "web": [
     29,
     17,
-    55
+    57
    ],
    "app": [
-    20,
+    22,
     10,
-    29
+    34
    ],
    "tests": 130,
    "hard_skipped": 21,
@@ -199,12 +199,12 @@
    "web": [
     31,
     20,
-    55
+    57
    ],
    "app": [
-    20,
+    22,
     10,
-    29
+    34
    ],
    "tests": 131,
    "hard_skipped": 15,
@@ -232,13 +232,13 @@
    "commit_date": "2026-09-07",
    "web": [
     37,
-    29,
-    55
+    27,
+    57
    ],
    "app": [
-    20,
+    22,
     10,
-    29
+    34
    ],
    "tests": 145,
    "hard_skipped": 13,
@@ -266,13 +266,13 @@
    "commit_date": "2026-09-07",
    "web": [
     37,
-    29,
-    55
+    27,
+    57
    ],
    "app": [
-    20,
+    22,
     10,
-    29
+    34
    ],
    "tests": 145,
    "hard_skipped": 13,
@@ -300,13 +300,13 @@
    "commit_date": "2026-09-09",
    "web": [
     37,
-    29,
-    55
+    27,
+    57
    ],
    "app": [
-    20,
+    22,
     10,
-    29
+    34
    ],
    "tests": 148,
    "hard_skipped": 13,
@@ -335,13 +335,13 @@
    "commit_date": "2026-09-22",
    "web": [
     38,
-    31,
-    55
+    29,
+    57
    ],
    "app": [
-    22,
-    11,
-    29
+    25,
+    12,
+    34
    ],
    "tests": 160,
    "hard_skipped": 10,
@@ -371,13 +371,13 @@
    "commit_date": "2026-10-06",
    "web": [
     39,
-    34,
-    55
+    32,
+    57
    ],
    "app": [
-    22,
-    14,
-    29
+    25,
+    15,
+    34
    ],
    "tests": 194,
    "hard_skipped": 12,
@@ -406,14 +406,14 @@
    "sha": "53d29c8",
    "commit_date": "2026-11-03",
    "web": [
-    40,
-    34,
-    55
+    42,
+    33,
+    57
    ],
    "app": [
-    25,
+    29,
     18,
-    29
+    34
    ],
    "tests": 224,
    "hard_skipped": 18,
@@ -438,9 +438,337 @@
    },
    "files": 33,
    "reconstructed": true
+  },
+  {
+   "date": "2026-11-24",
+   "sha": "c9d6e26",
+   "commit_date": "2026-11-24",
+   "web": [
+    42,
+    33,
+    57
+   ],
+   "app": [
+    29,
+    18,
+    34
+   ],
+   "tests": 232,
+   "hard_skipped": 18,
+   "ar_safe": 142,
+   "platforms": {
+    "app": 87,
+    "web_uae": 69,
+    "web_ksa": 52,
+    "web_commons": 24
+   },
+   "areas": {
+    "Now / super app": 10,
+    "Account & sign-in": 18,
+    "Cart": 46,
+    "Categories": 3,
+    "Checkout & payments": 49,
+    "Coupons & promotions": 60,
+    "Filters & sort": 15,
+    "Gift registry": 10,
+    "Home & search": 5,
+    "Wishlist": 16
+   },
+   "files": 37,
+   "reconstructed": true
+  },
+  {
+   "date": "2026-11-25",
+   "sha": "2918673",
+   "commit_date": "2026-11-25",
+   "web": [
+    42,
+    35,
+    57
+   ],
+   "app": [
+    31,
+    20,
+    34
+   ],
+   "tests": 239,
+   "hard_skipped": 18,
+   "ar_safe": 143,
+   "platforms": {
+    "app": 90,
+    "web_uae": 69,
+    "web_ksa": 52,
+    "web_commons": 28
+   },
+   "areas": {
+    "Now / super app": 10,
+    "Account & sign-in": 18,
+    "Filters & sort": 21,
+    "Cart": 46,
+    "Categories": 3,
+    "Checkout & payments": 49,
+    "Coupons & promotions": 60,
+    "Gift registry": 11,
+    "Home & search": 5,
+    "Wishlist": 16
+   },
+   "files": 39,
+   "reconstructed": true
   }
  ],
  "prs": [
+  {
+   "date": "2026-11-25",
+   "pr": 360,
+   "title": "FALCONS-400: [QA] App gift registry – guest order from share link (all 6 product types)",
+   "tickets": [
+    "FALCONS-400"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Gift registry"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-11-25",
+   "pr": 359,
+   "title": "FALCONS-399: guest gift-registry order test — no duplicate cart rows, qty and PDP price",
+   "tickets": [
+    "FALCONS-399"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Gift registry"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-11-25",
+   "pr": 356,
+   "title": "FALCONS-397: mWeb Algolia recommendation banner filter and sort tests",
+   "tickets": [
+    "FALCONS-397"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Filters & sort"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-11-25",
+   "pr": 354,
+   "title": "FALCONS-396: filters and price sort on Home Algolia recommendation banners",
+   "tickets": [
+    "FALCONS-396"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Filters & sort"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-11-20",
+   "pr": 357,
+   "title": "fix(superapp): judge the Now listing sheet open by its paint, not its mounted shell",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-11-20",
+   "pr": 306,
+   "title": "test(superapp): automate FALCONS-380 Now new-user category, sort, filter and Tabby journey on mWeb",
+   "tickets": [
+    "FALCONS-380"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Now / super app"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-11-20",
+   "pr": 305,
+   "title": "test(superapp): automate FALCONS-375 Now guest end-to-end order journey on mWeb",
+   "tickets": [
+    "FALCONS-375"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Now / super app"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-11-20",
+   "pr": 304,
+   "title": "test(superapp): automate FALCONS-373 Now serviceability for a logged-in user on mWeb",
+   "tickets": [
+    "FALCONS-373"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Now / super app"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-11-19",
+   "pr": 353,
+   "title": "Fix the BrowserStack app relaunch for the coupon suite and add the iOS gift-items fallback",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-11-18",
+   "pr": 349,
+   "title": "FALCONS-394: Arabic locators and RTL handling for KSA app suites",
+   "tickets": [
+    "FALCONS-394"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart",
+    "Gift registry",
+    "Home & search",
+    "Wishlist"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-11-18",
+   "pr": 348,
+   "title": "FALCONS-393: run the mWeb KSA suites in Arabic (sa-ar)",
+   "tickets": [
+    "FALCONS-393"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart",
+    "Checkout & payments",
+    "Coupons & promotions",
+    "Wishlist"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-11-18",
+   "pr": 336,
+   "title": "FALCONS-389: enable app checkout suite for BH and KW stores",
+   "tickets": [
+    "FALCONS-389"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments",
+    "Coupons & promotions"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-11-17",
+   "pr": 350,
+   "title": "Fix the Android gift-items bar and the product-options dropdown locators",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Cart"
+   ],
+   "app": true,
+   "web": false
+  },
+  {
+   "date": "2026-11-12",
+   "pr": 346,
+   "title": "fix(mweb): sheet-dismissal waits for address, bundle and price-filter flows",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-11-12",
+   "pr": 340,
+   "title": "FALCONS-360: Give Android its own test accounts so parallel Android and iOS runs never share a user",
+   "tickets": [
+    "FALCONS-360"
+   ],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Account & sign-in",
+    "Cart",
+    "Checkout & payments",
+    "Coupons & promotions",
+    "Wishlist"
+   ],
+   "app": true,
+   "web": true
+  },
+  {
+   "date": "2026-11-10",
+   "pr": 341,
+   "title": "Fix the mWeb gift registry checkout click and pay by card",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Gift registry"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-11-09",
+   "pr": 339,
+   "title": "Fix the invalid-card call arity and group CheckoutPage imports above the constants",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
+  {
+   "date": "2026-11-09",
+   "pr": 337,
+   "title": "Place real CC orders on iOS Safari by driving 3DS in the native context",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [
+    "Checkout & payments",
+    "Coupons & promotions"
+   ],
+   "app": false,
+   "web": true
+  },
+  {
+   "date": "2026-11-04",
+   "pr": 334,
+   "title": "Restore the two closing braces dropped from language_data.json in merge 6d82e6e",
+   "tickets": [],
+   "author": "Saifulla Attar",
+   "areas": [],
+   "app": false,
+   "web": false
+  },
   {
    "date": "2026-11-03",
    "pr": 332,
@@ -2326,17 +2654,17 @@
    "web": true
   }
  ],
- "tickets": 68,
- "commits_since": 798,
+ "tickets": 79,
+ "commits_since": 870,
  "commits_before": 1175,
  "commit_authors_since": [
   [
    "saifullaAttar",
-   500
+   553
   ],
   [
    "Saifulla Attar",
-   197
+   216
   ],
   [
    "siddharthsharmaext",

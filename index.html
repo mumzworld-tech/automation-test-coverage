@@ -613,7 +613,8 @@ code,.test-tag,.pr-num{font-family:var(--mono);letter-spacing:0}
     <span class="note-icon">i</span>
     <div><strong>What this measures.</strong> A case counts once at least one automated test on
     <span id="scopeCommit">main</span> is mapped to it; the Evidence column says what each test proves. Only cases TestMO flags
-    <em>Automated = YES / NO</em> count — “Not planned” ones are kept for reference. This is coverage, not a pass rate:
+    <em>Automated = YES / NO</em> count, plus “Not planned” cases the suite automates anyway; the
+    other “Not planned” ones are kept for reference. This is coverage, not a pass rate:
     execution results are under <a href="#runsSection">Regression runs</a>.</div>
   </div>
   <div class="lock-banner" id="lockBanner">
@@ -1430,8 +1431,10 @@ function gateLabel(t) {
 function flagBadge(t) {
   const flag = (t.automated_flag || '').toUpperCase();
   const style = {YES: '#28a745', NO: '#6c757d'}[flag] || '#bbb';
-  const text = flag === 'NOT PLANNED' ? 'n/p' : (flag || '?').toLowerCase();
-  const title = isScoped(t) ? `TestMO Automated = ${t.automated_flag}` :
+  const overridden = t.scope_override === 'automated_but_not_planned';
+  const text = overridden ? 'n/p → auto' : flag === 'NOT PLANNED' ? 'n/p' : (flag || '?').toLowerCase();
+  const title = overridden ? 'TestMO says Not planned, but the suite automates it — counted; re-flag it in TestMO' :
+    isScoped(t) ? `TestMO Automated = ${t.automated_flag}` :
     `TestMO Automated = ${t.automated_flag} — excluded from every percentage`;
   return `<span title="${title}" style="background:${style};color:#fff;padding:2px 6px;border-radius:4px;font-size:.75em;font-weight:600">${text}</span>`;
 }
@@ -1439,7 +1442,7 @@ function flagBadge(t) {
 function localeBadge(t) {
   const ar = (t.locales || ['en']).includes('ar');
   return ar
-    ? '<span title="Mapped tests are AR-safe — either locale-aware, or locale-agnostic by design; not a passing Arabic run" style="background:#0e9f6e;color:#fff;padding:2px 6px;border-radius:4px;font-size:.75em;font-weight:600">EN·AR</span>'
+    ? '<span title="Mapped tests are AR-safe — locale-aware, locale-agnostic by design, or passed in the full Arabic (sa-ar) regression" style="background:#0e9f6e;color:#fff;padding:2px 6px;border-radius:4px;font-size:.75em;font-weight:600">EN·AR</span>'
     : '<span title="Mapped tests are only verified in English" style="background:#e9ecef;color:#666;padding:2px 6px;border-radius:4px;font-size:.75em">EN</span>';
 }
 
@@ -1578,7 +1581,7 @@ function renderArabicPanel() {
     <p style="color:#555;font-size:.9em;margin:10px 0 10px">${ar.summary}</p>
     ${ar.caveat ? `<div style="background:#fff8e1;border-left:4px solid #f0ad4e;border-radius:4px;padding:10px 12px;margin-bottom:16px;font-size:.85em;color:#5d4037"><strong>Read this before quoting the number.</strong> ${ar.caveat}</div>` : ''}
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px">
-      <div class="stat-card" style="animation:none"><div class="stat-number" style="color:#0e9f6e">${arTests.length}/${auto.length}</div><div class="stat-label">Tests AR-safe<br><small style="color:#999">by design, not yet run in AR</small></div></div>
+      <div class="stat-card" style="animation:none"><div class="stat-number" style="color:#0e9f6e">${arTests.length}/${auto.length}</div><div class="stat-label">Tests AR-safe<br><small style="color:#999">mWeb KSA ran in full in Arabic on 13 Nov</small></div></div>
       <div class="stat-card" style="animation:none"><div class="stat-number" style="color:#0e9f6e">${ar.stores.length}</div><div class="stat-label">Arabic storefronts</div></div>
       <div class="stat-card" style="animation:none"><div class="stat-number" style="color:#0e9f6e">${ar.app_locale_selectors}</div><div class="stat-label">Locale-nested app selectors</div></div>
       <div class="stat-card" style="animation:none"><div class="stat-number" style="color:#0e9f6e">${ar.tickets.length}</div><div class="stat-label">Delivery tickets</div></div>

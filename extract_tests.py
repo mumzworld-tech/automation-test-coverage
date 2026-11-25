@@ -32,7 +32,45 @@ REF = "origin/main"
 
 # Tickets that delivered / hardened Arabic locale support. Files they touched
 # are treated as AR-verified, as are files that carry locale-aware code.
-ARABIC_TICKETS = ["FALCONS-321", "FALCONS-330", "FALCONS-335", "FALCONS-336"]
+ARABIC_TICKETS = ["FALCONS-321", "FALCONS-330", "FALCONS-335", "FALCONS-336",
+                  "FALCONS-394"]   # Arabic locators and RTL for the KSA app suites
+# FALCONS-393 (mWeb KSA in Arabic) is deliberately NOT a ticket here: in its
+# Arabic regression most of test_coupon_ksa.py failed, so crediting every file
+# it touched would overclaim. Its passing tests are credited one by one below.
+
+# Tests that PASSED on both Android and iOS in the full Arabic (sa-ar) mWeb KSA
+# regressions of 13 Nov 2026 -- Allure projects
+# falcons-393-{android,ios}-preprod-sa-ar-regression, 92 tests each. Evidence
+# from a run, per test, for tests no file-level rule above already credits.
+ARABIC_RUN_DATE = "2026-11-13"
+ARABIC_RUN_VERIFIED = {
+    "web_ksa::test_ksa_user_register_from_account_page",
+    "web_ksa::test_ksa_user_register_from_cart_page",
+    "web_ksa::test_ksa_user_logs_in_from_account_page",
+    "web_ksa::test_ksa_user_logs_in_from_cart_page",
+    "web_ksa::test_ksa_wishlist_add_all_product_types_existing_user",
+    "web_ksa::test_ksa_wishlist_add_all_product_types_new_user",
+    "web_commons::test_categories_levels_load",
+    "web_commons::test_web_filters_one_filter_at_a_time",
+    "web_commons::test_web_filters_multiple_filters",
+    "web_commons::test_web_filters_yalla_from_listing",
+    "web_commons::test_web_filters_price_range",
+    "web_commons::test_web_filters_color_and_diaper_size",
+    "web_commons::test_web_filters_discounts",
+    "web_commons::test_web_sort_by_price_from_both_entry_points",
+    "web_commons::test_wishlist_delete_all_product_types",
+    "web_commons::test_wishlist_add_products_from_plps_new_user",
+    "web_commons::test_wishlist_add_products_from_plps_existing_user",
+    "web_commons::test_wishlist_move_all_product_types_to_cart_existing_user",
+    "web_commons::test_wishlist_move_all_product_types_to_cart_new_user",
+}
+
+
+def mark_run_verified(tests):
+    """Credit Arabic to the tests that passed in the Arabic regression."""
+    for t in tests:
+        if t["ref"] in ARABIC_RUN_VERIFIED:
+            t["locales"] = ["en", "ar"]
 
 # A suite is AR-safe by one of two designs, and only the first was detected:
 #
@@ -266,6 +304,7 @@ def main():
             if why:
                 ar_reasons.append((path, why))
         disambiguate(tests)
+        mark_run_verified(tests)
         result[platform] = tests
         print(f"  {platform:12s} {len(files)} files, {len(tests):3d} tests")
 
@@ -281,6 +320,8 @@ def main():
           f"{hard} hard-skipped, {cond} OS-gated, {ar} AR-safe -> {out}")
     for path, why in sorted(ar_reasons):
         print(f"    AR-safe ({why}): {path}")
+    print(f"    AR-safe (passed the {ARABIC_RUN_DATE} Arabic regression): "
+          f"{sum(1 for t in flat if t['ref'] in ARABIC_RUN_VERIFIED)} tests")
 
 
 if __name__ == "__main__":
